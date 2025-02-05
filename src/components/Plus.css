@@ -1,0 +1,18 @@
+
+.plus{
+    position: fixed;
+    right:400px;
+    top: 650px;
+    background-color: rgb(29, 155, 240);
+    color: white;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+}
+.icon{
+    background-color: rgb(29, 155, 240);
+    color:white;
+    width: 40px;
+    height: 40px;
+    
+}

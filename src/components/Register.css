@@ -1,0 +1,77 @@
+.register-cont{
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /* border: 1px solid white; */
+    
+}
+.reg-cont{
+    background-color: rgb(207, 148, 219);
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:40px;
+    height: 500px;
+    border-top-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+}
+.register-head{
+    margin-top: 80px;
+    font-size: 40px;
+    background-color: rgb(207, 148, 219);
+    color:rgb(33, 32, 32)
+}
+.register-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(207, 148, 219);
+}
+.reg-email{
+    background-color: white;
+    width: 250px;
+    height: 30px;
+    outline: none;
+    border-radius: 10px;
+    
+}
+.emailusername{
+    display: flex;
+    justify-content: center;
+   border-radius: 10px;
+   border: 1px solid black;
+
+}
+.reg-passw{
+    background-color: white;
+    width: 250px;
+    height: 30px;
+    outline: none;
+    border-radius: 10px;
+}
+.avatar{
+    background-color: white;
+    color: black;
+    width: 250px;
+    /* height: 30px; */
+    /* outline: none; */
+    border-radius: 5px;
+}
+.avatar-cont{
+    background-color: rgb(207, 148, 219);
+}
+.profile{
+    margin-right: 8px;
+    color:black;
+    background-color: rgb(207, 148, 219);
+}
+.reg-button{
+    background-color: blueviolet;
+    color:white;
+    border-radius: 10px;
+}

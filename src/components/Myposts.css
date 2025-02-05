@@ -1,0 +1,20 @@
+.myposts-cont{
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.myposts-cont a {
+    color: inherit; /* Use the parent element's color */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  .myposts-cont a:visited {
+    color: inherit; /* Ensure visited links don't change color */
+  }
+  
+  .myposts-cont a:hover {
+    color: inherit; /* Prevent color change on hover */
+  }

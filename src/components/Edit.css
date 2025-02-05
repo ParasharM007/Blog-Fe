@@ -1,0 +1,118 @@
+.edit-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.edit-cont{
+    margin: 20px;
+    padding: 20px;
+    /* background-color: rgb(97, 95, 95); */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 50vw;
+    height: auto;
+}
+.edit-head{
+    margin: 5px;
+    padding: 5px;
+    font-size: 40px;
+    font-weight: 300;
+}
+.edit-headng{
+    width: 50vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid white; */
+}
+
+.back-btn{
+    /* border: 1px solid white; */
+    /* margin: 5px;
+    padding: 5px; */
+    width: auto;
+    height: 5vh;
+    border: none;
+    outline: none;
+    
+}
+.back-btn:focus,
+.back-btn:active {
+    outline: none;
+    border: none;
+}
+.back{
+    display: flex;
+    justify-content: center;
+    /* border:     1px solid white; */
+    align-items: center;
+    background-color: blueviolet;
+    cursor: pointer;
+}
+.blogimage{
+    margin: 5px;
+    padding: 5px;
+}
+.blog-heading{
+
+    margin: 5px;
+    padding: 5px;
+}
+.blog-heading input{
+    
+    width: 40vw;
+    outline: none;
+    /* border: ; */
+    color:white;
+    font-size: 30px;
+}
+.blog-description{
+    margin: 5px;
+    padding: 5px;
+    /* background-color: white; */
+    font-size: 30px;
+    
+}
+
+
+  .ql-snow .ql-picker{
+    
+    color:white
+  }
+  .ql-snow.ql-toolbar button svg,
+.ql-snow .ql-toolbar button svg {
+ background-color:white;
+ 
+}
+.ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg{
+    background-color: white;
+}
+.ql-editor p{
+    /* font-size: 1.2rem; */
+}
+
+.save-btn{
+    margin: 5px;
+    padding: 5px;
+    width: auto;
+    height: 5vh;
+}
+
+
+.image-preview-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .image-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+  }
+  

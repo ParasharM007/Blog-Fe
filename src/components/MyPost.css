@@ -1,0 +1,70 @@
+.cont{
+    position: relative;
+}
+.post{
+    margin: 5px;
+    padding: 10px;
+    width: 60vw;
+    border: 1px solid white;
+    border-radius: 20px;
+    display: flex;
+    cursor: pointer;
+
+}
+.post-img{
+    margin: 10px;
+    padding: 10px;
+    width: 160px;
+    height: 160px;
+    border-top-left-radius: 30%;
+    border-bottom-right-radius: 30%;
+}
+.left-part{
+    margin: 10px;
+    padding: 10px;
+    border-right: 1px solid white;
+}
+.right-part{
+    margin: 10px;
+    padding: 10px;
+}
+.post-head{
+    margin: 5px;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.post-desc{
+    margin: 5px;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: 400;
+}
+.creat{
+    margin: 5px;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    color:rgb(189, 255, 189)
+}
+.btns{
+    display: flex;
+    justify-content: end;
+    gap:5px;
+    margin: 5px;
+    margin-right: 20px;
+    
+
+}
+.edit{
+    background-color: green;
+    color:white;
+}
+.del{
+    background-color: white;
+    color: red;
+}
+.err-head{
+    font-size: 50px;
+    font-weight: 300;
+}
