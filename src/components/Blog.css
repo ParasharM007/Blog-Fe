@@ -23,7 +23,7 @@
 }
 .blog-content{
 border: 1px solid grey;
-    background-color: rgb(27, 26, 26);;
+    background-color: rgb(27, 26, 26);
     color: white;
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@ margin-left: 250px;
 }
 .creator-details{
     margin-left: 250px;
-    background-color: rgb(27, 26, 26);;
+    background-color: rgb(27, 26, 26);
     color: white;
     display: flex;
     justify-content: center;

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./Register.css"
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 function Register() {
   const [username,setUsername]=useState(null)
   const [fullName,setFullName]=useState(null)
@@ -9,6 +10,7 @@ function Register() {
   const [email,setEmail]=useState(null)
   const [imageFile,setImageFile]=useState(null)
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const navigate=useNavigate();
   const handleImageChange=(e)=>{
     setImageFile(e.target.files[0])
   }
@@ -32,6 +34,11 @@ function Register() {
       )
       toast.success("Account created successfully")
       console.log("User registration successful "+res)
+      setTimeout(() => {
+        navigate('/login')
+        
+      }, 3000);
+      
     } catch (error) {
       toast.error("Error in creating account");
       console.log("Error while registering user: " + error)
@@ -40,46 +47,46 @@ function Register() {
   return (
     <div className='register-cont'>
       <ToastContainer theme='dark'/>
-      <div className='reg-cont'>
+      <div className='m-3 mt-7 p-5 w-70 md:h-120 md:w-120 bg-gray-300 flex flex-col items-center justify-center'>
 
-        <h1 className='register-head'>Welcome To MyBlog</h1>
+        <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>Welcome To MyBlog</h1>
         <form action="submit"
           onSubmit={handleRegisterUser}
-          className='register-form'
+          className='flex flex-col items-center'
         >
 
           <input type="text"
             required={true}
             placeholder='Enter full name'
-            className='reg-email'
+            className='m-2 p-2 text-lg bg-white rounded-md outline-none'
             onChange={(e) =>{setFullName(e.target.value)}}
             />
           <input type="email"
             required={true}
             placeholder='Enter email'
-            className='reg-email'
+            className='m-2 p-2 text-lg bg-white rounded-md outline-none'
             onChange={(e) => {setEmail(e.target.value)}}
             />
           <input type="username"
             required={true}
             placeholder='Enter username'
-            className='reg-email'
+            className='m-2 p-2 text-lg bg-white rounded-md outline-none'
             onChange={(e)=>setUsername(e.target.value)}
             />
 
           <input type="text"
             required={true}
             placeholder='Enter password '
-            className='reg-passw'
+            className='m-2 p-2 text-lg bg-white rounded-md outline-none'
             onChange={(e) => {setPassword(e.target.value)}}
             />
-            <div className="avatar-cont">
+            <div className=" m-2 w-auto">
 
-            <span className='profile'>Profile/avatar:-</span>
+            <span className=''>Profile/avatar:-</span>
           <input type="file"
             name="avatar" 
             id="avatar"
-            className='avatar'
+            className='mt-2 border-1 border-gray-400 w-50 cursor-pointer'
             accept="image/*"
             
             onChange={handleImageChange}
@@ -87,7 +94,7 @@ function Register() {
             />
             </div>
             
-          <button type='submit' className='reg-button'>Sign Up</button>
+          <button type='submit' className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800 rounded-md outline-none'>Sign Up</button>
         </form>
       </div>
     </div>

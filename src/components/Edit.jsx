@@ -152,32 +152,27 @@ function Edit() {
 
        
   return (
-    <div className="edit-container">
+    <div className="flex justify-center items-center">
 
-    <div className='edit-cont'>
-       <div className='edit-headng'><div className="edit-head">Blog Editor</div>
-     <div className='back'>
-     <MdArrowBack style={{backgroundColor:'blueviolet',
-                                                        fontSize:'30px',
-                                                        // marginRight:'5px'
-                                                      }}/> 
-      <button className='back-btn'
-              onClick={handleNavigate}
+    <div className='m-2 p-2 md:m-5 md:p-5 flex flex-col border items-start w-full md:w-[80%] lg:w-[60%]'>
+       <div className='flex justify-between items-center w-full'>
+        <div className="m-2 font-light text-3xl md:text-4xl">Blog Editor</div>
+     <div className="p-1 cursor-pointer flex gap-2 items-center bg-purple-600 text-white rounded-xl" onClick={handleNavigate}>
+     <MdArrowBack className='text-xl lg:text-3xl'/> 
+      <button className='text-lg lg:text-xl cursor-pointer'
+           
       >Back</button>
                                                       </div>
       </div>
       <form onSubmit={handleImagePreviewSubmit}>
 
-      <div style={{fontSize:'30px',
-                   margin:'5px',
-                   padding:'5px'
-      }}>
+      <div className='m-2 p-2  md:m-2 text-3xl text-gray-500 font-medium'>
         Edit Blog-Image
       </div>
       <input type="file"
             name="blogimage" 
             id="blogimage"
-            className='blogimage'
+            className='m-2'
             accept="image/*"
             onChange={handleImageChange}
             required
@@ -185,47 +180,39 @@ function Edit() {
             />
              {
              imagePreview ? (
-            <div className="image-preview-container">
-              <img src={imagePreview} alt="Preview" className="image-preview" />
-              <button style={{marginLeft:"10px"}}>Edit Blog image</button>
+            <div className="ml-8 m-2 p-2 mt-3 flex justify-center items-center w-50 md:w-100 lg:w-150">
+              <img src={imagePreview} alt="Preview" className="border-3 border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
+              <button className='ml-5'>Edit Blog image</button>
             </div>
           ):(
             <>
-            <div style={{fontSize:'20px',
-                   margin:'5px',
-                   padding:'5px'}}>Loading Image Preview</div>
+            <div className='m-2 p-2 text-2xl'>Loading Image Preview...</div>
             </>
           )}
                    </form>
       <form action="submit" onSubmit={handleContentSubmit}>
 
-      <div style={{fontSize:'30px',
-                   margin:'5px',
-                   padding:'5px'
-                  }}>Heading</div>
-      <div className="blog-heading">
+      <div className='m-2 p-2 md:m-2 text-3xl text-gray-500 font-medium '>Heading</div>
+      <div className="md:m-2 p-2 w-200">
         <input 
           type="text" 
           placeholder="Enter blog title..." 
-          className="blog-title-input" 
+          className="m-2 outline-none text-2xl md:w-100 p-1 text-gray-700 border-gray-300 border rounded-xl" 
           value={heading}
           onChange={handleHeadingChange}
           />
       </div>
-      <div className="blog-description">
-      <div style={{fontSize:'30px',
-                   margin:'5px',
-                   padding:'5px'
-      }}>Content</div>
+      <div className="m-2 p-2">
+      <div className='my-4 text-3xl text-gray-500 font-medium'>Content</div>
         <ReactQuill 
           value={content} 
           onChange={handleContentChange} 
           theme="snow" // Quill theme
           placeholder="Write your blog content here..."
-          className='quill-edit'
+          className='w-70 md:w-100 lg:w-148 text-4xl border-gray-300 border'
           />
       </div>
-      <button className='save-btn' type='submit'>Save</button>
+      <button className='text-lg lg:text-xl cursor-pointer mx-4 p-1 w-20 bg-green-700 rounded-2xl text-white' type='submit'>Save</button>
           </form>
         
           </div>

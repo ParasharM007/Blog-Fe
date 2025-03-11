@@ -48,18 +48,18 @@ useEffect(() => {
     ):(
 
       
-      <div className='profile-cont'>
-        <div className="left">
+      <div className='flex items-center justify-center  m-2 p-2 gap-4 md:gap-12'>
+        <div className="mt-15 ">
           <div >
-            <img src={profileData?.avatar} alt="pfp" className="pfp"/>
+            <img src={profileData?.avatar} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50"/>
           </div>
-          <div className="username">{profileData?.username || "username"}</div>
+          <div className="m-3 p-1 md:text-5xl text-4xl font-light">{profileData?.username || "username"}</div>
         </div>
-        <div className="right">
-          <div className="details">
+        <div className="">
+          <div className="flex flex-col gap-2  text-md md:text-xl ">
             <div>{profileData?.fullName || "Full Name"}</div>
             <div>{profileData?.email || "user-email"}</div>
-            <div>{date|| "data of joining"}</div>
+            <div>Joined at:-{date|| "data of joining"}</div>
               
           </div>
         </div>
@@ -67,9 +67,9 @@ useEffect(() => {
   )
     }
     
-    <div className="posts-cont">
-      <div className="posts-head">My Posts</div>
-      <div className="posts">
+    <div className="m-5 p-5 mt-3 md:mt-10  flex flex-col justify-center items-center ">
+      <div className="font-light text-4xl md:text-5xl">My Posts</div>
+      <div className="">
      <Myposts />
 
       </div>

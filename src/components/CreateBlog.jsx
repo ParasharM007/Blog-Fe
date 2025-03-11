@@ -14,7 +14,7 @@ function Edit() {
   const [title, setTitle] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview]=useState(null);
-  const [content, setContent] = useState('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis voluptatem natus quibusdam similique, sit ipsa architecto dicta facere fuga animi sunt dolorem asperiores nobis atque consectetur modi cum velit, repudiandae, aliquid iure repellendus cumque? Magni et aut hic perspiciatis molestias unde optio iste voluptatibus doloremque, porro enim dicta quisquam eum fugit deleniti ipsam eius tempore fugiat. Quisquam nisi dicta assumenda hic necessitatibus sit magnam sequi rerum officiis?');
+  const [content, setContent] = useState('');
   // const [cleanedContent,setCleanedContent] =useState('')
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   
@@ -47,10 +47,11 @@ function Edit() {
   const handleSave = async (e) => {
     e.preventDefault(); // Prevent page reload on form submit
     // setCleanedContent(content)
-    const plainText = content.replace(/<[^>]+>/g, ''); // Removes all HTML tags
+    // const plainText = content.replace(/<[^>]+>/g, ''); // Removes all HTML tags
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('content', plainText);
+    // formData.append('content', plainText);
+    formData.append('content', content);
     if (image) formData.append('blogImg', image);
 
     try {
@@ -83,19 +84,21 @@ function Edit() {
     {
       isLoading ? (
         <>
-                        <div className="loading-container">
+                        <div className=" flex justify-center items-center ">
                           <img src={loadinggif} alt="Loading..." className="loading-gif" style={{ color: 'white' }} />
                         </div> 
                         </>
                       ) : (
                         <>
-                        <div className="edit-container">
-                        <div className="edit-cont">
-                          <div className="edit-headng">
-                            <div className="edit-head">Create Your Blogs with MyBlog...</div>
-                            <div className="back">
-                              <MdArrowBack style={{ backgroundColor: 'blueviolet', fontSize: '30px' }} />
-                              <button className="back-btn" onClick={handleNavigate}>
+                        
+                        <div className="flex justify-center items-center">
+                        <div className="m-2 p-2 md:m-5 md:p-5 flex flex-col border items-start w-full md:w-[80%] lg:w-[60%]">
+                          <div className="flex justify-between items-center w-full">
+                            <div className="m-2 font-light text-3xl md:text-4xl ">Create Your Blogs with MyBlog...</div>
+                            <div className="p-1 cursor-pointer flex gap-2 items-center bg-purple-600 text-white rounded-xl" onClick={handleNavigate}>
+                              {/* <MdArrowBack style={{ backgroundColor: 'blueviolet', fontSize: '30px' }} /> */}
+                              <MdArrowBack className='text-xl lg:text-3xl' />
+                              <button className="text-lg lg:text-xl cursor-pointer" >
                                 Back
                               </button>
                             </div>
@@ -103,49 +106,57 @@ function Edit() {
                   
                           <form onSubmit={handleSave}>
                             <div>
-                              <div style={{ fontSize: '30px', margin: '5px', padding: '5px' }}>
+                              <div className='m-2 p-2  md:m-2 text-3xl text-gray-500 font-medium'>
                                 Upload Blog-Image
                               </div>
                               <input
                               type="file"
                               name="blogimage"
                               id="blogimage"
-                              className="blogimage"
+                              className="m-2"
                               accept="image/*"
                               onChange={handleImageChange}
                                 required
                               />
                             </div>
                             {imagePreview && (
-            <div className="image-preview-container">
-              <img src={imagePreview} alt="Preview" className="image-preview" />
+            <div className="m-2 p-2 mt-3 flex justify-center items-center w-50 md:w-100 lg:w-150"> 
+              <img src={imagePreview} alt="Preview" className="border-3 border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
             </div>
           )}
                   
-                            <div style={{ fontSize: '30px', margin: '5px', padding: '5px' }}>Heading</div>
-                            <div className="blog-heading">
+                            <div className='m-2 p-2 md:m-2 text-3xl text-gray-500 font-medium '>Heading</div>
+                            <div className="md:m-2 p-2 w-200">
                               <input
                                 type="text"
                                 placeholder="Enter blog title..."
-                                className="blog-title-input"
+                                className="m-2 outline-none text-2xl md:w-100 p-1 text-gray-700 border-gray-300 border rounded-xl"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                                 required
                               />
                             </div>
                   
-                            <div className="blog-description">
-                            <div style={{ fontSize: '30px', margin: '5px', padding: '5px' }}>Content</div>
+                            <div className="m-2 p-2">
+                            <div className='my-4 text-3xl text-gray-500 font-medium'>Content</div>
+                            {/* <textarea
+                            value={content}
+                            onChange={handleContentChange}
+                            
+                            placeholder="Write your blog content here..."
+                            className="w-200 border-1 h-"
+                            /> */}
                             <ReactQuill
                             value={content}
                             onChange={handleContentChange}
                             theme="snow"
                             placeholder="Write your blog content here..."
-                            className="quill-edit"
+                            className="w-70 md:w-100 lg:w-148 text-4xl border-gray-300 border"
+                            
                             />
                             </div>
                   
-                            <button type="submit" className="save-btn">
+                            <button type="submit" className="text-lg lg:text-xl cursor-pointer mx-4 p-1 w-20 bg-green-700 rounded-2xl text-white">
                               Save
                             </button>
                           </form>

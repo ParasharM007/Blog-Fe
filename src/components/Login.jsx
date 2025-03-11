@@ -54,28 +54,28 @@ function Login() {
   return (<>
     <ToastContainer theme='dark'/>
     <div className='login-cont'>
-      <div className='log-cont'>
+      <div className='m-3 mt-7 p-5  md:h-120 md:w-120 bg-gray-300 flex flex-col items-center justify-center'>
 
-        <h1 className='login-head'>MyBlog</h1>
+        <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>MyBlog Login</h1>
         <form action="submit"
              onSubmit={handleLogin}
-             className='login-form'
+             className='flex flex-col items-center'
              >
 
           <input type="text" 
                  required={true}
                  placeholder='Enter username or email'   
-                 className='email' 
+                 className='m-2 p-2 text-lg bg-white rounded-md outline-none' 
                  onChange={(e)=>setEmail(e.target.value)}      
           />
           
           <input type="text" 
                  required={true}
                  placeholder='Enter password '          
-                 className='passw'
+                 className='m-2 p-2 text-lg bg-white rounded-md outline-none'
                  onChange={(e)=>setPassword(e.target.value)}
           />
-          <button type="submit">Login</button>
+          <button type="submit" className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800   rounded-md outline-none'>Login</button>
         </form>
                  </div>
     </div>

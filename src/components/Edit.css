@@ -71,13 +71,14 @@
 .blog-description{
     margin: 5px;
     padding: 5px;
+    max-width: 800px;
     /* background-color: white; */
     font-size: 30px;
     
 }
 
 
-  .ql-snow .ql-picker{
+  /* .ql-snow .ql-picker{
     
     color:white
   }
@@ -91,6 +92,10 @@
 }
 .ql-editor p{
     /* font-size: 1.2rem; */
+/* }  */
+.ql-editor p,ol,ul {
+    font-size: 24px;
+    color:  #4a5568;
 }
 
 .save-btn{

@@ -20,8 +20,8 @@ function Plus() {
 
   return (
     
-       <button className='plus' onClick={handleNavigate}>
-        <FaPlus className='icon'/> 
+       <button className='p-2 cursor-pointer rounded-[100%] text-white z-50 fixed md:right-[20%] md:top-[70%] right-[20%] top-[70%]  bg-yellow-700' onClick={handleNavigate}>
+        <FaPlus className='text-5xl lg:text-6xl'/> 
       </button>
     
   )

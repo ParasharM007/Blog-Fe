@@ -47,7 +47,7 @@ function Blog() {
   <>
          {
              isLoading ? (
-                 <> <div className="loading-container">
+                 <> <div className="flex justify-center items-center ">
                     <img src={loadinggif} alt="Loading..." className="loading-gif" style={{ color: 'white' }} />
                   </div> </>
                 ) : (
@@ -59,18 +59,24 @@ function Blog() {
                         <button className='edit'>Edit</button>
                         <button className='del'>Delete</button>
                         </div> */}
-                        <div className='blog-container'>
+                        <div className='relative h-auto'>
                         
-                        <div className='blogimg-container'>
-                        <img src={blog.blogImg} alt="image" />
+                        <div className='md:flex justify-between items-center'>
+                          <div className="m-10 text-5xl md:text-7xl">
+
+                        {/* <h1 className="text-3xl">{blog.title ||"Blog Title"}</h1> */}
+                        <h1 className="font-medium text-gray-700 ">{blog.title.split(' ').slice(0, 2).join(' ') ||"Blog Title"}</h1>
+                        <h1 className="font-medium text-gray-400">{blog.title.split(' ').slice(2, 7).join(' ')}</h1>
+                        <h1 className="font-medium text-gray-700">{blog.title.split(' ').slice(7, 20).join(' ')}</h1>
+                          </div>
+                        <img src={blog.blogImg} alt="image" className='m-10 p-2 bg-gray-200 w-60 h-40 md:w-90 md:h-60 lg:w-220 lg:h-100 border rounded-tl-3xl rounded-br-3xl object-cover' />
                         </div>
-                        <div className="blog-content">
-                        <h1 className="title">{blog.title ||"Blog Title"}</h1>
-                        <div className='blog-detail'>{blog.content ||"Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi error expedita ut. At nemo cumque obcaecati voluptate assumenda dolore porro recusandae? pjrwpkfwjrnfo eojrg;k erohgpoejen o3hrgejn oehripgjela orejpg;jnael oehrjijfherh"}
+                        <div className="m-10">
+                        <div className='text-3xl md:text-4xl text-gray-500'>{blog.content ||"Blog content is not available"}
                     </div>
-                     <div className="creator-details">
-                              <img src={blog.authorId?.avatar} alt="" className='image' />
-                             <span className='created'>Created by:- {blog.authorId?.username ||"Author-name"}</span>
+                     <div className="my-5 gap-3 flex">
+                              <img src={blog.authorId?.avatar} alt="" className='w-12 h-12 rounded-[50%] border-5 border-gray-200' />
+                             <span className='p-2 border-5 border-gray-200  text-gray-600 rounded-3xl'>Created by:- <span className=' font-medium'>{blog.authorId?.username ||"Author-name"}</span></span>
                     
                              </div>
                 </div>

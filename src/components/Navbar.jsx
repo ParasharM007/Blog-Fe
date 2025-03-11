@@ -14,10 +14,10 @@ function Navbar() {
   const navigate=useNavigate();
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const userId=localStorage.getItem('userId');
-  const toggleMenu=()=>{
-    setShowMenu(!showMenu);
+  // const toggleMenu=()=>{
+  //   setShowMenu(!showMenu);
     
-  }
+  // }
   const handleShowProfile=()=>{
     setShowProfile(!showProfile);
 
@@ -25,11 +25,12 @@ function Navbar() {
   const handleNavigate=()=>{
   const id=localStorage.getItem('userId');
   if(id) {
-    navigate(`/profile/${id}`)
+    // navigate(`/profile/${id}`)
+    window.location.href=`/profile/${id}`
 
   }
  else {toast.error("Please login first")}
-   setShowProfile(!showProfile);
+  //  setShowProfile(!showProfile);
   }
 
   const handleLogout=async()=>{
@@ -46,6 +47,7 @@ function Navbar() {
           toast.success("Logged out", { toastId: "logoutSuccess" });
           }, 100);
           console.log("Logout completed successfully");
+          setShowMenu(false);
           if(userId){
             
             localStorage.removeItem("userId")
@@ -58,30 +60,34 @@ function Navbar() {
         // , { toastId: "logoutError" }
       );
       console.log("Error while logging out " + error);
+      setShowMenu(false);
     }
-  
+    
     setTimeout(() => {
       navigate("/");
-    }, 8000);
+    }, 5000);
   
   }
   return (
-    <div>
-    <nav className='nav'>
-      <div className='nav-items'>
+    <div className=''>
+    <nav className='z-10'>
+      <div className='flex m-1 p-1 justify-between items-center'>
 
-    <div className='logo'>
+    <div className='bg-black p-2 text-white text-4xl'>
     <Link to='/'>MyBlog</Link>
       
       </div>
      
-       <div className='hampburger' onClick={toggleMenu}>
+       <div className={`mr-5 text-4xl md:hidden cursor-pointer transition-transform ease-in-out duration-300 `} onClick={()=>setShowMenu(prev=>!prev)}>
          {/* <FaBars size={30} color="white"/> */}
-         {showMenu ? <FaTimes size={30} color="white" /> : <FaBars size={30} color="white" />}
+         <div className={`${showMenu ? "-rotate-90" : "rotate-0"} transition-transform duration-600`}>
+    {showMenu ? <FaTimes /> : <FaBars />}
+  </div>
 
        </div>
-     
-     <ul className={`nav-list ${showMenu?'open':''}`}>
+      
+     {/* Menu Options For Desktop */}
+     <ul className='text-lg px-4 mr-4 hidden md:flex gap-5'>
       {!userId?
       
      ( <>
@@ -99,24 +105,58 @@ function Navbar() {
         ):(
 
           <li onClick={handleShowProfile}>
-      <Link className='menu' > <FaUser /> </Link>
+      <Link  > <FaUser className='border-2 p-1 rounded-[100%] border-gray-400 bg-white text-black text-4xl'/> </Link>
         
         </li>
       )
       } 
        
      </ul>
+     {/* Menu Options For Mobile */}
+     <ul className={`md:hidden p-2 border-1 border-gray-300 absolute z-30 flex flex-col top-19 right-10 text-gray-900 bg-gray-200 gap-3  transition-all duration-300 transform ease-in-out ${showMenu ? " translate-x-0 opacity-100 visible" : " translate-x-full opacity-0 invisible"}`}>
+      {!userId?
+      
+     ( <>
+     <li className='border-b-2 border-gray-400'>
+      <Link to='/login' onClick={()=>setShowMenu(false)}>Login</Link>
+      
+      </li>
+      
+      
+      <li className='border-b-2 border-gray-400'>
+      <Link to='/register' onClick={()=>setShowMenu(false)}>Register</Link>
+        
+        </li>
+      
+     </>
+        ):(
+
+         <>
+         <li className='flex flex-col gap-2 text-xl'>
+      <Link className='border-b-2 border-gray-400' onClick={()=>handleNavigate()} >Profile </Link>
+      <Link className='border-b-2 border-gray-400' onClick={handleLogout} >Logout </Link>
+        
+        </li>
+        
+         </> 
+      )
+      } 
+       
+     </ul>
      {/* <ToastContainer theme='dark'/> */}
      {showProfile && 
-        <div className='menu-options'><div onClick={handleNavigate}>Profile</div>
+        <div className='menu-options'>
+        <div onClick={handleNavigate}>Profile</div>
         <div onClick={handleLogout}>Logout
 
         </div>
+       
+       
         </div>
         }    
       </div>
-    <div className='line'>
-      <hr style={{border:'1px solid white',color:'white'}}/>
+    <div className=''>
+      <hr className='text-gray-800'/>
       </div>
     </nav>
      

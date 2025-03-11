@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import "./Myposts.css"
 import MyPost from './MyPost'
-import Plus from './Plus.jsx'
+
 
 function Myposts() {
  
   return (
-    <div className='myposts-cont'>
+    <div className='m-2.5 p-2.5 flex flex-col items-center'>
    
      <MyPost />
-     <Plus />
+     {/* <Plus /> */}
     </div>
   )
 }
