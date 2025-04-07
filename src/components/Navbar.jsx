@@ -25,8 +25,8 @@ function Navbar() {
   const handleNavigate=()=>{
   const id=localStorage.getItem('userId');
   if(id) {
-    // navigate(`/profile/${id}`)
-    window.location.href=`/profile/${id}`
+    navigate(`/profile/${id}`)
+    // window.location.href=`/profile/${id}`    //to be resolved
 
   }
  else {toast.error("Please login first")}
@@ -133,7 +133,7 @@ function Navbar() {
 
          <>
          <li className='flex flex-col gap-2 text-xl'>
-      <Link className='border-b-2 border-gray-400' onClick={()=>handleNavigate()} >Profile </Link>
+      <button className='border-b-2 border-gray-400' onClick={handleNavigate} >Profile </button>
       <Link className='border-b-2 border-gray-400' onClick={handleLogout} >Logout </Link>
         
         </li>
