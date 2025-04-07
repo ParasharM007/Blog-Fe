@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Navbar.css"
 import { FaBars, FaUser } from 'react-icons/fa';
 import { FaTimes } from 'react-icons/fa';
@@ -11,9 +11,10 @@ import axios from 'axios';
 function Navbar() {
   const [showMenu,setShowMenu]=useState(false)
   const [showProfile,setShowProfile]=useState(false);
+  const [isLoggedIn,setIsLoggedIn]=useState(false);
   const navigate=useNavigate();
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  const userId=localStorage.getItem('userId');
+  // const userId=localStorage.getItem('userId');
   // const toggleMenu=()=>{
   //   setShowMenu(!showMenu);
     
@@ -23,7 +24,7 @@ function Navbar() {
 
   }
   const handleNavigate=()=>{
-  const id=localStorage.getItem('userId');
+  // const id=localStorage.getItem('userId');
   if(id) {
     navigate(`/profile/${id}`)
     // window.location.href=`/profile/${id}`    //to be resolved
@@ -48,10 +49,11 @@ function Navbar() {
           }, 100);
           console.log("Logout completed successfully");
           setShowMenu(false);
-          if(userId){
+          setIsLoggedIn(false)
+          // if(userId){
             
-            localStorage.removeItem("userId")
-          }
+          //   localStorage.removeItem("userId")
+          // }
         
       }
       setShowProfile(false);
@@ -68,6 +70,24 @@ function Navbar() {
     }, 5000);
   
   }
+  useEffect(()=>{
+   (
+  async()=>{
+
+    try {
+     const res = await axios.get(`${API_BASE_URL}/v1/users/nav-items`,
+      {withCredentials: true}
+     )
+     console.log(res.data.data.data)
+     setIsLoggedIn(res.data.data.data)
+     
+   } catch (error) {
+     console.log("Error in fetching nav items")  
+     setIsLoggedIn(false) 
+   }
+  }
+   )()
+  },[])
   return (
     <div className=''>
     <nav className='z-10'>
@@ -88,7 +108,7 @@ function Navbar() {
       
      {/* Menu Options For Desktop */}
      <ul className='text-lg px-4 mr-4 hidden md:flex gap-5'>
-      {!userId?
+      {!isLoggedIn?
       
      ( <>
      <li>
@@ -114,7 +134,7 @@ function Navbar() {
      </ul>
      {/* Menu Options For Mobile */}
      <ul className={`md:hidden p-2 border-1 border-gray-300 absolute z-30 flex flex-col top-19 right-10 text-gray-900 bg-gray-200 gap-3  transition-all duration-300 transform ease-in-out ${showMenu ? " translate-x-0 opacity-100 visible" : " translate-x-full opacity-0 invisible"}`}>
-      {!userId?
+      {!isLoggedIn?
       
      ( <>
      <li className='border-b-2 border-gray-400'>
