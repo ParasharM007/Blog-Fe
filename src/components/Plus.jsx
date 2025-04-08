@@ -1,17 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaPlus } from 'react-icons/fa';
 import "./Plus.css"
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie'
 function Plus() {
   const navigate=useNavigate()
-  const userId =localStorage.getItem('userId')
-  const handleNavigate=()=>{
-    if(userId){
-      navigate(
-        '/create-blog'
-      )
+ 
+  const [isLoggedIn,setIsLoggedIn] = useState(false)
+  // const userId =localStorage.getItem('userId')
+  useEffect(()=>{
+    const cookie = Cookies.get('accessToken')
+    setIsLoggedIn(!!cookie)   //conver to boolean
+  },[])
 
+
+  const handleNavigate=()=>{
+    // if(userId){
+    //   navigate(
+    //     '/create-blog'
+    //   )
+
+    // }
+    if(isLoggedIn){
+      navigate(
+        `/create-blog`
+      )
     }
     else{
       toast.error("Please login first to create a new blog")

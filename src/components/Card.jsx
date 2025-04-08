@@ -10,6 +10,7 @@ function Card() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [isLoading, setLoading] = useState(false)
   const fetchBlogData = async () => {
+     
 
     setLoading(true)
     try {
