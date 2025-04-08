@@ -10,7 +10,7 @@ import Edit from './components/Edit';
 import CreateBlog from './components/CreateBlog';
 import { ToastContainer } from 'react-toastify';
 import Plus from './components/Plus';
-import { useState } from 'react';
+
 // import SmoothScroll from './SmoothScroll';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
      <div className=' relative bg-white overflow-x-hidden'>
       <Router>
       <Navbar />
-      <ToastContainer theme="dark" />
+      <ToastContainer position='top-center' theme="dark" />
         <Routes>
           <Route path='/' element={<Cards/>}/>
           <Route path='/blog/:id' element={<Blog />}/>

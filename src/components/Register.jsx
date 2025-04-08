@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Register.css"
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 function Register() {
   const [username,setUsername]=useState(null)
@@ -46,7 +46,7 @@ function Register() {
   }
   return (
     <div className='register-cont'>
-      <ToastContainer theme='dark'/>
+      
       <div className='m-3 mt-7 p-5 w-70 md:h-120 md:w-120 bg-gray-300 flex flex-col items-center justify-center'>
 
         <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>Welcome To MyBlog</h1>

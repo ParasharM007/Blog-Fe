@@ -3,12 +3,12 @@ import "./Navbar.css"
 import { FaBars, FaUser } from 'react-icons/fa';
 import { FaTimes } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import axios from 'axios';
 
 
-function Navbar(logIn) {
+function Navbar() {
   const [showMenu,setShowMenu]=useState(false)
   const [showProfile,setShowProfile]=useState(false);
   const [isLoggedIn,setIsLoggedIn]=useState(false);
@@ -21,11 +21,13 @@ function Navbar(logIn) {
     
   // }
   const handleShowProfile=()=>{
-    setShowProfile(!showProfile);
+    setShowProfile(prev=>!prev);
+    
 
   }
   const handleNavigate=()=>{
   setShowMenu(false)
+  setShowProfile(false)
   if(userId) {
     navigate(`/profile/${userId}`)
     // window.location.href=`/profile/${id}`    //to be resolved
@@ -43,8 +45,9 @@ function Navbar(logIn) {
         {},
         { withCredentials: true }
       );
-  
+      
       if (res.status === 200) {
+        setShowProfile(false)
         setTimeout(() => {
           toast.success("Logged out", { toastId: "logoutSuccess" });
           }, 100);
@@ -57,7 +60,7 @@ function Navbar(logIn) {
           }
         
       }
-      setShowProfile(false);
+      
     } catch (error) {
       toast.error("Couldn't log out"
         // , { toastId: "logoutError" }
@@ -166,7 +169,7 @@ function Navbar(logIn) {
       } 
        
      </ul>
-     {/* <ToastContainer theme='dark'/> */}
+     
      {showProfile && 
         <div className='menu-options'>
         <div onClick={handleNavigate}>Profile</div>

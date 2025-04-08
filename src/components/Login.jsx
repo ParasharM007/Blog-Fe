@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import "./Login.css"
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 
 
-function Login(setLogin) {
+function Login() {
   const [Email , setEmail]=useState('')
   const [password, setPassword] = useState('')
   const navigate=useNavigate()
@@ -46,7 +46,7 @@ function Login(setLogin) {
       
       }
     } catch (error) {
-      toast.error("Error while logging in")
+      toast.error("User does not exist!")
       console.log('Error while logging in: ', error);
     }
   };
@@ -54,7 +54,7 @@ function Login(setLogin) {
    
   
   return (<>
-    <ToastContainer theme='dark'/>
+    
     <div className='login-cont'>
       <div className='m-3 mt-7 p-5  md:h-120 md:w-120 bg-gray-300 flex flex-col items-center justify-center'>
 
