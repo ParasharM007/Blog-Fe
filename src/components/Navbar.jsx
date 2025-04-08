@@ -8,13 +8,14 @@ import "react-toastify/dist/ReactToastify.css"
 import axios from 'axios';
 
 
-function Navbar() {
+function Navbar(logIn) {
   const [showMenu,setShowMenu]=useState(false)
   const [showProfile,setShowProfile]=useState(false);
   const [isLoggedIn,setIsLoggedIn]=useState(false);
   const navigate=useNavigate();
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  // const userId=localStorage.getItem('userId');
+  const userId=localStorage.getItem('userId');
+ 
   // const toggleMenu=()=>{
   //   setShowMenu(!showMenu);
     
@@ -24,9 +25,9 @@ function Navbar() {
 
   }
   const handleNavigate=()=>{
-  // const id=localStorage.getItem('userId');
-  if(id) {
-    navigate(`/profile/${id}`)
+  setShowMenu(false)
+  if(userId) {
+    navigate(`/profile/${userId}`)
     // window.location.href=`/profile/${id}`    //to be resolved
 
   }
@@ -50,10 +51,10 @@ function Navbar() {
           console.log("Logout completed successfully");
           setShowMenu(false);
           setIsLoggedIn(false)
-          // if(userId){
+          if(userId){
             
-          //   localStorage.removeItem("userId")
-          // }
+            localStorage.removeItem("userId")
+          }
         
       }
       setShowProfile(false);
@@ -81,13 +82,14 @@ function Navbar() {
      console.log(res.data.data.data)
      setIsLoggedIn(res.data.data.data)
      
+     
    } catch (error) {
      console.log("Error in fetching nav items")  
      setIsLoggedIn(false) 
    }
   }
    )()
-  },[])
+  },[userId])
   return (
     <div className=''>
     <nav className='z-10'>
@@ -109,6 +111,7 @@ function Navbar() {
      {/* Menu Options For Desktop */}
      <ul className='text-lg px-4 mr-4 hidden md:flex gap-5'>
       {!isLoggedIn?
+      
       
      ( <>
      <li>

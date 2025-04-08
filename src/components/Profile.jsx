@@ -9,11 +9,14 @@ function Profile() {
   const [profileData,setProfileData] =useState(null)
   const [isLoading, setisLoading] = useState(false)
   const [date,setDate]=useState(null)
+  
   const { id }=useParams()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   if(!id){
     console.log("Id is not available")
   }
+  
+  
 useEffect(() => {
   const fetchProfile=async() => {
     try {
@@ -30,6 +33,7 @@ useEffect(() => {
       
       // Format to display only the date (YYYY-MM-DD)
       setDate(date.toLocaleDateString());
+      
       setisLoading(false)
     } catch (error) {
       setisLoading(false)
@@ -38,7 +42,7 @@ useEffect(() => {
   }
   fetchProfile();
 
-},[])
+},[id])
   return (
     <>
     {isLoading?(

@@ -21,7 +21,7 @@ function Blog() {
               )
               if(res.status===200){
                 setBlog(res.data?.data)
-                console.log("Fetched Blog Data: "+res.data?.data)
+                // console.log("Fetched Blog Data: "+res.data?.data)
               }
               
             } catch (error) {
@@ -72,8 +72,8 @@ function Blog() {
                         <img src={blog.blogImg} alt="image" className='m-10 p-2 bg-gray-200 w-60 h-40 md:w-90 md:h-60 lg:w-220 lg:h-100 border rounded-tl-3xl rounded-br-3xl object-cover' />
                         </div>
                         <div className="m-10">
-                        <div className='text-3xl md:text-4xl text-gray-500'>{blog.content ||"Blog content is not available"}
-                    </div>
+                        {/* <div className='text-3xl md:text-4xl text-gray-500'>{blog.content ||"Blog content is not available"} */}
+                        <div className='text-3xl md:text-4xl text-gray-500' dangerouslySetInnerHTML={{ __html: blog.content }}/>
                      <div className="my-5 gap-3 flex">
                               <img src={blog.authorId?.avatar} alt="" className='w-12 h-12 rounded-[50%] border-5 border-gray-200' />
                              <span className='p-2 border-5 border-gray-200  text-gray-600 rounded-3xl'>Created by:- <span className=' font-medium'>{blog.authorId?.username ||"Author-name"}</span></span>

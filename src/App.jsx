@@ -10,11 +10,11 @@ import Edit from './components/Edit';
 import CreateBlog from './components/CreateBlog';
 import { ToastContainer } from 'react-toastify';
 import Plus from './components/Plus';
+import { useState } from 'react';
 // import SmoothScroll from './SmoothScroll';
 
 function App() {
   
-
   return (
       
     <>

@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 
 
-function Login() {
+function Login(setLogin) {
   const [Email , setEmail]=useState('')
   const [password, setPassword] = useState('')
   const navigate=useNavigate()
@@ -37,6 +37,7 @@ function Login() {
         console.log(
           id
         )
+        
         if(id) localStorage.setItem('userId',id);
         console.log('User Logged in successfully!!');
         setTimeout(() => {
