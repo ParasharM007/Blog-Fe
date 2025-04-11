@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import "./Blog.css"
 import { useParams } from 'react-router-dom'
 import loadinggif from '../assets/loading-gif.gif'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import js from '@eslint/js'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 

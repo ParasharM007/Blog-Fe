@@ -17,8 +17,8 @@ function Register() {
   }
   const mutation = useMutation({
 
-    mutationFn:({formData})=>{
-      return axios.post(`${API_BASE_URL}/v1/users/register`,formData,
+    mutationFn: async ({formData})=>{
+      return await axios.post(`${API_BASE_URL}/v1/users/register`,formData,
         { 
           headers:{
             "Content-Type" : "multipart/form-data"
