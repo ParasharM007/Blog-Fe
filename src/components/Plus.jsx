@@ -37,8 +37,7 @@ function Plus() {
       
       
     } catch (error) {
-      toast.error("Please login first to create a new blog")
-      console.log("Error")  
+      toast.error("Please login first to create a new blog") 
       setIsLoggedIn(false) 
     }
 

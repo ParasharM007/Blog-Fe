@@ -3,55 +3,87 @@ import "./Blog.css"
 import { useParams } from 'react-router-dom'
 import loadinggif from '../assets/loading-gif.gif'
 import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+import js from '@eslint/js'
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+const blogData=async (id) =>{
+  if(!id) console.log("Id is not available")
+   
+         const res= await axios.post(`${API_BASE_URL}/v1/users/blog-page-data`,
+          {
+            "id":id
+          }
+        )
+        
+    return res.data?.data
+         
+        
+    }
+    // const BlogData=blogs.find(blog=>{
+      //     blog._id===id
+  // })
+  // setBlogPageData(BlogData)
+  
 function Blog() {
-    const { id }=useParams()
-    const [isLoading, setLoading] = useState(false)
-    const [blog,setBlog]=useState(null)
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const { id }=useParams()
+  
+  const {data:blog, isLoading, isError} = useQuery(
+    {
+      queryKey:["blog",id], 
+      queryFn:({queryKey})=>blogData(queryKey[1]),
+      staleTime:20000
+    }       //queryFn take queryKey as parameter 
+  )
+
+  // const [isLoading, setLoading] = useState(false)
+  // const [blog,setBlog]=useState(null)
     useEffect(()=>{
         window.scrollTo(0, 0)
-       const blogData=async()=>{
-        if(!id) console.log("Id is not available")
-           try {
-              setLoading(true)
-               const res= await axios.post(`${API_BASE_URL}/v1/users/blog-page-data`,
-                {
-                  "id":id
-                }
-              )
-              if(res.status===200){
-                setBlog(res.data?.data)
-                // console.log("Fetched Blog Data: "+res.data?.data)
-              }
+      //  const blogData=async()=>{
+      //   if(!id) console.log("Id is not available")
+      //      try {
+      //         setLoading(true)
+      //          const res= await axios.post(`${API_BASE_URL}/v1/users/blog-page-data`,
+      //           {
+      //             "id":id
+      //           }
+      //         )
+      //         if(res.status===200){
+      //           setBlog(res.data?.data)
+      //           // console.log("Fetched Blog Data: "+res.data?.data)
+      //         }
               
-            } catch (error) {
-                console.log("Error while loading blog data: "+error )
-            }
-            finally{
-               setLoading(false)
+      //       } catch (error) {
+      //           console.log("Error while loading blog data: "+error )
+      //       }
+      //       finally{
+      //          setLoading(false)
 
-           }
+      //      }
 
-       }
-        // const BlogData=blogs.find(blog=>{
-        //     blog._id===id
-        // })
-        // setBlogPageData(BlogData)
-        blogData();
-    },[id])
+      //  }
+      //   // const BlogData=blogs.find(blog=>{
+      //   //     blog._id===id
+      //   // })
+      //   // setBlogPageData(BlogData)
+      //   blogData();
+    },[])
     
 
    
     
     return (
-  <>
+      <>
+      {isError && <h1 className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Error while Loading blog</h1>}
          {
-             isLoading ? (
-                 <> <div className="flex justify-center items-center ">
+           isLoading ? (
+             <> <div className="flex justify-center items-center ">
                     <img src={loadinggif} alt="Loading..." className="loading-gif" style={{ color: 'white' }} />
                   </div> </>
                 ) : (
-                    blog && <>
+                  blog && <>
                     
                     <div>
                     {/* <div className='btns'>
@@ -87,6 +119,7 @@ function Blog() {
                 </>
             )}
             </>
+  
     )
 }
 

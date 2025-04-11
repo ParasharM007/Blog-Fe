@@ -3,6 +3,7 @@ import "./Register.css"
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 function Register() {
   const [username,setUsername]=useState(null)
   const [fullName,setFullName]=useState(null)
@@ -14,6 +15,19 @@ function Register() {
   const handleImageChange=(e)=>{
     setImageFile(e.target.files[0])
   }
+  const mutation = useMutation({
+
+    mutationFn:({formData})=>{
+      return axios.post(`${API_BASE_URL}/v1/users/register`,formData,
+        { 
+          headers:{
+            "Content-Type" : "multipart/form-data"
+          }
+        }
+        
+      )
+    }
+    })
   const handleRegisterUser =async (e) => {
     e.preventDefault();
     const formData=new FormData();
@@ -23,26 +37,21 @@ function Register() {
     formData.append("email",email)
     formData.append("avatar",imageFile)
     console.log(formData)
-    try {
-      const res= await axios.post(`${API_BASE_URL}/v1/users/register`,formData,
-        { 
-          headers:{
-            "Content-Type" : "multipart/form-data"
-          }
-        }
-        
-      )
-      toast.success("Account created successfully")
-      console.log("User registration successful "+res)
-      setTimeout(() => {
-        navigate('/login')
-        
-      }, 3000);
-      
-    } catch (error) {
-      toast.error("Error in creating account");
-      console.log("Error while registering user: " + error)
+    mutation.mutate({formData},
+      {onSuccess:(res)=>{
+        toast.success("Account created successfully")
+        console.log("User registration successful "+res)
+        setTimeout(() => {
+          navigate('/login')
+          
+        }, 3000);
+      },
+      onError:(err)=>{
+        toast.error("Error in creating account");
+        console.log("Error while registering user: " + err)
+      }
     }
+    )
   }
   return (
     <div className='register-cont'>

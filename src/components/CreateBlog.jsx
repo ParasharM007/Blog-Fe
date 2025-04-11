@@ -7,18 +7,18 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import loadinggif from "../assets/loading-gif.gif"
+import { useMutation } from '@tanstack/react-query';
 
 function Edit() {
   const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false)
   const [title, setTitle] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview]=useState(null);
   const [content, setContent] = useState('');
+  const [isLoading, setLoading] = useState(false)
   // const [cleanedContent,setCleanedContent] =useState('')
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   
-
   const handleContentChange = (value) => {
     
     setContent(value);
@@ -44,8 +44,21 @@ function Edit() {
     navigate('/');
   };
 
+  const mutation = useMutation({
+    mutationFn:async ({formData})=>{
+
+      const res = await axios.post(`${API_BASE_URL}/v1/users/create-blog`, formData, {
+        withCredentials: true,
+        headers: { 'Content-Type': 'multipart/form-data' },
+      },
+    );
+    return res.data;
+    }
+  })
+
   const handleSave = async (e) => {
     e.preventDefault(); // Prevent page reload on form submit
+    
     // setCleanedContent(content)
     // const plainText = content.replace(/<[^>]+>/g, ''); // Removes all HTML tags
     const formData = new FormData();
@@ -54,41 +67,50 @@ function Edit() {
     formData.append('content', content);
     if (image) formData.append('blogImg', image);
 
-    try {
-      setLoading(true)
-      const res = await axios.post(`${API_BASE_URL}/v1/users/create-blog`, formData, {
-      withCredentials: true,
-      headers: { 'Content-Type': 'multipart/form-data' },
-    },
-     
-      
-   
-    );
-
-      if (res.status === 200) {
+    mutation.mutate({formData},{
+      onSuccess:()=>{
         console.log('Blog created successfully');
-        toast.success("Blog created successfully")
-        setLoading(false);
-        // Optionally, redirect after successful blog creation
+        toast.success("Blog created successfully");
         navigate('/');
-        
-      }
-    } catch (error) {
-      setLoading(false);
-      toast.error("Couldn't create blog")
+      },
+      onError:(error)=>{
+        toast.error("Couldn't create blog")
       console.log('Error while creating blog:', error);
-    }
+      }
+    })
+
+  //   try {
+  //     setLoading(true)
+  //     const res = await axios.post(`${API_BASE_URL}/v1/users/create-blog`, formData, {
+  //     withCredentials: true,
+  //     headers: { 'Content-Type': 'multipart/form-data' },
+  //   },
+  // );
+
+    //   if (res.status === 200) {
+    //     console.log('Blog created successfully');
+    //     toast.success("Blog created successfully")
+    //     setLoading(false);
+    //     // Optionally, redirect after successful blog creation
+    //     navigate('/');
+        
+    //   }
+    // } catch (error) {
+    //   setLoading(false);
+    //   toast.error("Couldn't create blog")
+    //   console.log('Error while creating blog:', error);
+    // }
   };
 
   return <>
     {
-      isLoading ? (
-        <>
-                        <div className=" flex justify-center items-center ">
-                          <img src={loadinggif} alt="Loading..." className="loading-gif" style={{ color: 'white' }} />
-                        </div> 
-                        </>
-                      ) : (
+      // isLoading ? (
+      //   <>
+      //                   <div className=" flex justify-center items-center ">
+      //                     <img src={loadinggif} alt="Loading..." className="loading-gif" style={{ color: 'white' }} />
+      //                   </div> 
+      //                   </>
+      //                 ) : (
                         <>
                         
                         <div className="flex justify-center items-center">
@@ -163,7 +185,7 @@ function Edit() {
                         </div>
                       </div>
                       </>
-                      )
+                      // )
                     }
                     </>
    

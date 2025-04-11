@@ -4,45 +4,72 @@ import loadinggif from "../assets/loading-gif.gif"
 import Myposts from './Myposts'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+const fetchProfile=async(id) => {
+ 
+    const res= await axios.post(`${API_BASE_URL}/v1/users/profile`,
+      {
+        "id":id
+      },
+      {withCredentials:true}
+    )
+   return res.data?.data
+}
+
+
 
 function Profile() {
-  const [profileData,setProfileData] =useState(null)
-  const [isLoading, setisLoading] = useState(false)
   const [date,setDate]=useState(null)
   
   const { id }=useParams()
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   if(!id){
     console.log("Id is not available")
   }
+  const {data:profileData , isLoading , isError } = useQuery(
+    {queryKey: ["Profile", id] ,
+      queryFn:(({queryKey})=>fetchProfile(queryKey[1])),
+      staleTime:20000
+    }
+  )
   
   
 useEffect(() => {
-  const fetchProfile=async() => {
-    try {
-      setisLoading(true)
-      const res= await axios.post(`${API_BASE_URL}/v1/users/profile`,
-        {
-          "id":id
-        },
-        {withCredentials:true}
-      )
-      setProfileData(res.data?.data)
-      const createdAt = res.data.data?.createdAt;
-      const date = new Date(createdAt);
+  // const fetchProfile=async() => {
+  //   try {
+  //     setisLoading(true)
+  //     const res= await axios.post(`${API_BASE_URL}/v1/users/profile`,
+  //       {
+  //         "id":id
+  //       },
+  //       {withCredentials:true}
+  //     )
+  //     setProfileData(res.data?.data)
+  //     const createdAt = res.data.data?.createdAt;
+  //     const date = new Date(createdAt);
       
-      // Format to display only the date (YYYY-MM-DD)
-      setDate(date.toLocaleDateString());
+  //     // Format to display only the date (YYYY-MM-DD)
+  //     setDate(date.toLocaleDateString());
       
-      setisLoading(false)
-    } catch (error) {
-      setisLoading(false)
-      console.log("Error fetching profile: "+error)
-    }
-  }
-  fetchProfile();
+  //     setisLoading(false)
+  //   } catch (error) {
+  //     setisLoading(false)
+  //     console.log("Error fetching profile: "+error)
+  //   }
+  // }
+  // fetchProfile();
+  if(profileData?.createdAt){
 
-},[id])
+    const createdAt = profileData?.createdAt;
+    const tempDate = new Date(createdAt);
+    
+    // Format to display only the date (YYYY-MM-DD)
+    setDate(tempDate.toLocaleDateString());
+  }
+
+},[profileData])
   return (
     <>
     {isLoading?(

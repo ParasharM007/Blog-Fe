@@ -6,17 +6,20 @@ import { MdArrowBack } from 'react-icons/md';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useMutation, useQuery } from '@tanstack/react-query';
 function Edit() {
   const navigate=useNavigate()
   const { id }= useParams()
-  const [blog, setBlog] =useState(null)
-  const [isLoading,setLoading] = useState(false)
+  // const [blog, setBlog] =useState(null)
+  // const [isLoading,setLoading] = useState(false)
   const [imagePreview, setImagePreview] = useState("");
   const [image, setImage] = useState(null);
   const [heading, setHeading] = useState('')
   const [content,setContent] = useState('')
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const userId=localStorage.getItem('userId');
+
+  
   const handleContentChange = (value) => {
     setContent(value); // Update the state when the content changes
   };
@@ -28,10 +31,10 @@ function Edit() {
   const handleNavigate=()=>{
     navigate(`/profile/${userId}`)
     
-   }
-   const handleImageChange = (event) => {
-     const file = event.target.files[0];
-     if (file) {
+  }
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
       setImage(file)
       const reader = new FileReader();
       reader.onload = () => {
@@ -44,12 +47,9 @@ function Edit() {
       reader.readAsDataURL(file);
     }
   };
-
-  const handleContentSubmit= async (e)=>{
-    e.preventDefault();
-    try {
-      //api to edit content
-      const res=await axios.post(`${API_BASE_URL}/v1/users/update-blog`,
+  
+  const mutation = useMutation({mutationFn: async ()=>{
+    const res= await axios.post(`${API_BASE_URL}/v1/users/update-blog`,
       {
         title:heading,
         content:content,
@@ -58,86 +58,89 @@ function Edit() {
         {
         withCredentials:true,
       },
+    )
+    return res.data?.data
+
+  }})
+  const handleContentSubmit=(e)=>{
+      //api to edit content
+    e.preventDefault();
+    mutation.mutate({},
+      {
+        onSuccess:()=>{
+          toast.success("Blog updated successfully")
+          console.log("Blog updated successfully")
+          navigate('/')
+          // setTimeout(() =>{
+          //   window.location.reload();
+          
+          // },3000)
+        },
+        onError:(err)=>{
+          toast.error("Failed to Edit blog content")
+          console.log("Failed to Edit blog content"+err)
+        },
+        
+        
+      }
+    )
+    
+  }
+
+  const mutation2 = useMutation({
+    mutationFn:async ({formData})=>{
+            const res= await axios.post(`${API_BASE_URL}/v1/users/update-blog-img`,
+     formData,
+        {
+        withCredentials:true,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      },
         
 
         
       )
-      if(res.status===200){
-        toast.success("Blog updated successfully")
-        console.log("Blog updated successfully")
-        setTimeout(() =>{
-          window.location.reload();
-        
-        },3000)
-      }
-
-    } catch (error) {
-      toast.error("Failed to Edit blog content")
-      console.log("Failed to Edit blog content")
-    }
+      return res.data;
+    },
     
-  }
-
+  })
   const handleImagePreviewSubmit=async (e)=>{
     e.preventDefault();
     const formData = new FormData();
     formData.append("blogImg",image)
     formData.append("blogId",id);
-    try {
-      const res=await axios.post(`${API_BASE_URL}/v1/users/update-blog-img`,
-       formData,
-          {
-          withCredentials:true,
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        },
-          
-  
-          
-        )
-        if(res.status===200){
+
+    mutation2.mutate({formData},
+      {
+        onSuccess:()=>{
           toast.success("Blog image updated!")
           console.log("Blog image updated!")
-          setTimeout(() =>{
-            window.location.reload();
+          // setTimeout(() =>{
+          //   window.location.reload();
           
-          },3000)
+          // },3000)
+        },
+        onError:()=>{
+          toast.error("Failed to update blog image");
+          console.log("Failed to update blog image")
         }
-      
-    } catch (error) {
-      toast.error("Failed to update blog image");
-      console.log("Failed to update blog image")
-    }
-
+      }
+    )
   }
 
-  useEffect(()=>{
-    const blogData=async()=>{
-      if(!id) console.log("Id is not available")
-           try {
-              setLoading(true)
-               const res= await axios.post(`${API_BASE_URL}/v1/users/blog-page-data`,
-                {
-                  "id":id
-                }
-              )
-              if(res.status===200){
-                setBlog(res.data?.data)
-          
-                console.log("Fetched Blog Data: "+res.data?.data)
-              }
-              
-            } catch (error) {
-                console.log("Error while loading blog data: "+error )
-            }
-            finally{
-               setLoading(false)
+  const {data:blog } = useQuery({
+   queryKey:["blog", id] ,
+   queryFn:async ({queryKey})=>{
+    const res = await  axios.post(`${API_BASE_URL}/v1/users/blog-page-data`,
+      {
+        "id":queryKey[1]
+      }
+    )
+    return res.data?.data
 
-           }
-          }
-           blogData();
-       },[id])
+   }
+  })
        useEffect(() => {
        try {
          if (blog) {
@@ -182,7 +185,8 @@ function Edit() {
              imagePreview ? (
             <div className="ml-8 m-2 p-2 mt-3 flex justify-center items-center w-50 md:w-100 lg:w-150">
               <img src={imagePreview} alt="Preview" className="border-3 border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
-              <button className='ml-5'>Edit Blog image</button>
+             {/* <button className='ml-5' disabled={mutation2.isLoading} type='submit'>{!mutation2.isLoading?"Edit Blog image":console.log(mutation2.isLoading)}</button> */}
+             <button className='ml-5' type='submit'>Edit Blog Img</button>
             </div>
           ):(
             <>
