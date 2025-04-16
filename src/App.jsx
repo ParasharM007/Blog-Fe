@@ -10,6 +10,7 @@ import Edit from './components/Edit';
 import CreateBlog from './components/CreateBlog';
 import { ToastContainer } from 'react-toastify';
 import Plus from './components/Plus';
+import { UserContextProvider } from './UserContext.jsx';
 
 
 // import SmoothScroll from './SmoothScroll';
@@ -19,10 +20,12 @@ function App() {
   
   return (
       
-    <>
+    <UserContextProvider>
      <div className=' relative bg-white overflow-x-hidden'>
+        
       <Router>
       <Navbar />
+
       <ToastContainer position='top-center' theme="dark" />
         <Routes>
           <Route path='/' element={<Cards/>}/>
@@ -36,7 +39,7 @@ function App() {
         <Plus />
       </Router>
      </div>
-    </>
+    </UserContextProvider>
         
   )
 }

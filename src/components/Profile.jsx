@@ -37,29 +37,7 @@ function Profile() {
   
   
 useEffect(() => {
-  // const fetchProfile=async() => {
-  //   try {
-  //     setisLoading(true)
-  //     const res= await axios.post(`${API_BASE_URL}/v1/users/profile`,
-  //       {
-  //         "id":id
-  //       },
-  //       {withCredentials:true}
-  //     )
-  //     setProfileData(res.data?.data)
-  //     const createdAt = res.data.data?.createdAt;
-  //     const date = new Date(createdAt);
-      
-  //     // Format to display only the date (YYYY-MM-DD)
-  //     setDate(date.toLocaleDateString());
-      
-  //     setisLoading(false)
-  //   } catch (error) {
-  //     setisLoading(false)
-  //     console.log("Error fetching profile: "+error)
-  //   }
-  // }
-  // fetchProfile();
+ 
   if(profileData?.createdAt){
 
     const createdAt = profileData?.createdAt;
