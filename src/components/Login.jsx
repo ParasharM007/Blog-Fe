@@ -88,19 +88,21 @@ function Login() {
             className='m-2 p-2 text-lg bg-white rounded-md outline-none'
             onChange={(e) => setEmail(e.target.value)}
           />
+<div>
 
           <input type={showPassword?('text'):('password')}
             required={true}
             placeholder='Enter password '
-            className='m-2 p-2 text-lg bg-white rounded-md outline-none'
+            className='m-2 p-2 text-lg bg-white rounded-md outline-none relative'
             onChange={(e) => setPassword(e.target.value)}
-          />
+            />
            <div 
-      className="absolute right-5 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-600"
+      className="relative left-50 bottom-7 transform -translate-y-1/2 cursor-pointer text-gray-600"
       onClick={() => setShowPassword(prev => !prev)}
-    >
+      >
       {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
     </div>
+      </div>
           <button type="submit" className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800   rounded-md outline-none'>Login</button>
         </form>
       </div>
