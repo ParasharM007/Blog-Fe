@@ -5,13 +5,13 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useMutation } from '@tanstack/react-query'
-import { UserContext } from '../UserContext.jsx'
+// import { UserContext } from '../UserContext.jsx'
 
 
 function Login() {
   const [Email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const {isLoggedIn , setLoggedIn} = useContext(UserContext)
+  // const {isLoggedIn , setLoggedIn} = useContext(UserContext)
   const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const mutation = useMutation({
@@ -38,7 +38,7 @@ function Login() {
 
           console.log("Calling toast success");
           toast.success("Login Successful")
-          setLoggedIn(true)   //CONTEXT API
+          // setLoggedIn(true)   //CONTEXT API
           const id = res.data.data.user._id
           console.log(
             id

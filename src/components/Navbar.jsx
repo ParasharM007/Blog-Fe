@@ -6,14 +6,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import axios from 'axios';
-import { UserContext } from '../UserContext.jsx';
+// import { UserContext } from '../UserContext.jsx';
 
 
 function Navbar() {
   const [showMenu,setShowMenu]=useState(false)
   const [showProfile,setShowProfile]=useState(false);
-  // const [isLoggedIn,setIsLoggedIn]=useState(false);
-  const {isLoggedIn , setLoggedIn} = useContext(UserContext)
+  const [isLoggedIn,setIsLoggedIn]=useState(false);
+  // const {isLoggedIn , setLoggedIn} = useContext(UserContext)
   const navigate=useNavigate();
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const userId=localStorage.getItem('userId');
@@ -32,7 +32,7 @@ function Navbar() {
   setShowProfile(false)
   if(userId) {
     navigate(`/profile/${userId}`)
-    // window.location.href=`/profile/${id}`    //to be resolved
+    
 
   }
  else {toast.error("Please login first")}
@@ -55,8 +55,8 @@ function Navbar() {
           }, 100);
           console.log("Logout completed successfully");
           setShowMenu(false);
-          // setIsLoggedIn(false) 
-          setLoggedIn(false)
+          setIsLoggedIn(false) 
+          // setLoggedIn(false)
           if(userId){
             
             localStorage.removeItem("userId")
@@ -77,31 +77,33 @@ function Navbar() {
     }, 5000);
   
   }
-  // useEffect(()=>{
-  //  (
-  // async()=>{
+  useEffect(()=>{
+   (
+  async()=>{
 
-  //   try {
-  //    const res = await axios.get(`${API_BASE_URL}/v1/users/nav-items`,
-  //     {withCredentials: true}
-  //    )
-  //    console.log(res.data.data.data)
-  //    setIsLoggedIn(res.data.data.data)
+    try {
+     const res = await axios.get(`${API_BASE_URL}/v1/users/nav-items`,
+      {withCredentials: true}
+     )
+     console.log(res.data.data.data)
+     setIsLoggedIn(res.data.data.data)
      
      
-  //  } catch (error) {
-  //    console.log("Error in fetching nav items")  
-  //    setIsLoggedIn(false) 
-  //  }
-  // }
-  //  )()
-  // },[userId])
+   } catch (error) {
+     console.log("Error in fetching nav items")  
+     setIsLoggedIn(false) 
+   }
+  }
+   )()
+  },[userId])
   return (
     <div className=''>
     <nav className='z-10'>
       <div className='flex m-1 p-1 justify-between items-center'>
 
-    <div className='bg-black p-2 text-white text-4xl'>
+    <div className='bg-black p-2 text-white text-4xl' onClick={()=>{  setShowMenu(false)
+       setShowProfile(false)
+    }} >
     <Link to='/'>MyBlog</Link>
       
       </div>
