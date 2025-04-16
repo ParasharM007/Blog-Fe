@@ -5,12 +5,14 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useMutation } from '@tanstack/react-query'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 // import { UserContext } from '../UserContext.jsx'
 
 
 function Login() {
   const [Email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword ,setShowPassword] = useState(false)
   // const {isLoggedIn , setLoggedIn} = useContext(UserContext)
   const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -87,12 +89,18 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <input type="text"
+          <input type={showPassword?('text'):('password')}
             required={true}
             placeholder='Enter password '
             className='m-2 p-2 text-lg bg-white rounded-md outline-none'
             onChange={(e) => setPassword(e.target.value)}
           />
+           <div 
+      className="absolute right-5 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-600"
+      onClick={() => setShowPassword(prev => !prev)}
+    >
+      {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+    </div>
           <button type="submit" className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800   rounded-md outline-none'>Login</button>
         </form>
       </div>

@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { FaPlus } from 'react-icons/fa';
 import "./Plus.css"
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import axios from 'axios';
 
 function Plus() {
+
+  // const pathsToShow = [`/`,`/profile/`]
+  const location = useLocation();
+  const show =
+  location.pathname === '/' ||
+  location.pathname.startsWith('/profile/');
+  if(show)
+  console.log(show)
+
+
+
+  
   const navigate=useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
  
@@ -27,8 +39,9 @@ function Plus() {
        {withCredentials: true}
       )
       console.log(res.data.data.data)
-      setIsLoggedIn(res.data.data.data)
-     if(isLoggedIn){
+     const userLoggedIn =  res.data.data.data
+     setIsLoggedIn(userLoggedIn)
+     if(userLoggedIn){
 
        navigate(
          `/create-blog`
@@ -49,6 +62,7 @@ function Plus() {
 
     
   }
+  if(!show) return null;
 
   return (
     

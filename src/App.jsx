@@ -1,7 +1,7 @@
 import './App.css'
 import Login from './components/Login';
 import Navbar from './components/Navbar'
-import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
+import {BrowserRouter as Router,Routes,Route, useLocation} from 'react-router-dom';
 import Register from './components/Register';
 import Cards from './components/Cards';
 import Blog from './components/Blog';
@@ -16,10 +16,11 @@ import { UserContextProvider } from './UserContext.jsx';
 // import SmoothScroll from './SmoothScroll';
 
 function App() {
+ 
   
   
   return (
-      
+    
     <UserContextProvider>
      <div className=' relative bg-white overflow-x-hidden'>
         
@@ -36,7 +37,7 @@ function App() {
           <Route path='/edit/:id' element={<Edit />}/>
           <Route path='/create-blog' element={<CreateBlog />}/>
         </Routes>
-        <Plus />
+       <Plus />
       </Router>
      </div>
     </UserContextProvider>
