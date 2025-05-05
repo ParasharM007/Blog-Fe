@@ -11,6 +11,7 @@ import CreateBlog from './components/CreateBlog';
 import { ToastContainer } from 'react-toastify';
 import Plus from './components/Plus';
 import { UserContextProvider } from './UserContext.jsx';
+import LandingPage from './components/LandingPage.jsx';
 
 
 // import SmoothScroll from './SmoothScroll';
@@ -29,7 +30,9 @@ function App() {
 
       <ToastContainer position='top-center' theme="dark" />
         <Routes>
-          <Route path='/' element={<Cards/>}/>
+
+          <Route path='/' element={<LandingPage/>}/>
+          <Route path='/blogs' element={<Cards/>}/>
           <Route path='/blog/:id' element={<Blog />}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>

@@ -116,7 +116,7 @@ function Edit() {
                         <div className="flex justify-center items-center">
                         <div className="m-2 p-2 md:m-5 md:p-5 flex flex-col border items-start w-full md:w-[80%] lg:w-[60%]">
                           <div className="flex justify-between items-center w-full">
-                            <div className="m-2 font-light text-3xl md:text-4xl ">Create Your Blogs with MyBlog...</div>
+                            <div className="m-2 font-light text-3xl md:text-4xl ">Create Your Blogs with WildEarth...</div>
                             <div className="p-1 cursor-pointer flex gap-2 items-center bg-purple-600 text-white rounded-xl" onClick={handleNavigate}>
                               {/* <MdArrowBack style={{ backgroundColor: 'blueviolet', fontSize: '30px' }} /> */}
                               <MdArrowBack className='text-xl lg:text-3xl' />

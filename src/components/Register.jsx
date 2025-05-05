@@ -58,7 +58,7 @@ function Register() {
       
       <div className='m-3 mt-7 p-5 w-70 md:h-120 md:w-120 bg-gray-300 flex flex-col items-center justify-center'>
 
-        <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>Welcome To MyBlog</h1>
+        <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>Welcome To WildEarth</h1>
         <form action="submit"
           onSubmit={handleRegisterUser}
           className='flex flex-col items-center'

@@ -104,7 +104,7 @@ function Navbar() {
     <div className='bg-black p-2 text-white text-4xl' onClick={()=>{  setShowMenu(false)
        setShowProfile(false)
     }} >
-    <Link to='/'>MyBlog</Link>
+    <Link to='/'>WildEarth</Link>
       
       </div>
      

@@ -77,7 +77,7 @@ function Login() {
     <div className='login-cont'>
       <div className='m-3 mt-7 p-5  md:h-120 md:w-120 bg-gray-300 flex flex-col items-center justify-center'>
 
-        <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>MyBlog Login</h1>
+        <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>Login to WildEarth</h1>
         <form action="submit"
           onSubmit={handleLogin}
           className='flex flex-col items-center'
@@ -98,7 +98,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             />
            <div 
-      className="relative left-50 bottom-7 transform -translate-y-1/2 cursor-pointer text-gray-600"
+      className="relative z-20 left-50 bottom-7 transform -translate-y-1/2 cursor-pointer text-gray-600"
       onClick={() => setShowPassword(prev => !prev)}
       >
       {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
