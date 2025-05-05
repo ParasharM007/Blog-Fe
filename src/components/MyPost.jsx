@@ -98,8 +98,11 @@ function MyPost() {
         }
        })
        const handleDelete=(id)=>{
+          const isConfirmed = window.confirm("Do you want to delete this blog?")
+          if(isConfirmed){
+
             setDeletingId(id);
-           mutation.mutate({id},
+            mutation.mutate({id},
             {
               onSuccess:()=>{
                 toast.success("Blog deleted successfully")
@@ -111,9 +114,12 @@ function MyPost() {
               },
               onSettled:()=>{
                 setDeletingId(null)
-              }
+              },
+              
             }
-           )
+          )
+        } 
+        return ;
          
           // try {
           //   const res= await axios.post(`${API_BASE_URL}/v1/users/delete-post`,
@@ -160,7 +166,7 @@ function MyPost() {
             <div className="md:m-3 md:p-3">
                 <div className='my-4 md:m-2 md:p-2 font-medium text-2xl'>{post.title}</div>
                 {/* <div className="post-desc">{post.content}</div> */}
-                <div className="md:m-2 md:p-2 text-gray-500 " 
+                <div className="md:m-2 md:p-2 text-gray-500 line-clamp-8" 
      dangerouslySetInnerHTML={{ __html: post.content }} />
                         <div className="my-2 md:p-1 md:m-2 ">
                             <span className='p-1 mr-2 bg-green-700 text-white w-23 h-10 text-center rounded-2xl'>Created at: </span>
