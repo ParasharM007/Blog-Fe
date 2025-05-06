@@ -26,7 +26,8 @@ function Login() {
         },
         {
           withCredentials: true,
-        }
+        },
+        
       );
     }
   })
@@ -62,6 +63,7 @@ function Login() {
 
         },
         
+        
       }
 
 
@@ -78,14 +80,13 @@ function Login() {
       <div className='m-3 mt-7 p-5  md:h-120 md:w-120 bg-gray-300 flex flex-col items-center justify-center'>
 
         <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>Login to WildEarth</h1>
-        <form action="submit"
-          onSubmit={handleLogin}
-          className='flex flex-col items-center'
+        <form onSubmit={handleLogin}
+              className='flex flex-col items-center'
         >
 
           <input type="text"
             required={true}
-            placeholder='Enter username or email'
+            placeholder='Enter your email'
             className='m-2 p-2 text-lg bg-white rounded-md outline-none'
             onChange={(e) => setEmail(e.target.value)}
           />

@@ -41,7 +41,7 @@ function Profile() {
         setImage(file)
         const reader = new FileReader();
         reader.onload = () => {
-          setImagePreview(reader.result); // Set the image preview
+          setImagePreview(reader.result); 
         };
         reader.onerror = () => {
           console.error('Error reading file:', reader.error);
@@ -83,7 +83,6 @@ function Profile() {
       return  toast.error("Please provide avatar")
 
     }
-    console.log("Sb")
     const formData = new FormData();
     formData.append("fullName",fullName)
     formData.append("avatar", image)
@@ -110,7 +109,7 @@ function Profile() {
   }
   const {data:profileData , isLoading , isError } = useQuery(
     {queryKey: ["Profile", id] ,
-      queryFn:(({queryKey})=>fetchProfile(queryKey[1])),
+      queryFn:({queryKey})=>fetchProfile(queryKey[1]),
       staleTime:20000
     }
   )
@@ -126,7 +125,7 @@ useEffect(() => {
     const createdAt = profileData?.createdAt;
     const tempDate = new Date(createdAt);
     
-    // Format to display only the date (YYYY-MM-DD)
+    
     setDate(tempDate.toLocaleDateString());
   }
 

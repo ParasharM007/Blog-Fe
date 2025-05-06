@@ -21,7 +21,7 @@ function Edit() {
 
   
   const handleContentChange = (value) => {
-    setContent(value); // Update the state when the content changes
+    setContent(value); 
   };
   const handleHeadingChange=(e)=>{
     setHeading(e.target.value);
@@ -194,7 +194,7 @@ function Edit() {
             </>
           )}
                    </form>
-      <form action="submit" onSubmit={handleContentSubmit}>
+      <form onSubmit={handleContentSubmit}>
 
       <div className='m-2 p-2 md:m-2 text-3xl text-gray-500 font-medium '>Heading</div>
       <div className="md:m-2 p-2 w-200">

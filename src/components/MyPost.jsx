@@ -73,6 +73,7 @@ function MyPost() {
       staleTime:20000
     })
 
+  
 
     const navigate=useNavigate()
     const handleNavigate=(id)=>{
@@ -170,9 +171,8 @@ function MyPost() {
      dangerouslySetInnerHTML={{ __html: post.content }} />
                         <div className="my-2 md:p-1 md:m-2 ">
                             <span className='p-1 mr-2 bg-green-700 text-white w-23 h-10 text-center rounded-2xl'>Created at: </span>
-                            {post.createdAt}
-                            {/* Created at: {date.map(item=>(item.Date || item.Created || "1/1/2025"))} */}
-                            {/* Created at: {post.createdAt? new Date(post.createdAt).toLocaleDateString:"No Date available" } */}
+                            {/* {post.createdAt} */}
+                            {post.createdAt? new Date(post?.createdAt).toLocaleDateString():"No Date available" }
                             
                         </div>
             </div>
