@@ -91,7 +91,7 @@ function Register() {
             />
             <div className=" m-2 w-auto">
 
-            <span className=''>Profile/avatar:-</span>
+            <span className=''>Profile/Avatar:-</span>
           <input type="file"
             name="avatar" 
             id="avatar"
@@ -103,7 +103,7 @@ function Register() {
             />
             </div>
             
-          <button type='submit' className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800 rounded-md outline-none'>Sign Up</button>
+          <button type='submit' className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800 rounded-md outline-none'>{!mutation.isPending?"Sign Up":"Signing Up..."}</button>
         </form>
       </div>
     </div>

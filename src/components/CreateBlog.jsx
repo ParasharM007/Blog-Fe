@@ -75,7 +75,7 @@ function Edit() {
       },
       onError:(error)=>{
         toast.error("Couldn't create blog")
-      console.log('Error while creating blog:', error);
+        console.log('Error while creating blog:', error);
       }
     })
 
@@ -179,7 +179,7 @@ function Edit() {
                             </div>
                   
                             <button type="submit" className="text-lg lg:text-xl cursor-pointer mx-4 p-1 w-20 bg-green-700 rounded-2xl text-white">
-                              Save
+                             {!mutation.isPending?"Save":"Saving..."}
                             </button>
                           </form>
                         </div>

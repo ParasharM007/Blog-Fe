@@ -129,7 +129,7 @@ function Edit() {
     )
   }
 
-  const {data:blog } = useQuery({
+  const {data:blog,isLoading } = useQuery({
    queryKey:["blog", id] ,
    queryFn:async ({queryKey})=>{
     const res = await  axios.post(`${API_BASE_URL}/v1/users/blog-page-data`,
@@ -183,14 +183,18 @@ function Edit() {
             />
              {
              imagePreview ? (
-            <div className="ml-8 m-2 p-2 mt-3 flex justify-center items-center w-50 md:w-100 lg:w-150">
+            <div className="ml-10 m-2 p-2 mt-3 flex justify-center items-center w-50 md:w-100 lg:w-150">
               <img src={imagePreview} alt="Preview" className="border-3 border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
              {/* <button className='ml-5' disabled={mutation2.isLoading} type='submit'>{!mutation2.isLoading?"Edit Blog image":console.log(mutation2.isLoading)}</button> */}
-             <button className='ml-5' type='submit'>Edit Blog Img</button>
+             <div>
+
+             {/* <button className='ml-5' type='submit'>Edit Blog Img</button> */}
+             <button className='bg-[#D95D39] hover:bg-[#b34b2e] text-sm lg:text-xl text-white w-full mx-5 py-1 px-2 lg:px-0 lg:mx-2 rounded-lg font-medium cursor-pointer' type='submit'>{!mutation2.isPending?"Edit Blog Img":"Editing Blog Img..."}</button>
+             </div>
             </div>
           ):(
             <>
-            <div className='m-2 p-2 text-2xl'>Loading Image Preview...</div>
+            <div className='m-2 p-2 text-2xl md:text-3xl text-gray-500 font-medium'>Loading Image Preview...</div>
             </>
           )}
                    </form>
@@ -202,21 +206,21 @@ function Edit() {
           type="text" 
           placeholder="Enter blog title..." 
           className="m-2 outline-none text-2xl md:w-100 p-1 text-gray-700 border-gray-300 border rounded-xl" 
-          value={heading}
+          value={isLoading?"Loading heading...":heading}
           onChange={handleHeadingChange}
           />
       </div>
       <div className="m-2 p-2">
       <div className='my-4 text-3xl text-gray-500 font-medium'>Content</div>
         <ReactQuill 
-          value={content} 
+          value={isLoading?"Loading blog...":content} 
           onChange={handleContentChange} 
-          theme="snow" // Quill theme
+          theme="snow"
           placeholder="Write your blog content here..."
           className='w-70 md:w-100 lg:w-148 text-4xl border-gray-300 border'
           />
       </div>
-      <button className='text-lg lg:text-xl cursor-pointer mx-4 p-1 w-20 bg-green-700 rounded-2xl text-white' type='submit'>Save</button>
+      <button className='text-lg lg:text-xl cursor-pointer mx-4 p-1 w-20 bg-green-700 rounded-2xl text-white' type='submit'>{mutation.isPending?"Saving...":"Save"}</button>
           </form>
         
           </div>

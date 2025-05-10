@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 // import Cookies from 'js-cookie';
 import axios from 'axios';
+import { refreshToken } from '../utils/refreshtoken';
 
 function Plus() {
 
@@ -50,8 +51,24 @@ function Plus() {
       
       
     } catch (error) {
-      toast.error("Please login first to create a new blog") 
-      setIsLoggedIn(false) 
+      if(error.response?.status===401){
+      try {
+          const res = await refreshToken(401)
+          if(res){
+            console.log("Token refreshed for login")
+            navigate(
+              `/create-blog`
+             )
+          }
+      } catch (error) {
+        
+        // toast.error("Please login first to create a new blog") //not working here 
+        setIsLoggedIn(false) 
+        
+      }
+        
+        
+      }
     }
 
      

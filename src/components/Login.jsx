@@ -19,6 +19,7 @@ function Login() {
   const mutation = useMutation({
     mutationFn: async ({ email, password }) => {
       return await axios.post(`${API_BASE_URL}/v1/users/login`,
+      // return await axios.post(`http://localhost:5000/api/v1/users/login`,
       
         {
           email,
@@ -105,7 +106,7 @@ function Login() {
       {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
     </div>
       </div>
-          <button type="submit" className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800   rounded-md outline-none'>Login</button>
+          <button type="submit" className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800   rounded-md outline-none'>{!mutation.isPending?"Login":"Logging in..."}</button>
         </form>
       </div>
     </div>

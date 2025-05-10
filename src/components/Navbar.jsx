@@ -44,6 +44,7 @@ function Navbar() {
     try {
       const res = await axios.post(
         `${API_BASE_URL}/v1/users/logout`,
+        // `http://localhost:5000/api/v1/users/logout`,
         {},
         { withCredentials: true }
       );
@@ -83,6 +84,7 @@ function Navbar() {
 
     try {
      const res = await axios.get(`${API_BASE_URL}/v1/users/nav-items`,
+    //  const res = await axios.get(`http://localhost:5000/api/v1/users/nav-items`,
       {withCredentials: true}
      )
      console.log(res.data.data.data)
