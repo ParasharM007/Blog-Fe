@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query'
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const fetchBlogData = async () => {
   const res = await axios.get(`${API_BASE_URL}/v1/users/get-blogs`)
+  // const res = await axios.get(`${API_BASE_URL}/v1/users/get-blogs`)
   return res.data?.data;
 }
 
@@ -48,6 +49,9 @@ function Card() {
   const handleNavigate = (id) => {
     navigate(`/blog/${id}`)
   }
+  const handleNavigateToUserProfile = (id)=>{
+    navigate(`/author/${id}`)
+  }
 
 
   return (
@@ -62,9 +66,9 @@ function Card() {
           blogs &&
           blogs.map(item => (
 
-
-
-            <div className='p-5 flex flex-col cursor-pointer w-[30%] min-w-[280px] h-auto items-start  rounded-2xl bg-gray-100' onClick={() => handleNavigate(item?._id)} key={item?._id}>
+<>
+            <div className='p-5 flex flex-col cursor-pointer w-[30%] min-w-[280px] h-auto items-start  rounded-2xl bg-gray-100'  key={item?._id}>
+<div onClick={() => handleNavigate(item?._id)} >
               {/* // <div className='mb-5 break-inside-avoid border bg-gray-300 p-4 rounded-lg shadow-md' onClick={() => handleNavigate(item?._id)} key={item?._id}> */}
               <div className="m-1 p-1 w-full " >
                 <img src={item.blogImg} alt="" className='p-2 w-full h-50 border-3 border-gray-300 rounded-tl-3xl rounded-br-3xl object-cover' />
@@ -76,13 +80,15 @@ function Card() {
               </div> */}
               <div className="my-2 p-2 text-black text-lg font-sans"
                 dangerouslySetInnerHTML={{ __html: item.content.split(' ').slice(0, 20).join(' ') }} />
-              <div className="flex gap-2 ">
-                <img src={item?.authorId?.avatar} alt="" className='w-10 h-10 border-1 rounded-[100%]' />
-                <span className='p-2 bg-gray-900 text-white rounded-3xl'>Created by:- <span className='font-medium'>{item.authorId?.username}</span></span>
 
               </div>
+              <div className="flex gap-2 " onClick={()=>handleNavigateToUserProfile(item?.authorId?._id)}>
+                <img src={item?.authorId?.avatar} alt="" className='w-10 h-10 border-1 rounded-[100%]' />
+                <span className='p-2 bg-gray-900 text-white rounded-3xl' >Created by:- <span className='font-medium'>{item.authorId?.username}</span></span>
 
+              </div>
             </div>
+              </>
           ))
         )
       }

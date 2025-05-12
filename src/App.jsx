@@ -13,6 +13,7 @@ import Plus from './components/Plus';
 import { UserContextProvider } from './UserContext.jsx';
 import LandingPage from './components/LandingPage.jsx';
 import { axios_Interceptor } from './utils/axios_Interceptor.js';
+import UserProfile from './components/UserProfile.jsx';
 
 
 
@@ -38,6 +39,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/profile/:id' element={<Profile />}/>
+          <Route path='/author/:id' element={<UserProfile />}/>
           <Route path='/edit/:id' element={<Edit />}/>
           <Route path='/create-blog' element={<CreateBlog />}/>
         </Routes>

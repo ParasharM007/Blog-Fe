@@ -8,6 +8,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const fetchPosts =async ()=>{
   const res= await axios.post(`${API_BASE_URL}/v1/users/my-posts`,
+  // const res= await axios.post(`${API_BASE_URL}/v1/users/my-posts`,
      {},
      {
        withCredentials: true
