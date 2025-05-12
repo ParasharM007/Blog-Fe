@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 // import Cookies from 'js-cookie';
 import axios from 'axios';
-import { refreshToken } from '../utils/refreshtoken';
+
 
 function Plus() {
 
@@ -14,8 +14,8 @@ function Plus() {
   const show =
   location.pathname === '/' ||
   location.pathname.startsWith('/profile/');
-  if(show)
-  console.log(show)
+  // if(show)
+  // console.log(show)
 
 
 
@@ -50,40 +50,24 @@ function Plus() {
       }
       
       
-    } catch (error) {
-      if(error.response?.status===401){
-      try {
-          const res = await refreshToken(401)
-          if(res){
-            console.log("Token refreshed for login")
-            navigate(
-              `/create-blog`
-             )
-          }
-      } catch (error) {
+    } 
+    catch (error) {
         
-        // toast.error("Please login first to create a new blog") //not working here 
+        toast.error("Please login first to create a new blog") //not working here 
         setIsLoggedIn(false) 
         
       }
         
         
       }
-    }
-
-     
-
-
-
-
-
-    
-  }
-  if(!show) return null;
+      
+      
+      
+if(!show) return null;
 
   return (
     
-       <button className='p-2 cursor-pointer rounded-[100%] text-white z-50 fixed md:right-[20%] md:top-[70%] right-[20%] top-[70%]  bg-yellow-700' onClick={()=>handleNavigate()}>
+    <button className='p-2 cursor-pointer rounded-[100%] text-white z-50 fixed md:right-[20%] md:top-[70%] right-[20%] top-[70%]  bg-yellow-700' onClick={()=>handleNavigate()}>
         <FaPlus className='text-5xl lg:text-6xl'/> 
       </button>
     

@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import Plus from './components/Plus';
 import { UserContextProvider } from './UserContext.jsx';
 import LandingPage from './components/LandingPage.jsx';
+import { axios_Interceptor } from './utils/axios_Interceptor.js';
 
 
 
@@ -19,7 +20,7 @@ import LandingPage from './components/LandingPage.jsx';
 function App() {
  
   
-  
+  axios_Interceptor();
   return (
     
     <UserContextProvider>
