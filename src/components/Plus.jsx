@@ -35,8 +35,8 @@ function Plus() {
 
   const handleNavigate=async ()=>{
     try {
-      const res = await axios.get(`${API_BASE_URL}/v1/users/nav-items`,
-      // const res = await axios.get(`${API_BASE_URL}/v1/users/nav-items`,
+      // const res = await axios.get(`http//:localhost:5000/api/v1/users/auth-route`,
+      const res = await axios.get(`${API_BASE_URL}/v1/users/auth-route`,
        {withCredentials: true}
       )
       console.log(res.data.data.data)
