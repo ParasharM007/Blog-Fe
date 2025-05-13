@@ -171,7 +171,7 @@ useEffect(() => {
           {/* <div >
             <img src={profileData?.avatar} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50"/>
             </div> */}
-            {!mutation.isPending?<img src={imagePreview} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50"/>:<img src={imagePreview} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50 opacity-50 "/>}
+            {!mutation.isPending?<img src={imagePreview} alt="pfp" className="rounded-[100%] w-32 h-32 md:w-50 md:h-50"/>:<img src={imagePreview} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50 opacity-50 "/>}
           <input type="file"
             name="avatar" 
             id="avatar"

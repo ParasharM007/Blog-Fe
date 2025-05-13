@@ -1,5 +1,5 @@
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 const axios_Interceptor=()=>{
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     let isRefreshing = false;
@@ -18,6 +18,7 @@ const notifySubscribers = () => {
 axios.interceptors.response.use(
   (response) => response,
   async (error) => {
+    
     const originalRequest = error.config;
 
     // If accessToken expired (401) and not retried yet
@@ -34,6 +35,7 @@ axios.interceptors.response.use(
       isRefreshing = true;
 
       try {
+        console.log("Trying to refresh token")
         // Attempt to refresh the token
         // await axios.post(`${API_BASE_URL}/v1/users/refresh-token`,{},
         await axios.post(`${API_BASE_URL}/v1/users/refresh-token`,{},
@@ -44,15 +46,19 @@ axios.interceptors.response.use(
         notifySubscribers(); // Retry all queued requests
         return axios(originalRequest); // Retry the original failed request
       } catch (refreshError) {
+        console.log("Error in refreshing token")
         toast.error("Please Login")
         return Promise.reject(refreshError); // Refresh failed
         
       } finally {
         isRefreshing = false;
+        
+        
       }
     }
 
     return Promise.reject(error); // Not a token issue
+   
   }
 );
 

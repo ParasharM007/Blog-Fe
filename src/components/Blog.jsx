@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import "./Blog.css"
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import loadinggif from '../assets/loading-gif.gif'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
@@ -69,6 +69,11 @@ function Blog() {
       //   // setBlogPageData(BlogData)
       //   blogData();
     },[])
+    const navigate = useNavigate()
+    const handleNavigate= (id)=>{
+      navigate(`/author/${id}`)
+
+    }
     
 
    
@@ -105,7 +110,7 @@ function Blog() {
                         <div className="m-10">
                         {/* <div className='text-3xl md:text-4xl text-gray-500'>{blog.content ||"Blog content is not available"} */}
                         <div className='text-3xl md:text-4xl text-gray-500' dangerouslySetInnerHTML={{ __html: blog.content }}/>
-                     <div className="my-5 gap-3 flex">
+                     <div className="my-5 gap-3 flex" onClick={()=>handleNavigate(blog?.authorId?._id)}>
                               <img src={blog.authorId?.avatar} alt="" className='w-12 h-12 rounded-[50%] border-5 border-gray-200' />
                              <span className='p-2 border-5 border-gray-200  text-gray-600 rounded-3xl'>Created by:- <span className=' font-medium'>{blog.authorId?.username ||"Author-name"}</span></span>
                     

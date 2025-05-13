@@ -151,7 +151,7 @@ function MyPost() {
        err &&(<div className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Create your first Blog</div>)}
        {myPosts && myPosts.map(post=>(
             
-            <div className='m-2  md:150 w-90 lg:w-250 h-auto relative bg-gray-50 rounded-xl md:border-gray-300 md:border cursor-pointer' key={post._id}>
+            <div className='m-2  md:150 w-90 md:w-[90%]  h-auto relative bg-gray-50 rounded-xl md:border-gray-300 md:border cursor-pointer' key={post._id}>
 
              <div className='flex  gap-3 m-5 justify-center md:mr-10 md:justify-end'>
             
@@ -163,9 +163,9 @@ function MyPost() {
 
         <div className='md:m-2 md:p-4 max-w-260' onClick={()=>handleNavigate(post._id)}>
             <div className="md:m-3 md:p-3">
-                <img src={post.blogImg} alt="" className='bg-gray-200 p-1 m-3 w-50 h-50 md:w-60 md:h-60 rounded-tl-[30%] rounded-br-[30%]' />
+                <img src={post.blogImg} alt="" className='bg-gray-200 mx-6 m-3 w-[87%] h-50 md:w-[70%] lg:w-[45%] md:h-60 rounded-tl-4xl rounded-br-4xl' />
             </div>
-            <div className="md:m-3 md:p-3">
+            <div className="mx-7 md:mx-0 md:m-3 md:p-3">
                 <div className='my-4 md:m-2 md:p-2 font-medium text-2xl'>{post.title}</div>
                 {/* <div className="post-desc">{post.content}</div> */}
                 <div className="md:m-2 md:p-2 text-gray-500 line-clamp-8" 
