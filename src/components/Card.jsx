@@ -3,8 +3,10 @@ import './Card.css'
 import loadinggif from '../assets/loading-gif.gif'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { useQuery } from '@tanstack/react-query'
-import SaveTag from "../assets/images/3D_Tag.png"
+import { useMutation, useQuery } from '@tanstack/react-query'
+// import SaveTag from "../assets/images/3D_Tag.png"
+import { FaHeart } from "react-icons/fa"
+import { toast } from 'react-toastify'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const fetchBlogData = async () => {
@@ -15,6 +17,8 @@ const fetchBlogData = async () => {
 
 
 function Card() {
+  const [liked, setLiked] = useState({})
+  const [justLiked , setJustLiked] = useState({})
   const { data: blogs, isLoading, isError } = useQuery(
     { 
       queryKey: ["blogs"], 
@@ -22,29 +26,57 @@ function Card() {
       staleTime: 20000 
     }
   )
-  // const [blogs, setBlogs] = useState(null)
+   const likeMutation = useMutation({
+      mutationFn:async(blogId)=>{
+       
+         const res = await axios.post(`${API_BASE_URL}/v1/users/like-blog`,{},
+        //  const res = await axios.post(`http://localhost:5000/api/v1/users/like-blog`,
+         {
+           id:blogId
+         },
+         { 
+           withCredentials:true,
+            validateStatus: function (status) {
+          return status >= 200 && status < 300; 
+        },
+         })
+         
+         return res.data
+         
+     
+      },
+      onSuccess:()=>{
+        toast.success("Blog added to liked list")
+       
+      },
+      onError:(error)=>{
+        toast.error(
+      error?.response?.status === 401
+        ? "Please login first to like"
+        : "Something went wrong"
+    );
+      }
+    })
+   
+  const handleLikedBlogs=(e, blogId)=>{
+    e.stopPropagation()
+    
+    
+        setJustLiked((prev) => ({ ...prev, [blogId]: true }));
+      setTimeout(() => {
+        setJustLiked((prev) => ({ ...prev, [blogId]: false }));
+      }, 1000);
+      
+      likeMutation.mutate(blogId)
 
-  // const [isLoading, setLoading] = useState(false)
+    }
+    
 
 
-  // const fetchBlogData = async () => {
-  //   setLoading(true)
-  //   try {
-  //     const res = await axios.get(`${API_BASE_URL}/v1/users/get-blogs`)
-  //     if (!res)
-  //       console.log("Couldn't get blog data on Home")
-  //     console.log("Blogs data: " + res.data?.data)
-  //     setBlogs(res?.data.data);
-  //     setLoading(false)
 
-  //   } catch (error) {
-  //     console.log("Error in Loading Blogs on Home")
-  //   }
-  // }
-  // useEffect(() => {
-  //   fetchBlogData();
-  // }, [])
-
+    
+   
+    
 
   const navigate = useNavigate()
   const handleNavigate = (id) => {
@@ -107,15 +139,22 @@ function Card() {
           onClick={() => handleNavigate(item?._id)}
           className="relative group mb-6 break-inside-avoid overflow-hidden rounded-3xl shadow-md bg-white transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
         >
+         
+
           {/* Image */}
           <img
             src={item.blogImg}
             alt="Blog Thumbnail"
             className="w-full object-cover h-auto rounded-t-3xl"
-          />
-
-          {/* Save Button */}
-          <div >
+            />
+            {/* Save Button */}
+          <div
+           onClick={(e)=>handleLikedBlogs(e,item?._id)}
+           className='absolute top-1 right-0 z-10 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity bg-opacity-60  px-3 py-1 w-15 h-15'>
+            <FaHeart className={`text-2xl transition-colors duration-500 ${justLiked[item?._id]?'text-pink-700':'text-white'}` }
+                     title={justLiked[item._id] ? "Unlike" : "Like"}
+            />
+           
 
           {/* <button className="absolute top-3 right-10 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-60 text-white cursor-pointer px-3 py-1 text-xs rounded-full shadow-md">
             Save
@@ -123,12 +162,17 @@ function Card() {
           {/* <div className="absolute top-0 right-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-opacity-60  px-3 py-1 w-15 h-15">
             <img src={SaveTag} alt="save" />
           </div> */}
-          <img src = {SaveTag} alt='save' className="absolute top-0 right-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-opacity-60  px-3 py-1 w-15 h-15"/>
+          {/* <img src = {SaveTag}
+               alt='save'
+               title='Save' 
+               onClick={(e)=>handleLikedBlogs(e)} 
+              className="absolute top-0 right-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-opacity-60  px-3 py-1 w-15 h-15"/> */}
           </div>
 
           {/* <button className="absolute top-[30%] right-[35%] z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 bg-opacity-60 text-white px-3 py-1 text-xs rounded-full shadow-md">
             Read more...
           </button> */}
+
 
           {/* Content */}
           <div className="p-4 space-y-3">

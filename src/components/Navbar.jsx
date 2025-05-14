@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./Navbar.css"
-import { FaBars, FaUser } from 'react-icons/fa';
+import { FaBars, FaHeart, FaUser } from 'react-icons/fa';
 import { FaTimes } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -43,7 +43,7 @@ function Navbar() {
     
     try {
       const res = await axios.post(
-        // `${API_BASE_URL}/v1/users/logout`,
+        // `http://localhost:5000/api/v1/users/logout`,
         `${API_BASE_URL}/v1/users/logout`,
         {},
         { withCredentials: true }
@@ -106,7 +106,7 @@ function Navbar() {
     <div className='bg-black p-2 text-white text-4xl' onClick={()=>{  setShowMenu(false)
        setShowProfile(false)
     }} >
-    <Link to='/'>WildEarth</Link>
+    <Link to='/blogs'>WildEarth</Link>
       
       </div>
      
@@ -134,13 +134,20 @@ function Navbar() {
       <Link to='/register'>Register</Link>
         
         </li>
+        <li className='mt-1 text-pink-700 text-3xl' onClick={(e)=>navigate(`/liked-blogs`)}>
+          <FaHeart />
+        </li>
      </>
         ):(
-
+            <>
           <li onClick={handleShowProfile}>
       <Link  > <FaUser className='border-2 p-1 rounded-[100%] border-gray-400 bg-white text-black text-4xl'/> </Link>
         
         </li>
+         <li className='mt-1 text-pink-700 text-3xl' onClick={(e)=>navigate(`/liked-blogs`)}>
+          <FaHeart />
+        </li>
+            </>
       )
       } 
        
@@ -160,6 +167,10 @@ function Navbar() {
       <Link to='/register' onClick={()=>setShowMenu(false)}>Register</Link>
         
         </li>
+         <li className='border-b-2 border-pink-700 text-pink-700 ' onClick={(e)=>navigate(`/liked-blogs`)}>
+          {/* <FaHeart /> */}
+          Liked
+        </li>
       
      </>
         ):(
@@ -169,6 +180,10 @@ function Navbar() {
       <button className='border-b-2 border-gray-400' onClick={handleNavigate} >Profile </button>
       <Link className='border-b-2 border-gray-400' onClick={handleLogout} >Logout </Link>
         
+         <li className='border-b-2 border-pink-700 text-pink-700 text-xl' onClick={(e)=>navigate(`/liked-blogs`)}>
+          {/* <FaHeart /> */}
+          Liked
+        </li>
         </li>
         
          </> 
@@ -183,6 +198,7 @@ function Navbar() {
         <div onClick={handleLogout}>Logout
 
         </div>
+       
        
        
         </div>

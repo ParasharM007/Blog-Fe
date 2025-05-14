@@ -123,27 +123,7 @@ function MyPost() {
         } 
         return ;
          
-          // try {
-          //   const res= await axios.post(`${API_BASE_URL}/v1/users/delete-post`,
-          //       {
-          //           id : id
-          //       },
-          //       {
-          //         withCredentials: true
         
-          //       }
-          //     )
-          //     if(res.status===200){
-                
-               
-          //       toast.success("Blog deleted successfully")
-          //      window.location.reload();
-                
-          //     }
-          // } catch (error) {
-          //   toast.error("Failed to delete blog");
-          //   console.log("Failed to delete blog "+error);
-          // }
        }
       
     return (<>
@@ -151,7 +131,8 @@ function MyPost() {
        err &&(<div className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Create your first Blog</div>)}
        {myPosts && myPosts.map(post=>(
             
-            <div className='m-2  md:150 w-90 md:w-[90%]  h-auto relative bg-gray-50 rounded-xl md:border-gray-300 md:border cursor-pointer' key={post._id}>
+            // <div className='m-2  md:150 w-90 md:w-[90%]  h-auto relative bg-gray-50 rounded-xl md:border-gray-300 md:border cursor-pointer' key={post._id}>
+            <div className='m-2  md:150 w-90 md:w-[90%]  h-auto relative bg-white rounded-xl  cursor-pointer' key={post._id}>
 
              <div className='flex  gap-3 m-5 justify-center md:mr-10 md:justify-end'>
             

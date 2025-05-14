@@ -14,6 +14,7 @@ import { UserContextProvider } from './UserContext.jsx';
 import LandingPage from './components/LandingPage.jsx';
 import { axios_Interceptor } from './utils/axios_Interceptor.js';
 import UserProfile from './components/UserProfile.jsx';
+import LikedBlogs from './components/LikedBlogs.jsx';
 
 
 
@@ -42,6 +43,7 @@ function App() {
           <Route path='/author/:id' element={<UserProfile />}/>
           <Route path='/edit/:id' element={<Edit />}/>
           <Route path='/create-blog' element={<CreateBlog />}/>
+          <Route path='/liked-blogs' element={<LikedBlogs />} />
         </Routes>
        <Plus />
       </Router>
