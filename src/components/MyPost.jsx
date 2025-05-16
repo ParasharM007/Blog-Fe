@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import api from '../utils/api_Interceptor'
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const fetchPosts =async ()=>{
-  const res= await axios.post(`${API_BASE_URL}/v1/users/my-posts`,
   // const res= await axios.post(`${API_BASE_URL}/v1/users/my-posts`,
+  const res= await api.post(`/v1/users/my-posts`,
      {},
      {
        withCredentials: true
@@ -87,7 +88,8 @@ function MyPost() {
 
        const mutation = useMutation({
         mutationFn:async ({id})=>{
-          const res= await axios.post(`${API_BASE_URL}/v1/users/delete-post`,
+          // const res= await axios.post(`${API_BASE_URL}/v1/users/delete-post`,
+          const res= await api.post(`/v1/users/delete-post`,
             {
                 id : id
             },

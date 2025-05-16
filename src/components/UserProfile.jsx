@@ -45,9 +45,9 @@ function UserProfile() {
     <>
 
  {isLoading?(
-     <> <div className="loading-container">
-                          <img src={loadinggif} alt="Loading..." className="loading-gif" style={{ color: 'white' }} />
-                        </div> </>
+     <> <div className="flex justify-center items-center h-[40vh]">
+           <img src={loadinggif} alt="Loading..." className="w-20 h-20" />
+         </div> </>
     ):(
         
         

@@ -5,12 +5,14 @@ import loadinggif from '../assets/loading-gif.gif'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const blogData=async (id) =>{
   if(!id) console.log("Id is not available")
    
          const res= await axios.post(`${API_BASE_URL}/v1/users/blog-page-data`,
+         
           {
             "id":id
           }
@@ -80,12 +82,12 @@ function Blog() {
     
     return (
       <>
-      {isError && <h1 className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Error while Loading blog</h1>}
+      {isError && <h1 className='font-light flex flex-col items-center text-center m-3 p-3 sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Error while Loading blog</h1>}
          {
            isLoading ? (
-             <> <div className="flex justify-center items-center ">
-                    <img src={loadinggif} alt="Loading..." className="loading-gif" style={{ color: 'white' }} />
-                  </div> </>
+             <> <div className="flex justify-center items-center h-[80vh]">
+                   <img src={loadinggif} alt="Loading..." className="w-20 h-20" />
+                 </div> </>
                 ) : (
                   blog && <>
                     

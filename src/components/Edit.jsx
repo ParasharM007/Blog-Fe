@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import api from '../utils/api_Interceptor';
 function Edit() {
   const navigate=useNavigate()
   const { id }= useParams()
@@ -49,7 +50,8 @@ function Edit() {
   };
   
   const mutation = useMutation({mutationFn: async ()=>{
-    const res= await axios.post(`${API_BASE_URL}/v1/users/update-blog`,
+    // const res= await axios.post(`${API_BASE_URL}/v1/users/update-blog`,
+    const res= await api.post(`/v1/users/update-blog`,
       {
         title:heading,
         content:content,
@@ -89,7 +91,8 @@ function Edit() {
 
   const mutation2 = useMutation({
     mutationFn:async ({formData})=>{
-            const res= await axios.post(`${API_BASE_URL}/v1/users/update-blog-img`,
+            // const res= await axios.post(`${API_BASE_URL}/v1/users/update-blog-img`,
+            const res= await api.post(`/v1/users/update-blog-img`,
      formData,
         {
         withCredentials:true,

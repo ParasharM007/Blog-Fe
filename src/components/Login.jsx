@@ -59,7 +59,8 @@ function Login() {
         },
         onError: (error) => {
 
-          toast.error("User does not exist!")
+          toast.error("Invalid credentials or user does not exist!")
+          
           console.log('Error while logging in: ', error);
 
         },

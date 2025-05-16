@@ -9,7 +9,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     
    <QueryClientProvider client={queryClient}>
 
@@ -19,5 +19,5 @@ createRoot(document.getElementById('root')).render(
    </QueryClientProvider>
     
     
-  </StrictMode>,
+  // </StrictMode>,
 )

@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 // import Cookies from 'js-cookie';
 import axios from 'axios';
+import api from '../utils/api_Interceptor';
 
 
 function Plus() {
@@ -36,7 +37,8 @@ function Plus() {
   const handleNavigate=async ()=>{
     try {
       // const res = await axios.get(`http//:localhost:5000/api/v1/users/auth-route`,
-      const res = await axios.get(`${API_BASE_URL}/v1/users/auth-route`,
+      // const reas = await axios/.get(`${API_BASE_URL}/v1/users/auth-route`,
+      const res = await api.get(`/v1/users/auth-route`,
        {withCredentials: true}
       )
       console.log(res.data.data.data)

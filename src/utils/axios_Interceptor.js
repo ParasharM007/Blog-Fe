@@ -2,6 +2,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 const axios_Interceptor=()=>{
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    
     let isRefreshing = false;
 let refreshSubscribers = [];
 
@@ -48,8 +49,9 @@ axios.interceptors.response.use(
       } catch (refreshError) {
         console.log("Error in refreshing token")
         toast.error("Please Login")
-        return Promise.reject(refreshError); // Refresh failed
-        
+        // return Promise.reject(refreshError); // Refresh failed
+        // Forward the original error, not refreshError
+        return Promise.reject(error);
       } finally {
         isRefreshing = false;
         
@@ -57,7 +59,7 @@ axios.interceptors.response.use(
       }
     }
 
-    return Promise.reject(error); // Not a token issue
+    return Promise.reject(error); // for non-401s or already retried
    
   }
 );

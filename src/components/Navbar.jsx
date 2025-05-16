@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import axios from 'axios';
+import api from '../utils/api_Interceptor';
 // import { UserContext } from '../UserContext.jsx';
 
 
@@ -42,18 +43,19 @@ function Navbar() {
   const handleLogout=async()=>{
     
     try {
-      const res = await axios.post(
-        // `http://localhost:5000/api/v1/users/logout`,
-        `${API_BASE_URL}/v1/users/logout`,
+      const res = await 
+      // axios.post(`${API_BASE_URL}/v1/users/logout`,
+      api.post(`/v1/users/logout`,
         {},
         { withCredentials: true }
       );
       
       if (res.status === 200) {
         setShowProfile(false)
-        setTimeout(() => {
-          toast.success("Logged out", { toastId: "logoutSuccess" });
-          }, 100);
+        // setTimeout(() => {
+        //   toast.success("Logged out", { toastId: "logoutSuccess" });
+        //   }, 100);
+        toast.success("Logged Out")
           console.log("Logout completed successfully");
           setShowMenu(false);
           setIsLoggedIn(false) 
@@ -83,7 +85,8 @@ function Navbar() {
   async()=>{
 
     try {
-     const res = await axios.get(`${API_BASE_URL}/v1/users/auth-route`,
+     const res = await api.get(`/v1/users/auth-route`,
+    //  const res = await axios.get(`${API_BASE_URL}/v1/users/auth-route`,
     //  const res = await axios.get(`http://localhost:5000/api/v1/users/auth-route`, 
       {withCredentials: true}
      )
@@ -106,7 +109,7 @@ function Navbar() {
     <div className='bg-black p-2 text-white text-4xl' onClick={()=>{  setShowMenu(false)
        setShowProfile(false)
     }} >
-    <Link to='/blogs'>WildEarth</Link>
+    <Link to='/'>WildEarth</Link>
       
       </div>
      

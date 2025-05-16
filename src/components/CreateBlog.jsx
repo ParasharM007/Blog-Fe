@@ -47,7 +47,8 @@ function Edit() {
   const mutation = useMutation({
     mutationFn:async ({formData})=>{
 
-      const res = await axios.post(`${API_BASE_URL}/v1/users/create-blog`, formData, {
+      // const res = await axios.post(`${API_BASE_URL}/v1/users/create-blog`, formData, {
+      const res = await api.post(`/v1/users/create-blog`, formData, {
         withCredentials: true,
         headers: { 'Content-Type': 'multipart/form-data' },
       },

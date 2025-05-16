@@ -7,12 +7,14 @@ import axios from 'axios'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { FaEdit } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import api from '../utils/api_Interceptor'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const fetchProfile=async(id) => {
  
-    const res= await axios.post(`${API_BASE_URL}/v1/users/profile`,
+    // const res= await axios.post(`${API_BASE_URL}/v1/users/profile`,
+    const res= await api.post(`/v1/users/profile`,
       {
         "id":id
       },
@@ -53,7 +55,8 @@ function Profile() {
 
     const mutation = useMutation({
       mutationFn: async({formData})=>{
-        const res = await axios.post(`${API_BASE_URL}/v1/users/update-profile-data`,
+        // const res = await axios.post(`${API_BASE_URL}/v1/users/update-profile-data`,
+        const res = await api.post(`/v1/users/update-profile-data`,
         
           formData,
           {
@@ -134,9 +137,9 @@ useEffect(() => {
   return (
     <>
     {isLoading?(
-       <> <div className="loading-container">
-                          <img src={loadinggif} alt="Loading..." className="loading-gif" style={{ color: 'white' }} />
-                        </div> </>
+       <> <div className="flex justify-center items-center h-[40vh]">
+             <img src={loadinggif} alt="Loading..." className="w-20 h-20" />
+           </div> </>
     ):(
 
         <>
