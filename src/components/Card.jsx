@@ -17,7 +17,7 @@ const fetchBlogData = async () => {
 
 
 function Card() {
-  const [liked, setLiked] = useState({})
+  // const [liked, setLiked] = useState({})
   const [justLiked , setJustLiked] = useState({})
   const { data: blogs, isLoading, isError } = useQuery(
     { 
@@ -29,7 +29,7 @@ function Card() {
    const likeMutation = useMutation({
       mutationFn:async(blogId)=>{
        
-         const res = await axios.post(`${API_BASE_URL}/v1/users/like-blog`,{},
+         const res = await axios.post(`${API_BASE_URL}/v1/users/like-blog`,
         //  const res = await axios.post(`http://localhost:5000/api/v1/users/like-blog`,
          {
            id:blogId
