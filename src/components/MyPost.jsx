@@ -134,7 +134,7 @@ function MyPost() {
        {myPosts && myPosts.map(post=>(
             
             // <div className='m-2  md:150 w-90 md:w-[90%]  h-auto relative bg-gray-50 rounded-xl md:border-gray-300 md:border cursor-pointer' key={post._id}>
-            <div className='m-2  md:150 w-90 md:w-[90%]  h-auto relative bg-white rounded-xl  cursor-pointer' key={post._id}>
+            <div className='m-2  md:150 w-90 md:w-[90%] shadow-2xl h-auto relative bg-white rounded-xl  cursor-pointer' key={post._id}>
 
              <div className='flex  gap-3 m-5 justify-center md:mr-10 md:justify-end'>
             

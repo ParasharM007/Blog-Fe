@@ -76,43 +76,92 @@ function Login() {
 
 
 
-  return (<>
+//   return (
+//   <>
 
-    <div className='login-cont'>
-      <div className='m-3 mt-7 p-5  md:h-120 md:w-120 bg-gray-300 flex flex-col items-center justify-center'>
+//     <div className='login-cont'>
+//       <div className='m-3 mt-7 p-5  md:h-120 md:w-120 bg-gray-300 flex flex-col items-center justify-center'>
 
-        <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>Login to WildEarth</h1>
-        <form onSubmit={handleLogin}
-              className='flex flex-col items-center'
-        >
+//         <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>Login to WildEarth</h1>
+//         <form onSubmit={handleLogin}
+//               className='flex flex-col items-center'
+//         >
 
-          <input type="text"
-            required={true}
-            placeholder='Enter your email'
-            className='m-2 p-2 text-lg bg-white rounded-md outline-none'
-            onChange={(e) => setEmail(e.target.value)}
-          />
-<div>
+//           <input type="text"
+//             required={true}
+//             placeholder='Enter your email'
+//             className='m-2 p-2 text-lg bg-white rounded-md outline-none'
+//             onChange={(e) => setEmail(e.target.value)}
+//           />
+// <div>
 
-          <input type={showPassword?('text'):('password')}
-            required={true}
-            placeholder='Enter password '
-            className='m-2 p-2 text-lg bg-white rounded-md outline-none relative'
-            onChange={(e) => setPassword(e.target.value)}
+//           <input type={showPassword?('text'):('password')}
+//             required={true}
+//             placeholder='Enter password '
+//             className='m-2 p-2 text-lg bg-white rounded-md outline-none relative'
+//             onChange={(e) => setPassword(e.target.value)}
+//             />
+//            <div 
+//       className="relative z-20 left-50 bottom-7 transform -translate-y-1/2 cursor-pointer text-gray-600"
+//       onClick={() => setShowPassword(prev => !prev)}
+//       >
+//       {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+//     </div>
+//       </div>
+//           <button type="submit" className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800   rounded-md outline-none'>{!mutation.isPending?"Login":"Logging in..."}</button>
+//         </form>
+//       </div>
+//     </div>
+//   </>
+//   )
+
+
+return (
+  <>
+    <div className="min-h-[90vh] bg-gray-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
+        <h1 className="text-center text-3xl font-semibold mb-6 text-gray-800">
+          Login to WildEarth
+        </h1>
+        <form onSubmit={handleLogin} className="space-y-5">
+          <div className="relative">
+            <input
+              type="email"
+              required
+              placeholder="Enter your email"
+              className="w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+              onChange={(e) => setEmail(e.target.value)}
             />
-           <div 
-      className="relative z-20 left-50 bottom-7 transform -translate-y-1/2 cursor-pointer text-gray-600"
-      onClick={() => setShowPassword(prev => !prev)}
-      >
-      {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-    </div>
-      </div>
-          <button type="submit" className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800   rounded-md outline-none'>{!mutation.isPending?"Login":"Logging in..."}</button>
+          </div>
+
+          <div className="relative">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              required
+              placeholder="Enter your password"
+              className="w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm pr-10"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 cursor-pointer"
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
+              {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-black hover:bg-purple-800 text-white text-sm font-medium py-3 rounded-xl transition-all duration-300"
+          >
+            {!mutation.isPending ? "Login" : "Logging in..."}
+          </button>
         </form>
       </div>
     </div>
   </>
-  )
+);
+
 }
 // }
 export default Login

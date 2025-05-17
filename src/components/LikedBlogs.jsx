@@ -156,7 +156,7 @@ function LikedBlogs() {
     <>
       {
         loading ? (
-           <div className="flex justify-center items-center h-screen">
+           <div className="flex justify-center items-center h-[90vh]">
             <img src={loadinggif} alt="Loading..." className="w-20 h-20" />
           </div>  
           // <h1>Checking if you are logged in or not... </h1>
@@ -189,12 +189,13 @@ function LikedBlogs() {
                   </Link>
                 </div>
               ) : (
-                <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 p-4">
+                <>
+                <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4  gap-6 p-4">
                   {blogs.map((item) => (
                     <div
-                      key={item?._id}
+                    key={item?._id}
                       className="relative group mb-6 break-inside-avoid overflow-hidden rounded-3xl shadow-md bg-white transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
-                    >
+                      >
                       <img
                         src={item.blogImg}
                         alt="Blog Thumbnail"
@@ -222,7 +223,8 @@ function LikedBlogs() {
                       </div>
                     </div>
                   ))}
-                  <div className='flex flex-col gap-3 items-center justify-center'>
+                </div>
+                  <div className='flex flex-col m-5 p-5 gap-3 items-center justify-center'>
 
                     <Link to="/blogs">
                       <button className="bg-[#D95D39] hover:bg-[#b34b2e] transition px-6 py-3 rounded-lg font-medium cursor-pointer">
@@ -230,7 +232,7 @@ function LikedBlogs() {
                       </button>
                     </Link>
                   </div>
-                </div>
+                      </>
               )}
             </>
           )}

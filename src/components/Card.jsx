@@ -161,7 +161,7 @@ function Card() {
             alt="Blog Thumbnail"
             className="w-full object-cover h-auto rounded-t-3xl"
             />
-            {/* Save Button */}
+            {/* Like Button */}
           <div
            onClick={(e)=>handleLikedBlogs(e,item?._id)}
            className='absolute top-1 right-0 z-10 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity bg-opacity-60  px-3 py-1 w-15 h-15'>
@@ -170,25 +170,13 @@ function Card() {
             />
            
 
-          {/* <button className="absolute top-3 right-10 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-60 text-white cursor-pointer px-3 py-1 text-xs rounded-full shadow-md">
-            Save
-          </button> */}
-          {/* <div className="absolute top-0 right-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-opacity-60  px-3 py-1 w-15 h-15">
-            <img src={SaveTag} alt="save" />
-          </div> */}
-          {/* <img src = {SaveTag}
-               alt='save'
-               title='Save' 
-               onClick={(e)=>handleLikedBlogs(e)} 
-              className="absolute top-0 right-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-opacity-60  px-3 py-1 w-15 h-15"/> */}
+       
           </div>
 
-          {/* <button className="absolute top-[30%] right-[35%] z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 bg-opacity-60 text-white px-3 py-1 text-xs rounded-full shadow-md">
-            Read more...
-          </button> */}
+          
 
 
-          {/* Content */}
+
           <div className="p-4 space-y-3">
             <h2 className="text-lg font-semibold text-gray-800 leading-tight">
               {item.title.split(' ').slice(0, 6).join(' ')}...
@@ -201,7 +189,7 @@ function Card() {
               }}
             />
 
-            {/* Author Info */}
+            
             <div
               className="flex items-center gap-3 mt-4"
               onClick={(e) => {
