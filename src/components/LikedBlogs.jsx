@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import loadinggif from '../assets/loading-gif.gif'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../utils/api_Interceptor';
 function LikedBlogs() {
@@ -13,7 +13,7 @@ function LikedBlogs() {
   // const [isError, setError] = useState()
   // const [isLoading, setIsLoading] = useState(false)
   // const [blogs, setBlogs] = useState([])
-
+  const navigate = useNavigate()
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -65,6 +65,11 @@ function LikedBlogs() {
     )()
   }, [userId])
   // }, [])
+
+ const handleNavigate=(id)=>{
+  navigate(`/blog/${id}`)
+ }
+
   const fetchLikedBlogs = async () => {
     try {
       
@@ -194,6 +199,7 @@ function LikedBlogs() {
                   {blogs.map((item) => (
                     <div
                     key={item?._id}
+                    onClick={()=>handleNavigate(item?._id)}
                       className="relative group mb-6 break-inside-avoid overflow-hidden rounded-3xl shadow-md bg-white transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
                       >
                       <img

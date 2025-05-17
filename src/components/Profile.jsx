@@ -160,7 +160,7 @@ useEffect(() => {
             <div>Joined at:-{date|| "data of joining"}</div>
               
           </div>
-          <button className='bg-gray-700 text-white font-medium text-sm w-22 h-8 md:w-25 md:h-10 md:text-md mt-5 rounded-2xl cursor-pointer ' onClick={()=>(setEditProfile(true))}>Edit Profile</button>
+          <button className='w-1/2 mt-4 bg-black hover:bg-purple-800 text-white text-sm font-medium py-3 rounded-xl transition-all duration-300 ' onClick={()=>(setEditProfile(true))}>Edit Profile</button>
         </div>
     </div>)
     
@@ -198,7 +198,10 @@ useEffect(() => {
         (
          <div className="flex flex-col gap-2  text-md md:text-xl ">
             {/* <div>{profileData?.fullName || "Full Name"}</div> */}
-            <input type="text" className='w-full bg-gray-200 opacity-50 rounded-xl p-1' value={fullName} onChange={(e)=>setFullName(e.target.value)}/>
+            <input type="text" 
+            // className='w-full bg-gray-200 opacity-50 rounded-xl p-1' 
+            className='w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm' 
+            value={fullName} onChange={(e)=>setFullName(e.target.value)}/>
            
               
           </div>
@@ -206,7 +209,10 @@ useEffect(() => {
 
          <div className="flex flex-col gap-2  text-md md:text-xl ">
             {/* <div>{profileData?.fullName || "Full Name"}</div> */}
-            <input type="text" className='w-full bg-gray-200  rounded-xl p-1' value={fullName} onChange={(e)=>setFullName(e.target.value)}/>
+            <input type="text"
+            //  className='w-full bg-gray-200  rounded-xl p-1'
+             className='w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm'
+              value={fullName} onChange={(e)=>setFullName(e.target.value)}/>
            
               
           </div>

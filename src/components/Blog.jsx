@@ -114,10 +114,10 @@ function Blog() {
   ) : blog && (
     <>
       {/* 🔥 Hero Section with Video Background */}
-      <div className="relative w-full h-full md:h-[60vh] overflow-hidden">
+      <div className="relative w-full h-full md:h-[91vh]  overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
-          src={Geovideo}
+          src={blog?.coverVideo || Geovideo}
           autoPlay
           muted
           loop

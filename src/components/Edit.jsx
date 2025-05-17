@@ -15,6 +15,7 @@ function Edit() {
   // const [isLoading,setLoading] = useState(false)
   const [imagePreview, setImagePreview] = useState("");
   const [image, setImage] = useState(null);
+  const [video, setVideo]= useState("")
   const [heading, setHeading] = useState('')
   const [content,setContent] = useState('')
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -90,7 +91,7 @@ function Edit() {
   }
 
   const mutation2 = useMutation({
-    mutationFn:async ({formData})=>{
+    mutationFn:async (formData)=>{
             // const res= await axios.post(`${API_BASE_URL}/v1/users/update-blog-img`,
             const res= await api.post(`/v1/users/update-blog-img`,
      formData,
@@ -108,6 +109,49 @@ function Edit() {
     },
     
   })
+
+  const videoUplaod = useMutation({
+    mutationFn:async(formData)=>{
+      //  const res = await api.post(`/v1/users/update-cover-video`,
+       const res = await axios.post(`http://localhost:5000/api/v1/users/update-cover-video`,
+        formData,
+        {
+          withCredentials:true
+        }
+      )
+      return res.data
+    }
+  })
+
+  const handleVideoChange=(e)=>{
+    const selectedVideo = e.target?.files[0]
+    if(selectedVideo)
+      setVideo(selectedVideo)
+      console.log('Video set to state')
+  }
+  
+  const handleVideo =async(e)=>{
+    e.preventDefault()
+    const formData = new FormData()
+    if(video && id){
+      console.log("Video available ")
+      formData.append("blogId",id)
+      formData.append("coverVideo",video)
+    }
+
+  videoUplaod.mutate(formData,{
+    onSuccess:()=>{
+      console.log("Updating cover video")
+      toast.success("Cover Video updated successfully")
+    },
+    onError:(formData)=>{
+      toast.error("Failed to upload cover video")
+      console.log(formData)
+    }
+  })
+
+  }
+
   const handleImagePreviewSubmit=async (e)=>{
     e.preventDefault();
     const formData = new FormData();
@@ -201,6 +245,27 @@ function Edit() {
             </>
           )}
                    </form>
+      <form onSubmit={handleVideo}>
+
+      <div className='m-2 p-2  md:m-2 text-3xl text-gray-500 font-medium'>
+        Edit Cover Video
+      </div>
+      <input type="file"
+            name="coverVideo" 
+            id="coverVideo"
+            className='m-2'
+            accept="video/*"
+            onChange={(e)=>handleVideoChange(e)}
+            
+            
+            />
+            
+             {/* <button className='ml-5' type='submit'>Edit Blog Img</button> */}
+             <button className='bg-[#D95D39] hover:bg-[#b34b2e] text-sm lg:text-xl text-white w-full mx-5 py-1 px-2 lg:px-0 lg:mx-2 rounded-lg font-medium cursor-pointer' type='submit'>{!videoUplaod.isPending?"Edit Cover Video":"Editing Cover Video..."}</button>
+      </form>
+             
+           
+         
       <form onSubmit={handleContentSubmit}>
 
       <div className='m-2 p-2 md:m-2 text-3xl text-gray-500 font-medium '>Heading</div>
