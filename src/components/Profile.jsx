@@ -160,7 +160,7 @@ useEffect(() => {
             <div>Joined at:-{date|| "data of joining"}</div>
               
           </div>
-          <button className='w-1/2 mt-4 bg-black hover:bg-purple-800 text-white text-sm font-medium py-3 rounded-xl transition-all duration-300 ' onClick={()=>(setEditProfile(true))}>Edit Profile</button>
+          <button className='w-1/2 mt-4 bg-black hover:bg-purple-800 text-white text-sm font-medium py-3 rounded-xl transition-all duration-300 cursor-pointer ' onClick={()=>(setEditProfile(true))}>Edit Profile</button>
         </div>
     </div>)
     

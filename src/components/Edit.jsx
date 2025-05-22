@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import "./Edit.css"
+import loadinggif from '../assets/loading-gif.gif'
 import { MdArrowBack } from 'react-icons/md';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -14,6 +15,7 @@ function Edit() {
   // const [blog, setBlog] =useState(null)
   // const [isLoading,setLoading] = useState(false)
   const [imagePreview, setImagePreview] = useState("");
+  const [videoPreview, setVideoPreview] = useState("")
   const [image, setImage] = useState(null);
   const [video, setVideo]= useState("")
   const [heading, setHeading] = useState('')
@@ -112,8 +114,8 @@ function Edit() {
 
   const videoUplaod = useMutation({
     mutationFn:async(formData)=>{
-      //  const res = await api.post(`/v1/users/update-cover-video`,
-       const res = await axios.post(`http://localhost:5000/api/v1/users/update-cover-video`,
+       const res = await api.post(`/v1/users/update-cover-video`,
+      //  const res = await axios.post(`http://localhost:5000/api/v1/users/update-cover-video`,
         formData,
         {
           withCredentials:true
@@ -124,10 +126,26 @@ function Edit() {
   })
 
   const handleVideoChange=(e)=>{
-    const selectedVideo = e.target?.files[0]
-    if(selectedVideo)
-      setVideo(selectedVideo)
-      console.log('Video set to state')
+    // const selectedVideo = e.target?.files[0]
+    // if(selectedVideo)
+    //   setVideo(selectedVideo)
+    //   console.log('Video set to state')
+     const file = e.target.files[0];
+    if (file) {
+      setVideo(file)
+      const reader = new FileReader();
+      reader.onload = () => {
+        setVideoPreview(reader.result); // Set the video preview
+        // console.log(reader.result)
+        console.log(reader.readAsDataURL)
+      };
+      reader.onerror = () => {
+        console.error('Error reading file:', reader.error);
+        alert('Failed to read the file. Please try again with a valid image.');
+      };
+      reader.readAsDataURL(file);
+    }
+    
   }
   
   const handleVideo =async(e)=>{
@@ -192,6 +210,7 @@ function Edit() {
        try {
          if (blog) {
            setImagePreview(blog?.blogImg);
+           setVideoPreview(blog?.coverVideo)
            setHeading(blog?.title)
            setContent(blog?.content)
           }
@@ -204,7 +223,7 @@ function Edit() {
   return (
     <div className="flex justify-center items-center">
 
-    <div className='m-2 p-2 md:m-5 md:p-5 flex flex-col border items-start w-full md:w-[80%] lg:w-[60%]'>
+    <div className='m-2 p-2 md:m-5 md:p-5 flex flex-col items-start w-full md:w-[80%] lg:w-[60%] shadow-2xl'>
        <div className='flex justify-between items-center w-full'>
         <div className="m-2 font-light text-3xl md:text-4xl">Blog Editor</div>
      <div className="p-1 cursor-pointer flex gap-2 items-center bg-purple-600 text-white rounded-xl" onClick={handleNavigate}>
@@ -250,18 +269,56 @@ function Edit() {
       <div className='m-2 p-2  md:m-2 text-3xl text-gray-500 font-medium'>
         Edit Cover Video
       </div>
+      
       <input type="file"
             name="coverVideo" 
             id="coverVideo"
             className='m-2'
             accept="video/*"
             onChange={(e)=>handleVideoChange(e)}
-            
+            required
             
             />
+              {
+             videoPreview ? (
+            !videoUplaod.isPending ? (
+            <div className="ml-10 m-2 p-2 mt-3 flex justify-center items-center w-50 md:w-100 lg:w-150">
+              <video src={videoPreview} alt="Preview" className="border-3 border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
+             <div>
+
+             
+             <button className='bg-[#D95D39] hover:bg-[#b34b2e] text-sm lg:text-xl text-white w-full mx-5 py-1 px-2 lg:px-0 lg:mx-2 rounded-lg font-medium cursor-pointer' type='submit'>Edit Cover Video</button>
+             </div>
+            </div>)
+            
+            :(
+              <div className="ml-10 m-2 p-2 mt-3 flex justify-center items-center w-[70%] md:w-100 lg:w-150">
+              <div className=" flex flex-col items-center border-3 bg-gray-300  border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" >
+                <b>
+                  It may take few minutes to upload video.
+                  </b>
+                
+             <img src={loadinggif} alt="Loading..." className="w-10 h-10 md:w-20 md:h-20" />
+           
+                
+              </div>
+             
+             <div>
+
+             {/* <button className='ml-5' type='submit'>Edit Blog Img</button> */}
+             <button className='bg-[#D95D39] hover:bg-[#b34b2e] text-sm lg:text-xl text-white w-full mx-5 py-1 px-2 lg:px-0 lg:mx-2 rounded-lg font-medium cursor-pointer' type='submit'>Editing Cover Video...</button>
+             </div>
+            </div>
+
+            )
+          ):(
+            <>
+            <div className='m-2 p-2 text-2xl md:text-3xl text-gray-500 font-medium'>Loading Video Preview...</div>
+            </>
+          )}
             
              {/* <button className='ml-5' type='submit'>Edit Blog Img</button> */}
-             <button className='bg-[#D95D39] hover:bg-[#b34b2e] text-sm lg:text-xl text-white w-full mx-5 py-1 px-2 lg:px-0 lg:mx-2 rounded-lg font-medium cursor-pointer' type='submit'>{!videoUplaod.isPending?"Edit Cover Video":"Editing Cover Video..."}</button>
+             {/* <button className='bg-[#D95D39] hover:bg-[#b34b2e] text-sm lg:text-xl text-white w-[70%] md:w-full mx-5 py-1 px-2 lg:px-0 lg:mx-2 rounded-lg font-medium cursor-pointer' type='submit'>{!videoUplaod.isPending?"Edit Cover Video":"Editing Cover Video..."}</button> */}
       </form>
              
            
@@ -273,22 +330,24 @@ function Edit() {
         <input 
           type="text" 
           placeholder="Enter blog title..." 
-          className="m-2 outline-none text-2xl md:w-100 p-1 text-gray-700 border-gray-300 border rounded-xl" 
+          className="md:m-2 outline-none text-2xl w-[38%] md:w-[70%] p-1 text-gray-700 border-gray-300 border rounded-xl" 
           value={isLoading?"Loading heading...":heading}
           onChange={handleHeadingChange}
           />
       </div>
-      <div className="m-2 p-2">
+      <div className="md:m-2 md:p-2">
       <div className='my-4 text-3xl text-gray-500 font-medium'>Content</div>
         <ReactQuill 
           value={isLoading?"Loading blog...":content} 
           onChange={handleContentChange} 
           theme="snow"
           placeholder="Write your blog content here..."
-          className='w-70 md:w-100 lg:w-148 text-4xl border-gray-300 border'
+          // className='w-70 md:w-100 lg:w-148 text-4xl border-gray-300 border'
+          className='w-[38%] md:w-[70%]  text-4xl border-gray-100 border'
+          
           />
       </div>
-      <button className='text-lg lg:text-xl cursor-pointer mx-4 p-1 w-20 bg-green-700 rounded-2xl text-white' type='submit'>{mutation.isPending?"Saving...":"Save"}</button>
+      <button className='text-lg lg:text-xl cursor-pointer m-4 p-1 w-20 bg-green-700 rounded-2xl text-white' type='submit'>{mutation.isPending?"Saving...":"Save"}</button>
           </form>
         
           </div>

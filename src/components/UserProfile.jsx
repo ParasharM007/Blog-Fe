@@ -83,17 +83,19 @@ function UserProfile() {
 
 
 
-    
+    <div className='m-5 p-5 mt-3 md:mt-10  flex flex-col justify-center items-center'>
+      <div className="font-light text-4xl md:text-5xl">User's Posts</div>
+
      <div className='m-2.5 p-2.5 flex flex-col items-center'>
 
     {
       isError &&
       
-       ( <div className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Error in loading User's Posts</div>)}
+      ( <div className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Error in loading User's Posts</div>)}
 
        {data?.blogs && data?.blogs.map(post=>(
            
-           <div className='m-2  md:150 w-90 md:w-[90%]  h-auto relative bg-gray-50 rounded-xl md:border-gray-300 md:border cursor-pointer' key={post._id}>
+           <div className='m-2  md:150 w-90 md:w-[90%] shadow-2xl h-auto relative bg-white rounded-xl  cursor-pointer' key={post._id}>
 
              <div className='flex  gap-3 m-5 justify-center md:mr-10 md:justify-end'>
             
@@ -123,6 +125,7 @@ function UserProfile() {
 )
 )
 }
+</div>
 </div>
 
 
