@@ -295,7 +295,7 @@ function Edit() {
               <div className="ml-10 m-2 p-2 mt-3 flex justify-center items-center w-[70%] md:w-100 lg:w-150">
               <div className=" flex flex-col items-center border-3 bg-gray-300  border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" >
                 <b>
-                  It may take few minutes to upload video.
+                  It may take few minutes to compress&upload video.
                   </b>
                 
              <img src={loadinggif} alt="Loading..." className="w-10 h-10 md:w-20 md:h-20" />
