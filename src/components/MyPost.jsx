@@ -8,7 +8,7 @@ import api from '../utils/api_Interceptor'
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const fetchPosts =async ()=>{
-  // const res= await axios.post(`${API_BASE_URL}/v1/users/my-posts`,
+  // const res= await axios.post(`http://localhost:5000/api/v1/users/my-posts`,
   const res= await api.post(`/v1/users/my-posts`,
      {},
      {
@@ -67,7 +67,7 @@ function MyPost() {
     //   fetchPosts();
     // },[])
 
-    const [ deletingId, setDeletingId] = useState(null)
+    
 
     const {data : myPosts , isLoading, isError:err } = useQuery({
       queryKey:["MyPosts"],
@@ -88,7 +88,7 @@ function MyPost() {
 
        const mutation = useMutation({
         mutationFn:async ({id})=>{
-          // const res= await axios.post(`${API_BASE_URL}/v1/users/delete-post`,
+          // const res= await axios.post(`http://localhost:5000/api/v1/users/delete-post`,
           const res= await api.post(`/v1/users/delete-post`,
             {
                 id : id
@@ -105,7 +105,7 @@ function MyPost() {
           const isConfirmed = window.confirm("Do you want to delete this blog?")
           if(isConfirmed){
 
-            setDeletingId(id);
+            
             mutation.mutate({id},
             {
               onSuccess:()=>{
@@ -116,9 +116,7 @@ function MyPost() {
                 toast.error("Failed to delete blog");
                 console.log("Failed to delete blog "+error);
               },
-              onSettled:()=>{
-                setDeletingId(null)
-              },
+             
               
             }
           )

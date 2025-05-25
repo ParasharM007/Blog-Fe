@@ -7,14 +7,17 @@ import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import axios from 'axios';
 import api from '../utils/api_Interceptor';
-// import { UserContext } from '../UserContext.jsx';
+import { AuthContext } from '../utils/AuthContext';
+import loadinggif from '../assets/loading-gif.gif'
+
 
 
 function Navbar() {
   const [showMenu,setShowMenu]=useState(false)
   const [showProfile,setShowProfile]=useState(false);
-  const [isLoggedIn,setIsLoggedIn]=useState(false);
-  // const {isLoggedIn , setLoggedIn} = useContext(UserContext)
+  // const [isLoggedIn,setIsLoggedIn]=useState(false)
+  const {isLoggedIn , setIsLoggedIn , loading} = useContext(AuthContext)
+  
   const navigate=useNavigate();
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const userId=localStorage.getItem('userId');
@@ -77,30 +80,34 @@ function Navbar() {
     
     setTimeout(() => {
       navigate("/");
-    }, 5000);
+    }, 2000);
   
   }
-  useEffect(()=>{
-   (
-  async()=>{
+  // useEffect(()=>{
+  //  (
+  // async()=>{
 
-    try {
-     const res = await api.get(`/v1/users/auth-route`,
-    //  const res = await axios.get(`${API_BASE_URL}/v1/users/auth-route`,
-    //  const res = await axios.get(`http://localhost:5000/api/v1/users/auth-route`, 
-      {withCredentials: true}
-     )
-     console.log(res.data.data.data)
-     setIsLoggedIn(res.data.data.data)
+  //   try {
+  //    const res = await api.get(`/v1/users/auth-route`,
+  //   //  const res = await axios.get(`${API_BASE_URL}/v1/users/auth-route`,
+  //   //  const res = await axios.get(`http://localhost:5000/api/v1/users/auth-route`, 
+  //     {withCredentials: true}
+  //    )
+  //    console.log(res.data.data.data)
+  //    setIsLoggedIn(res.data.data.data)
      
      
-   } catch (error) {
-     console.log("Error in fetching nav items")  
-     setIsLoggedIn(false) 
-   }
-  }
-   )()
-  },[userId])
+  //  } catch (error) {
+  //    console.log("Error in fetching nav items")  
+  //    setIsLoggedIn(false) 
+  //  }
+  // }
+  //  )()
+  // },[userId])
+  
+  
+ 
+
   return (
     <div className=''>
     <nav className='z-10'>
@@ -113,20 +120,31 @@ function Navbar() {
       
       </div>
      
-       <div className={`mr-5 text-4xl md:hidden cursor-pointer transition-transform ease-in-out duration-300 `} onClick={()=>setShowMenu(prev=>!prev)}>
+       <div className={`mr-5 text-4xl md:hidden cursor-pointer transition-transform ease-in-out duration-300 `} >
          {/* <FaBars size={30} color="white"/> */}
-         <div className={`${showMenu ? "-rotate-90" : "rotate-0"} transition-transform duration-600`}>
+         {loading ? ( 
+      <ul className='text-lg md:hidden flex gap-5'>
+       <img src={loadinggif} alt="Loading..." className="w-10 h-10" />
+      </ul>):
+      (
+         <div className={`${showMenu ? "-rotate-90" : "rotate-0"} transition-transform duration-600`} onClick={()=>setShowMenu(prev=>!prev)}>
     {showMenu ? <FaTimes /> : <FaBars />}
   </div>
-
+)}
        </div>
       
      {/* Menu Options For Desktop */}
-     <ul className='text-lg px-4 mr-4 hidden md:flex gap-5'>
-      {!isLoggedIn?
+     {loading ? ( 
+      <ul className='text-lg px-4 mr-4 hidden md:flex gap-5'>
+       <img src={loadinggif} alt="Loading..." className="w-10 h-10" />
+      </ul>):
+      (
+
+        <ul className='text-lg px-4 mr-4 hidden md:flex gap-5'>
+      {!isLoggedIn ?
+          ( <>
       
       
-     ( <>
      <li>
       <Link to='/login'>Login</Link>
       
@@ -147,17 +165,24 @@ function Navbar() {
       <Link  > <FaUser className='border-2 p-1 rounded-[100%] border-gray-400 bg-white text-black text-4xl'/> </Link>
         
         </li>
-         <li className='mt-1 text-pink-700 text-3xl' onClick={(e)=>navigate(`/liked-blogs`)}>
+         <li className='mt-1 text-pink-700 text-3xl'  
+         onClick={(e)=>
+          {
+            navigate(`/liked-blogs`)
+            setShowProfile(false)
+            }}>
           <FaHeart />
         </li>
             </>
       )
-      } 
-       
+    }
      </ul>
+)
+  } 
      {/* Menu Options For Mobile */}
+     
      <ul className={`md:hidden p-2 border-1 border-gray-300 absolute z-30 flex flex-col top-19 right-10 text-gray-900 bg-gray-200 gap-3  transition-all duration-300 transform ease-in-out ${showMenu ? " translate-x-0 opacity-100 visible" : " translate-x-full opacity-0 invisible"}`}>
-      {!isLoggedIn?
+      {!isLoggedIn ?
       
      ( <>
      <li className='border-b-2 border-gray-400'>
@@ -170,7 +195,13 @@ function Navbar() {
       <Link to='/register' onClick={()=>setShowMenu(false)}>Register</Link>
         
         </li>
-         <li className='border-b-2 border-pink-700 text-pink-700 ' onClick={(e)=>navigate(`/liked-blogs`)}>
+         <li className='border-b-2 border-pink-700 text-pink-700 ' 
+           onClick={(e)=>
+          {
+            navigate(`/liked-blogs`)
+            setShowMenu(false)
+            }}
+          >
           {/* <FaHeart /> */}
           Liked
         </li>
@@ -183,7 +214,11 @@ function Navbar() {
       <button className='border-b-2 border-gray-400' onClick={handleNavigate} >Profile </button>
       <Link className='border-b-2 border-gray-400' onClick={handleLogout} >Logout </Link>
         
-         <li className='border-b-2 border-pink-700 text-pink-700 text-xl' onClick={(e)=>navigate(`/liked-blogs`)}>
+         <li className='border-b-2 border-pink-700 text-pink-700 text-xl' onClick={(e)=>
+          {
+            navigate(`/liked-blogs`)
+            setShowMenu(false)
+            }}>
           {/* <FaHeart /> */}
           Liked
         </li>
@@ -194,6 +229,7 @@ function Navbar() {
       } 
        
      </ul>
+      
      
      {showProfile && 
         <div className='menu-options'>

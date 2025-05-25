@@ -144,47 +144,21 @@ function Edit() {
       }
     })
 
-    //   try {
-    //     setLoading(true)
-    //     const res = await axios.post(`${API_BASE_URL}/v1/users/create-blog`, formData, {
-    //     withCredentials: true,
-    //     headers: { 'Content-Type': 'multipart/form-data' },
-    //   },
-    // );
-
-    //   if (res.status === 200) {
-    //     console.log('Blog created successfully');
-    //     toast.success("Blog created successfully")
-    //     setLoading(false);
-    //     // Optionally, redirect after successful blog creation
-    //     navigate('/');
-
-    //   }
-    // } catch (error) {
-    //   setLoading(false);
-    //   toast.error("Couldn't create blog")
-    //   console.log('Error while creating blog:', error);
-    // }
+    
   };
 
   return <>
     {
-      // isLoading ? (
-      //   <>
-      //                   <div className=" flex justify-center items-center ">
-      //                     <img src={loadinggif} alt="Loading..." className="loading-gif" style={{ color: 'white' }} />
-      //                   </div> 
-      //                   </>
-      //                 ) : (
+      
       <>
 
         <div className="flex justify-center items-center">
-          {/* <div className="m-2 p-2 md:m-5 md:p-5 flex flex-col border items-start w-full md:w-[80%] lg:w-[60%]"> */}
+          
           <div className="relative  m-2 p-2 md:m-5 md:p-5 flex flex-col items-start w-full md:w-[80%] lg:w-[60%] shadow-2xl">
             <div className="flex justify-between items-center w-full">
               <div className="m-2 font-light text-3xl md:text-4xl ">Create Your Blogs with WildEarth...</div>
               <div className="p-1 cursor-pointer flex gap-2 items-center bg-purple-600 text-white rounded-xl" onClick={handleNavigate}>
-                {/* <MdArrowBack style={{ backgroundColor: 'blueviolet', fontSize: '30px' }} /> */}
+                
                 <MdArrowBack className='text-xl lg:text-3xl' />
                 <button className="text-lg lg:text-xl cursor-pointer" >
                   Back
@@ -207,8 +181,7 @@ function Edit() {
 
                 />
 
-                {/* <button className='ml-5' type='submit'>Edit Blog Img</button> */}
-                {/* <button className='bg-[#D95D39] hover:bg-[#b34b2e] text-sm lg:text-xl text-white w-[70%] md:w-[30%] mx-5 py-1 px-2 lg:px-0 lg:mx-2 rounded-lg font-medium cursor-pointer' type='submit'>{!videoUplaod.isPending?"Upload Cover Video":"Uploading Cover Video..."}</button> */}
+               
               </div>
               {videoPreview && (
                 !mutation.isPending ? (
@@ -217,16 +190,16 @@ function Edit() {
                   </div>)
 
                   : (
-                    <div className="ml-10 m-2 p-2 mt-3 flex justify-center items-center w-[70%] md:w-100 lg:w-150">
-                      <div className=" flex flex-col items-center border-3 bg-gray-300  border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" >
-                        <b>
-                          It may take few minutes to compress&upload video.
-                        </b>
-
-                        <img src={loadinggif} alt="Loading..." className="w-10 h-10 md:w-20 md:h-20" />
-
-
-                      </div>
+                    <div className="m-2 p-2 mt-3 flex justify-center items-center w-[70%] md:w-100 lg:w-150">
+                      <div className=" flex flex-col items-center border-3 bg-gray-300  border-gray-300 w-70 h-45 md:w-80 md:h-50 rounded-2xl" >
+                                     <b className='m-2'>
+                                       It may take few minutes to compress&upload video.
+                                       </b>
+                                     
+                                  <img src={loadinggif} alt="Loading..." className="w-10 h-10 md:w-20 md:h-20" />
+                                
+                                     
+                                   </div>
 
 
                     </div>

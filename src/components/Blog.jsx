@@ -85,14 +85,14 @@ function Blog() {
         <div className="relative z-20 flex flex-col md:flex-row items-center justify-between h-full md:h-full px-10 py-8 text-white">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-6xl font-bold">
-              {blog.title.split(' ').slice(0, 10).join(' ')}...
+              {blog.title.split(' ').slice(0, 13).join(' ')}...
             </h1>
             <p className="mt-4 text-gray-200 text-lg md:text-xl">
               by <span className="font-semibold">{blog.authorId?.username || "Author"}</span>
             </p>
           </div>
 
-         <div className="relative md:h-80 md:w-[100%] lg:w-[40%] opacity-95 hover:opacity-80  group mt-20 lg:mt-0">
+         <div className="relative md:h-80 md:w-[100%] lg:w-[40%] opacity-95 hover:opacity-80  group mt-15 lg:mt-0">
   <img
     src={blog.blogImg}
     alt="Blog"

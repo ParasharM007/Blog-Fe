@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaPlus } from 'react-icons/fa';
 import "./Plus.css"
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 // import Cookies from 'js-cookie';
 import axios from 'axios';
 import api from '../utils/api_Interceptor';
+import { AuthContext } from '../utils/AuthContext';
 
 
 function Plus() {
@@ -24,7 +25,7 @@ function Plus() {
   const navigate=useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
  
-  const [isLoggedIn,setIsLoggedIn] = useState(false)
+  const {isLoggedIn} = useContext(AuthContext)
   // const userId =localStorage.getItem('userId')
   // useEffect(()=>{
   //   const cookie = Cookies.get('accessToken')
@@ -35,16 +36,9 @@ function Plus() {
 
 
   const handleNavigate=async ()=>{
-    try {
-      // const res = await axios.get(`http://localhost:5000/api/v1/users/auth-route`,
-      // const reas = await axios/.get(`${API_BASE_URL}/v1/users/auth-route`,
-      const res = await api.get(`/v1/users/auth-route`,
-       {withCredentials: true}
-      )
-      console.log(res.data.data.data)
-     const userLoggedIn =  res.data.data.data
-     setIsLoggedIn(userLoggedIn)
-     if(userLoggedIn){
+    
+     if(isLoggedIn){
+      console.log("Chl rha h bhai")
 
        navigate(
          `/create-blog`
@@ -52,11 +46,11 @@ function Plus() {
       }
       
       
-    } 
-    catch (error) {
+    
+    else {
         
-        toast.error("Please login first to create a new blog") //not working here 
-        setIsLoggedIn(false) 
+        toast.error("Please login first to create a new blog") 
+        
         
       }
         
