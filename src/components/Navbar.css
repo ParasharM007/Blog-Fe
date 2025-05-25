@@ -69,14 +69,7 @@ li {
  
 
 }
-.menu-options div{
-  margin: 5px;
-  padding: 5px;
-  border: 1px solid grey;
-  background-color: white;
-  cursor: pointer;
 
-}
 
 @media (max-width: 768px) {
 

@@ -134,68 +134,64 @@ function Navbar() {
        </div>
       
      {/* Menu Options For Desktop */}
-     {loading ? ( 
-      <ul className='text-lg px-4 mr-4 hidden md:flex gap-5'>
-       <img src={loadinggif} alt="Loading..." className="w-10 h-10" />
-      </ul>):
-      (
-
-        <ul className='text-lg px-4 mr-4 hidden md:flex gap-5'>
-      {!isLoggedIn ?
-          ( <>
-      
-      
-     <li>
-      <Link to='/login'>Login</Link>
-      
+    <ul className='text-lg px-4 mr-4 hidden md:flex gap-5'>
+  {loading ? (
+    <li>
+      <img src={loadinggif} alt="Loading..." className="w-10 h-10" />
+    </li>
+  ) : !isLoggedIn ? (
+    <>
+      <li className='text-2xl'>
+        <Link to='/login'>Login</Link>
       </li>
-      
-      
-      <li>
-      <Link to='/register'>Register</Link>
-        
-        </li>
-        <li className='mt-1 text-pink-700 text-3xl' onClick={(e)=>navigate(`/liked-blogs`)}>
-          <FaHeart />
-        </li>
-     </>
-        ):(
-            <>
-          <li onClick={handleShowProfile}>
-      <Link  > <FaUser className='border-2 p-1 rounded-[100%] border-gray-400 bg-white text-black text-4xl'/> </Link>
-        
-        </li>
-         <li className='mt-1 text-pink-700 text-3xl'  
-         onClick={(e)=>
-          {
-            navigate(`/liked-blogs`)
-            setShowProfile(false)
-            }}>
-          <FaHeart />
-        </li>
-            </>
-      )
-    }
-     </ul>
-)
-  } 
+      <li className='text-2xl'>
+        <Link to='/register'>Register</Link>
+      </li>
+      <li
+        className='mt-1 text-pink-700 text-3xl cursor-pointer'
+        onClick={() => navigate(`/liked-blogs`)}
+      >
+        <FaHeart />
+      </li>
+    </>
+  ) : (
+    <>
+      <li onClick={handleShowProfile}>
+        <Link>
+          <FaUser className={`border-2 p-1 rounded-full border-gray-400 bg-white text-black text-4xl ${showProfile ? "-rotate-40" : "rotate-0"} transition-transform duration-600} `} />
+        </Link>
+      </li>
+      <li
+        className='mt-1 text-pink-700 text-3xl cursor-pointer'
+        onClick={() => {
+          navigate(`/liked-blogs`);
+          setShowProfile(false);
+        }}
+      >
+        <FaHeart />
+      </li>
+    </>
+  )}
+</ul>
+
+
      {/* Menu Options For Mobile */}
      
-     <ul className={`md:hidden p-2 border-1 border-gray-300 absolute z-30 flex flex-col top-19 right-10 text-gray-900 bg-gray-200 gap-3  transition-all duration-300 transform ease-in-out ${showMenu ? " translate-x-0 opacity-100 visible" : " translate-x-full opacity-0 invisible"}`}>
+     <ul className={`md:hidden p-3 border-1 border-gray-300 rounded-xl absolute z-30 flex flex-col top-19 right-10 text-gray-900 bg-white gap-3  transition-all duration-300 transform ease-in-out ${showMenu ? " translate-x-0 opacity-100 visible" : " translate-x-full opacity-0 invisible"}`}>
       {!isLoggedIn ?
       
      ( <>
-     <li className='border-b-2 border-gray-400'>
+     <li className='border-b-2 border-purple-500 text-xl'>
       <Link to='/login' onClick={()=>setShowMenu(false)}>Login</Link>
       
       </li>
       
       
-      <li className='border-b-2 border-gray-400'>
+      <li className='border-b-2 border-purple-500 text-xl'>
       <Link to='/register' onClick={()=>setShowMenu(false)}>Register</Link>
         
         </li>
-         <li className='border-b-2 border-pink-700 text-pink-700 ' 
+         <li className='border-b-2 border-pink-700 text-pink-700 text-xl' 
            onClick={(e)=>
           {
             navigate(`/liked-blogs`)
@@ -211,10 +207,10 @@ function Navbar() {
 
          <>
          <li className='flex flex-col gap-2 text-xl'>
-      <button className='border-b-2 border-gray-400' onClick={handleNavigate} >Profile </button>
-      <Link className='border-b-2 border-gray-400' onClick={handleLogout} >Logout </Link>
+      <button className='border-b-2 border-purple-500' onClick={handleNavigate} >Profile </button>
+      <Link className='border-b-2 border-purple-500' onClick={handleLogout} >Logout </Link>
         
-         <li className='border-b-2 border-pink-700 text-pink-700 text-xl' onClick={(e)=>
+         <li className='border-b-2 border-pink-700 text-pink-700' onClick={(e)=>
           {
             navigate(`/liked-blogs`)
             setShowMenu(false)
@@ -232,9 +228,9 @@ function Navbar() {
       
      
      {showProfile && 
-        <div className='menu-options'>
-        <div onClick={handleNavigate}>Profile</div>
-        <div onClick={handleLogout}>Logout
+        <div className='m-1 p-5 gap-2 grid menu-options rounded-xl text-xl border-1 border-gray-200 '>
+        <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleNavigate}>Profile</div>
+        <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleLogout}>Logout
 
         </div>
        

@@ -133,7 +133,7 @@ function LikedBlogs() {
   })
   const handleDislikeBlog = (e, blogId) => {
 
-
+     e.stopPropagation()
 
     dislikeMutation.mutate(blogId,
       {
