@@ -106,47 +106,15 @@ function Card() {
     <>
       {isError && <h1 className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Error while Loading blog data</h1>}
       {
-//         isLoading ? (
-//           <div className="loading-container ">
-//             <img src={loadinggif} alt="Loading..." className="loading-gif" style={{ color: 'white' }} />
-//           </div>
-//         ) : (
-//           blogs &&
-//           blogs.map(item => (
-
-// <>
-//             <div className='p-5 flex flex-col cursor-pointer w-[30%] min-w-[280px] h-auto items-start  rounded-2xl bg-gray-100'  key={item?._id}>
-// <div onClick={() => handleNavigate(item?._id)} >
-//               {/* // <div className='mb-5 break-inside-avoid border bg-gray-300 p-4 rounded-lg shadow-md' onClick={() => handleNavigate(item?._id)} key={item?._id}> */}
-//               <div className="m-1 p-1 w-full " >
-//                 <img src={item.blogImg} alt="" className='p-2 w-full h-50 border-3 border-gray-300 rounded-tl-3xl rounded-br-3xl object-cover' />
-//               </div>
-//               <hr className='w-[100%] text-gray-700' />
-//               <div className=' mt-2 p-2 rounded-3xl text-4xl font-medium text-gray-500 '>{item.title.split(' ').slice(0, 4).join(' ')}...</div>
-//               {/* <div className='my-2 p-2 text-black text-lg font-sans'>
-//                 {item.content.split(' ').slice(0, 15).join(' ')}...
-//               </div> */}
-//               <div className="my-2 p-2 text-black text-lg font-sans"
-//                 dangerouslySetInnerHTML={{ __html: item.content.split(' ').slice(0, 20).join(' ') }} />
-
-//               </div>
-//               <div className="flex gap-2 " onClick={()=>handleNavigateToUserProfile(item?.authorId?._id)}>
-//                 <img src={item?.authorId?.avatar} alt="" className='w-10 h-10 border-1 rounded-[100%]' />
-//                 <span className='p-2 bg-gray-900 text-white rounded-3xl' >Created by:- <span className='font-medium'>{item.authorId?.username}</span></span>
-
-//               </div>
-//             </div>
-//               </>
-//           ))
-//         )
-
-
-  isLoading ? (
+       
+   isLoading ? (
     <div className="flex justify-center items-center h-[80vh]">
       <img src={loadinggif} alt="Loading..." className="w-20 h-20" />
     </div>
   ) : (
+    // <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 p-4">
     <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 p-4">
+    
       {blogs?.map((item) => (
         <div
           key={item?._id}

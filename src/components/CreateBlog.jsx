@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './Edit.css';
@@ -19,6 +19,7 @@ function Edit() {
   const [video, setVideo] = useState("")
   const [videoPreview, setVideoPreview] = useState("")
   const [isLoading, setLoading] = useState(false)
+  const toolbarRef =useRef(null)
   // const [cleanedContent,setCleanedContent] =useState('')
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -66,41 +67,7 @@ function Edit() {
     }
   }
 
-  //  const videoUplaod = useMutation({
-  //   mutationFn:async(formData)=>{
-  //     //  const res = await api.post(`/v1/users/update-cover-video`,
-  //      const res = await axios.post(`http://localhost:5000/api/v1/users/update-cover-video`,
-  //       formData,
-  //       {
-  //         withCredentials:true
-  //       }
-  //     )
-  //     return res.data
-  //   }
-  // })
-
-
-  //   const handleVideo =async(e)=>{
-  //     e.preventDefault()
-  //     const formData = new FormData()
-  //     if(video && id){
-  //       console.log("Video available ")
-  //       formData.append("blogId",id)
-  //       formData.append("coverVideo",video)
-  //     }
-
-  //   videoUplaod.mutate(formData,{
-  //     onSuccess:()=>{
-  //       console.log("Updating cover video")
-  //       toast.success("Cover Video updated successfully")
-  //     },
-  //     onError:(formData)=>{
-  //       toast.error("Failed to upload cover video")
-  //       console.log(formData)
-  //     }
-  //   })
-
-  //   }
+  
 
   const handleNavigate = () => {
     navigate('/');
@@ -146,6 +113,10 @@ function Edit() {
 
     
   };
+  
+  const scrollToTollbar=()=>{
+    toolbarRef.current.scrollIntoView( { behaviour:'smooth'})
+  }
 
   return <>
     {
@@ -240,7 +211,7 @@ function Edit() {
               </div>
 
               <div className="m-2 p-2">
-                <div className='my-4 text-3xl text-gray-500 font-medium'>Content</div>
+                <div className='my-4 text-3xl text-gray-500 font-medium' ref={toolbarRef}>Content</div>
                 {/* <textarea
                             value={content}
                             onChange={handleContentChange}
@@ -262,6 +233,7 @@ function Edit() {
                 {!mutation.isPending ? "Save" : "Saving..."}
               </button>
             </form>
+            <button className='w-20 ml-4 mt-4 bg-black hover:bg-purple-800 text-white text-sm font-medium py-3 rounded-xl transition-all duration-300 cursor-pointer ' onClick={scrollToTollbar} >Editbar ↑</button>
           </div>
          
         </div>

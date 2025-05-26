@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import "./Edit.css"
@@ -20,6 +20,7 @@ function Edit() {
   const [video, setVideo]= useState("")
   const [heading, setHeading] = useState('')
   const [content,setContent] = useState('')
+  const toolbarRef= useRef(null)
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const userId=localStorage.getItem('userId');
 
@@ -219,7 +220,11 @@ function Edit() {
        }
       }, [blog]); 
 
-       
+       const scrollToTollbar=()=>{
+        console.log("clicked")
+        toolbarRef.current.scrollIntoView({ behavior: "smooth" });
+
+       }
   return (
     <div className="flex justify-center items-center">
 
@@ -336,12 +341,13 @@ function Edit() {
           />
       </div>
       <div className="md:m-2 md:p-2">
-      <div className='my-4 text-3xl text-gray-500 font-medium'>Content</div>
+      <div className='my-4 text-3xl text-gray-500 font-medium' ref={toolbarRef}>Content</div>
         <ReactQuill 
           value={isLoading?"Loading blog...":content} 
           onChange={handleContentChange} 
           theme="snow"
           placeholder="Write your blog content here..."
+          
           // className='w-70 md:w-100 lg:w-148 text-4xl border-gray-300 border'
           className='w-[38%] md:w-[70%]  text-4xl border-gray-100 border'
           
@@ -349,6 +355,7 @@ function Edit() {
       </div>
       <button className='text-lg lg:text-xl cursor-pointer m-4 p-1 w-20 bg-green-700 rounded-2xl text-white' type='submit'>{mutation.isPending?"Saving...":"Save"}</button>
           </form>
+      <button className='w-20 ml-4 mt-4 bg-black hover:bg-purple-800 text-white text-sm font-medium py-3 rounded-xl transition-all duration-300 cursor-pointer ' onClick={scrollToTollbar} >Editbar ↑</button>
         
           </div>
     </div>

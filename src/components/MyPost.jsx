@@ -16,7 +16,7 @@ const fetchPosts =async ()=>{
 
      }
    )
-   return res.data?.data || []
+   return res.data?.data
   }
       
   
@@ -129,8 +129,8 @@ function MyPost() {
     return (<>
     {
        err &&(<div className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Create your first Blog</div>)}
-       {/* {myPosts===0 &&(<div className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Create your first Blog</div>)} */}
-       {myPosts && myPosts.map(post=>(
+       {myPosts!==null && typeof(myPosts)==='object'&& !Array.isArray(myPosts) &&(<div className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Create your first Blog</div>)} 
+       {Array.isArray(myPosts) && myPosts.map(post=>(
             
             // <div className='m-2  md:150 w-90 md:w-[90%]  h-auto relative bg-gray-50 rounded-xl md:border-gray-300 md:border cursor-pointer' key={post._id}>
             <div className='m-2  md:150 w-90 md:w-[90%] shadow-2xl h-auto relative bg-white rounded-xl  cursor-pointer' key={post._id}>
