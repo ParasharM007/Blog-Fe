@@ -79,16 +79,16 @@ function Profile() {
   const submitProfile=async(e)=>{
     e.preventDefault();
     // setEditProfile(false)
-    if(!imagePreview){
-     return  toast.error("Please provide avatar")
-    }
-    if(!image){
-      return  toast.error("Please provide avatar")
+    // if(!imagePreview){
+    //  return  toast.error("Please provide avatar")
+    // }
+    // if(!image){
+    //   return  toast.error("Please provide avatar")
 
-    }
+    // }
     const formData = new FormData();
     formData.append("fullName",fullName)
-    formData.append("avatar", image)
+    if(image) formData.append("avatar", image)
 
     mutation.mutate({formData},
       {
