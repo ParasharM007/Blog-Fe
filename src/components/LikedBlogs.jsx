@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../utils/api_Interceptor';
 import { AuthContext } from '../utils/AuthContext';
+import { AiFillDislike } from 'react-icons/ai';
 function LikedBlogs() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const userId = localStorage.getItem("userId")
@@ -209,13 +210,15 @@ function LikedBlogs() {
                         className="w-full object-cover h-auto rounded-t-3xl"
                       />
 
-                      <button
-                        className='absolute top-1 right-1 z-10 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity bg-opacity-60 px-1 py-1 bg-white rounded-tr-3xl cursor-pointer'
-                        onClick={(e) => handleDislikeBlog(e, item?._id)}
-                        title="Unlike"
-                      >
-                        <div className="text-md">Unlike</div>
-                      </button>
+                     <button
+  className="absolute top-2 right-2 z-10 cursor-pointer flex items-center gap-2 bg-white/80 text-red-600 hover:text-white hover:bg-red-600 transition-all px-3 py-1 rounded-full shadow-sm backdrop-blur-sm
+  lg:opacity-0 lg:group-hover:opacity-100"
+  onClick={(e) => handleDislikeBlog(e, item?._id)}
+  title="Unlike"
+>
+  <AiFillDislike className="w-4 h-4" />
+  <span className="text-sm font-medium">Unlike</span>
+</button>
 
                       <div className="p-4 space-y-3">
                         <h2 className="text-lg font-semibold text-gray-800 leading-tight">

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import "./Navbar.css"
 import { FaBars, FaHeart, FaUser } from 'react-icons/fa';
 import { FaTimes } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import axios from 'axios';
@@ -16,7 +16,9 @@ function Navbar() {
   const [showMenu,setShowMenu]=useState(false)
   const [showProfile,setShowProfile]=useState(false);
   // const [isLoggedIn,setIsLoggedIn]=useState(false)
-  const {isLoggedIn , setIsLoggedIn , loading} = useContext(AuthContext)
+  const {isLoggedIn , setIsLoggedIn , loading , AdminLogin ,setAdminLogin } = useContext(AuthContext)
+  
+  
   
   const navigate=useNavigate();
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -35,7 +37,7 @@ function Navbar() {
   setShowMenu(false)
   setShowProfile(false)
   if(userId) {
-    navigate(`/profile/${userId}`)
+  navigate(AdminLogin?`/admin/${userId}`:`/profile/${userId}`);
     
 
   }
@@ -62,6 +64,7 @@ function Navbar() {
           console.log("Logout completed successfully");
           setShowMenu(false);
           setIsLoggedIn(false) 
+          setAdminLogin(false)
           // setLoggedIn(false)
           if(userId){
             
@@ -106,10 +109,9 @@ function Navbar() {
   // },[userId])
   
   
- 
 
   return (
-    <div className=''>
+   <div className=''>
     <nav className='z-10'>
       <div className='flex m-1 p-1 justify-between items-center'>
 
@@ -147,6 +149,9 @@ function Navbar() {
       <li className='text-2xl'>
         <Link to='/register'>Register</Link>
       </li>
+      <li className='text-2xl'>
+        <Link to='/admin-login'>AdminLogin</Link>
+      </li>
       <li
         className='mt-1 text-pink-700 text-3xl cursor-pointer'
         onClick={() => navigate(`/liked-blogs`)}
@@ -161,7 +166,7 @@ function Navbar() {
           <FaUser className={`border-2 p-1 rounded-full border-gray-400 bg-white text-black text-4xl ${showProfile ? "-rotate-40" : "rotate-0"} transition-transform duration-600} `} />
         </Link>
       </li>
-      <li
+     <li
         className='mt-1 text-pink-700 text-3xl cursor-pointer'
         onClick={() => {
           navigate(`/liked-blogs`);
@@ -191,6 +196,10 @@ function Navbar() {
       <Link to='/register' onClick={()=>setShowMenu(false)}>Register</Link>
         
         </li>
+      <li className='border-b-2 border-purple-500 text-xl'>
+      <Link to='/admin-login' onClick={()=>setShowMenu(false)}>AdminLogin</Link>
+        
+        </li>
          <li className='border-b-2 border-pink-700 text-pink-700 text-xl' 
            onClick={(e)=>
           {
@@ -207,10 +216,10 @@ function Navbar() {
 
          <>
          <li className='flex flex-col gap-2 text-xl'>
-      <button className='border-b-2 border-purple-500' onClick={handleNavigate} >Profile </button>
+      <button className='border-b-2 border-purple-500' onClick={handleNavigate} >{AdminLogin?"Dashboard":"Profile"} </button>
       <Link className='border-b-2 border-purple-500' onClick={handleLogout} >Logout </Link>
         
-         <li className='border-b-2 border-pink-700 text-pink-700' onClick={(e)=>
+       <li className='border-b-2 border-pink-700 text-pink-700' onClick={(e)=>
           {
             navigate(`/liked-blogs`)
             setShowMenu(false)
@@ -229,7 +238,9 @@ function Navbar() {
      
      {showProfile && 
         <div className='m-1 p-5 gap-2 grid menu-options rounded-xl text-xl border-1 border-gray-200 '>
-        <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleNavigate}>Profile</div>
+        
+        <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleNavigate}>{AdminLogin?"Dashboard":"Profile"}</div>
+        
         <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleLogout}>Logout
 
         </div>

@@ -15,6 +15,7 @@ import LandingPage from './components/LandingPage.jsx';
 import UserProfile from './components/UserProfile.jsx';
 import LikedBlogs from './components/LikedBlogs.jsx';
 import { AuthContextProvider } from './utils/AuthContext.jsx';
+import AdminDashboard from './components/AdminDashboard.jsx';
 
 
 
@@ -42,8 +43,10 @@ function App() {
           <Route path='/blogs' element={<Cards/>}/>
           <Route path='/blog/:id' element={<Blog />}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/admin-login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/profile/:id' element={<Profile />}/>
+          <Route path='/admin/:id' element={<AdminDashboard />}/>
           <Route path='/author/:id' element={<UserProfile />}/>
           <Route path='/edit/:id' element={<Edit />}/>
           <Route path='/create-blog' element={<CreateBlog />}/>

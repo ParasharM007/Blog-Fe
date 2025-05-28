@@ -11,7 +11,7 @@ import api from '../utils/api_Interceptor'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const fetchBlogData = async () => {
-  const res = await axios.get(`${API_BASE_URL}/v1/users/get-blogs`)
+  const res = await axios.get(`${API_BASE_URL}/v1/users/approved-blogs`)
   // const res = await axios.get(`${API_BASE_URL}/v1/users/get-blogs`)
   return res.data?.data;
 }

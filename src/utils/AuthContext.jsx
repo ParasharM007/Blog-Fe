@@ -7,6 +7,7 @@ function AuthContextProvider({children}) {
     
     const [isLoggedIn, setIsLoggedIn ]= useState(false)
     const [ loading, setLoading ] =useState(true)
+    const [AdminLogin , setAdminLogin] =useState(false)
     
 
     useEffect(()=>{
@@ -18,8 +19,12 @@ function AuthContextProvider({children}) {
                     withCredentials:true
                 }
             )
-            console.log(res.data?.data?.data)
-            setIsLoggedIn(res.data?.data?.data)
+            console.log(res.data?.data)
+            if(res.data?.data==='admin')
+              setAdminLogin(true)
+            
+            setIsLoggedIn(true)
+
             
         } catch (error) {
             console.log("User not logged in")
@@ -32,7 +37,7 @@ function AuthContextProvider({children}) {
     
     
   return (
-    <AuthContext.Provider value={{ isLoggedIn , setIsLoggedIn , loading }}>
+    <AuthContext.Provider value={{ isLoggedIn , setIsLoggedIn , loading , AdminLogin , setAdminLogin }}>
      {children}
     </AuthContext.Provider>
   )
