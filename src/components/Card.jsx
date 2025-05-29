@@ -104,7 +104,7 @@ function Card() {
 
   return (
     <>
-      {isError && <h1 className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Error while Loading blog data</h1>}
+      {isError && <h1 className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-10 text-4xl md:text-5xl'>Error while Loading blog data...</h1>}
       {
        
    isLoading ? (

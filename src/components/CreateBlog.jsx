@@ -101,7 +101,7 @@ function Edit() {
 
     mutation.mutate( formData , {
       onSuccess: () => {
-        console.log('Blog created successfully');
+        console.log('Blog created and sent for approval');
         toast.success("Blog created successfully");
         navigate('/');
       },

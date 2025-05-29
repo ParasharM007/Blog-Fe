@@ -28,47 +28,7 @@ const fetchPosts =async ()=>{
 
 
 function MyPost() {
-    // const [myPosts,setMyPosts]=useState([])
-    // const [date,setDate] = useState([])
-    // const [err,setErr] = useState(false)
-    // const fetchPosts =async ()=>{
-      
-    //   try {
-  
-    //    const res= await axios.post(`${API_BASE_URL}/v1/users/my-posts`,
-    //       {},
-    //       {
-    //         withCredentials: true
-  
-    //       }
-    //     )
-    //     if(res.status===200){
-    //       setMyPosts(res.data?.data)
-          
-    //       function arrayDate(){
-        
-    //         const createdAt = res.data.data?.map(item=>(item.createdAt))
-    //         const date = new Date(createdAt);
-            
-    //         // Format to display only the date (YYYY-MM-DD)
-    //         setDate(date.toLocaleDateString());
-    //       }
-          
-
-          
-    //     }
-    //   } catch (error) {
-    //     setErr(true)
-        
-        
-    //   }
-    // }
-    // useEffect(()=>{
-    //   fetchPosts();
-    // },[])
-
-    
-
+   
     const {data : myPosts , isLoading, isError:err } = useQuery({
       queryKey:["MyPosts"],
       queryFn: fetchPosts,
@@ -132,8 +92,8 @@ function MyPost() {
        {myPosts!==null && typeof(myPosts)==='object'&& !Array.isArray(myPosts) &&(<div className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>Create your first Blog</div>)} 
        {Array.isArray(myPosts) && myPosts.map(post=>(
             
-            // <div className='m-2  md:150 w-90 md:w-[90%]  h-auto relative bg-gray-50 rounded-xl md:border-gray-300 md:border cursor-pointer' key={post._id}>
-            <div className='m-2  md:150 w-90 md:w-[90%] shadow-2xl h-auto relative bg-white rounded-xl  cursor-pointer' key={post._id}>
+            // <div className='m-2  w-90 md:w-[90%]  h-auto relative bg-gray-50 rounded-xl md:border-gray-300 md:border cursor-pointer' key={post._id}>
+            <div className='m-2  w-90 md:w-[90%] shadow-2xl h-auto relative bg-white rounded-xl  cursor-pointer' key={post._id}>
 
              <div className='flex  gap-3 m-5 justify-center md:mr-10 md:justify-end'>
             

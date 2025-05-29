@@ -38,7 +38,7 @@ function Plus() {
   const handleNavigate=async ()=>{
     
      if(isLoggedIn){
-      console.log("Chl rha h bhai")
+      
 
        navigate(
          `/create-blog`

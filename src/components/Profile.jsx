@@ -240,12 +240,14 @@ useEffect(() => {
   )
     }
     
-    <div className="m-5 p-5 mt-3 md:mt-10  flex flex-col justify-center items-center ">
+    <div className="m-5 p-5 mt-3 md:mt-10 flex flex-col justify-center items-center ">
       <div className="font-light text-4xl md:text-5xl">My Posts</div>
-      <div className="">
-     <Myposts />
+      <div className='w-[80%]'>
 
+     <Myposts />
       </div>
+
+      
     </div>
     </>
   )

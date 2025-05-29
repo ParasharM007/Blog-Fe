@@ -74,7 +74,7 @@ function Edit() {
     mutation.mutate({},
       {
         onSuccess:()=>{
-          toast.success("Blog updated successfully")
+          toast.success("Blog updated and sent for approval")
           console.log("Blog updated successfully")
           navigate('/')
           // setTimeout(() =>{
@@ -95,6 +95,7 @@ function Edit() {
 
   const mutation2 = useMutation({
     mutationFn:async (formData)=>{
+            // const res= await axios.post(`http://localhost:5000/api/v1/users/update-blog-img`,
             // const res= await axios.post(`${API_BASE_URL}/v1/users/update-blog-img`,
             const res= await api.post(`/v1/users/update-blog-img`,
      formData,
@@ -161,7 +162,7 @@ function Edit() {
   videoUplaod.mutate(formData,{
     onSuccess:()=>{
       console.log("Updating cover video")
-      toast.success("Cover Video updated successfully")
+      toast.success("Cover Video updated and sent for approval")
     },
     onError:(formData)=>{
       toast.error("Failed to upload cover video")
@@ -177,10 +178,10 @@ function Edit() {
     formData.append("blogImg",image)
     formData.append("blogId",id);
 
-    mutation2.mutate({formData},
+    mutation2.mutate(formData,
       {
         onSuccess:()=>{
-          toast.success("Blog image updated!")
+          toast.success("Blog image updated and sent for approval!")
           console.log("Blog image updated!")
           // setTimeout(() =>{
           //   window.location.reload();
@@ -221,7 +222,6 @@ function Edit() {
       }, [blog]); 
 
        const scrollToTollbar=()=>{
-        console.log("clicked")
         toolbarRef.current.scrollIntoView({ behavior: "smooth" });
 
        }
