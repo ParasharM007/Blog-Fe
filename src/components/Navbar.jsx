@@ -9,6 +9,7 @@ import axios from 'axios';
 import api from '../utils/api_Interceptor';
 import { AuthContext } from '../utils/AuthContext';
 import loadinggif from '../assets/loading-gif.gif'
+import { AiOutlineSearch } from 'react-icons/ai';
 
 
 
@@ -16,6 +17,7 @@ function Navbar() {
   const [showMenu,setShowMenu]=useState(false)
   const [showProfile,setShowProfile]=useState(false);
   // const [isLoggedIn,setIsLoggedIn]=useState(false)
+  const[ showSearch,setShowSearch]=useState(false)
   const {isLoggedIn , setIsLoggedIn , loading , AdminLogin ,setAdminLogin } = useContext(AuthContext)
   
   
@@ -87,33 +89,12 @@ function Navbar() {
     }, 2000);
   
   }
-  // useEffect(()=>{
-  //  (
-  // async()=>{
-
-  //   try {
-  //    const res = await api.get(`/v1/users/auth-route`,
-  //   //  const res = await axios.get(`${API_BASE_URL}/v1/users/auth-route`,
-  //   //  const res = await axios.get(`http://localhost:5000/api/v1/users/auth-route`, 
-  //     {withCredentials: true}
-  //    )
-  //    console.log(res.data.data.data)
-  //    setIsLoggedIn(res.data.data.data)
-     
-     
-  //  } catch (error) {
-  //    console.log("Error in fetching nav items")  
-  //    setIsLoggedIn(false) 
-  //  }
-  // }
-  //  )()
-  // },[userId])
-  
   
 
   return (
+    
    <div className=''>
-    <nav className='z-10'>
+   <nav className='z-10'>
       <div className='flex m-1 p-1 justify-between items-center'>
 
     <div className='bg-black p-2 text-white text-4xl' onClick={()=>{  setShowMenu(false)
@@ -153,28 +134,51 @@ function Navbar() {
       <li className='text-2xl'>
         <Link to='/admin-login'>AdminLogin</Link>
       </li>
+      <li 
+      className="cursor-pointer flex items-center gap-2 text-pink-700 text-3xl  hover:text-white hover:bg-pink-800 transition-all duration-300 px-3 py-1 rounded-full shadow-sm backdrop-blur-sm"
+  onClick={()=>navigate('/search-blogs')}
+  title="Search">
+        
+  
+
+  <AiOutlineSearch className="w-4 h-4" /> {/* or FiSearch / BiSearch */}
+  <span className="text-lg font-medium">Search</span>
+
+      </li>
       <li
-        className='mt-1 text-pink-700 text-3xl cursor-pointer'
+        // className='mt-1 text-pink-700 text-3xl cursor-pointer'
+        className='cursor-pointer flex items-center gap-2 text-pink-700 text-3xl  hover:text-white hover:bg-pink-800 transition-all duration-300 px-3 py-1 rounded-full shadow-sm backdrop-blur-sm'
         onClick={() => navigate(`/liked-blogs`)}
       >
-        <FaHeart />
+        <FaHeart className='w-4 h-4' />
+        <span className="text-lg font-medium">Liked</span>
       </li>
     </>
   ) : (
     <>
+    <li 
+      className="cursor-pointer flex items-center gap-2 text-pink-700 text-3xl  hover:text-white hover:bg-pink-800 transition-all duration-300 px-3 py-1 rounded-full shadow-sm backdrop-blur-sm"
+  onClick={()=>navigate('/search-blogs')}
+  title="Search">
+        
+  
+
+  <AiOutlineSearch className="w-4 h-4" /> {/* or FiSearch / BiSearch */}
+  <span className="text-lg font-medium">Search</span>
+
+      </li>
+      <li
+        // className='mt-1 text-pink-700 text-3xl cursor-pointer'
+        className='cursor-pointer flex items-center gap-2 text-pink-700 text-3xl  hover:text-white hover:bg-pink-800 transition-all duration-300 px-3 py-1 rounded-full shadow-sm backdrop-blur-sm'
+        onClick={() => navigate(`/liked-blogs`)}
+      >
+        <FaHeart className='w-4 h-4' />
+        <span className="text-lg font-medium">Liked</span>
+      </li>
       <li onClick={handleShowProfile}>
         <Link>
           <FaUser className={`border-2 p-1 rounded-full border-gray-400 bg-white text-black text-4xl ${showProfile ? "-rotate-40" : "rotate-0"} transition-transform duration-600} `} />
         </Link>
-      </li>
-     <li
-        className='mt-1 text-pink-700 text-3xl cursor-pointer'
-        onClick={() => {
-          navigate(`/liked-blogs`);
-          setShowProfile(false);
-        }}
-      >
-        <FaHeart />
       </li>
     </>
   )}
@@ -204,6 +208,16 @@ function Navbar() {
          <li className='border-b-2 border-pink-700 text-pink-700 text-xl' 
            onClick={(e)=>
           {
+            navigate(`/search-blogs`)
+            setShowMenu(false)
+            }}
+          >
+          {/* <FaHeart /> */}
+          Search
+        </li>
+         <li className='border-b-2 border-pink-700 text-pink-700 text-xl' 
+           onClick={(e)=>
+          {
             navigate(`/liked-blogs`)
             setShowMenu(false)
             }}
@@ -220,6 +234,14 @@ function Navbar() {
       <button className='border-b-2 border-purple-500' onClick={handleNavigate} >{AdminLogin?"Dashboard":"Profile"} </button>
       <Link className='border-b-2 border-purple-500' onClick={handleLogout} >Logout </Link>
         
+       <li className='border-b-2 border-pink-700 text-pink-700' onClick={(e)=>
+          {
+            navigate(`/search-blogs`)
+            setShowMenu(false)
+            }}>
+          {/* <FaHeart /> */}
+          Search
+        </li>
        <li className='border-b-2 border-pink-700 text-pink-700' onClick={(e)=>
           {
             navigate(`/liked-blogs`)

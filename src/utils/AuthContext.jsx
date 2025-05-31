@@ -8,6 +8,7 @@ function AuthContextProvider({children}) {
     const [isLoggedIn, setIsLoggedIn ]= useState(false)
     const [ loading, setLoading ] =useState(true)
     const [AdminLogin , setAdminLogin] =useState(false)
+    const [searchBlogs, setSearchBlogs]=useState([])
     
 
     useEffect(()=>{
@@ -38,7 +39,7 @@ function AuthContextProvider({children}) {
     
     
   return (
-    <AuthContext.Provider value={{ isLoggedIn , setIsLoggedIn , loading , AdminLogin , setAdminLogin }}>
+    <AuthContext.Provider value={{ isLoggedIn , setIsLoggedIn , loading , AdminLogin , setAdminLogin , searchBlogs, setSearchBlogs }}>
      {children}
     </AuthContext.Provider>
   )

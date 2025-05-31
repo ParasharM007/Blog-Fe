@@ -16,6 +16,7 @@ import UserProfile from './components/UserProfile.jsx';
 import LikedBlogs from './components/LikedBlogs.jsx';
 import { AuthContextProvider } from './utils/AuthContext.jsx';
 import AdminDashboard from './components/AdminDashboard.jsx';
+import Search from './components/Search.jsx';
 
 
 
@@ -51,6 +52,7 @@ function App() {
           <Route path='/edit/:id' element={<Edit />}/>
           <Route path='/create-blog' element={<CreateBlog />}/>
           <Route path='/liked-blogs' element={<LikedBlogs />} />
+          <Route path='/search-blogs' element={<Search />} />
         </Routes>
        <Plus />
         </AuthContextProvider>

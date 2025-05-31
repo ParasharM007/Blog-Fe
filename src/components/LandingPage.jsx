@@ -28,8 +28,8 @@ export default function LandingPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           
           <div className="bg-white rounded-lg shadow p-5">
-            <h3 className="text-xl font-bold mb-2">Why Rainforests Matter</h3>
-            <p className="text-sm text-gray-700 mb-3">A closer look at the Earth's lungs and biodiversity.</p>
+            <h3 className="text-xl font-bold mb-2">Why River Ecosystems - Lifelines of Biodiversity and Civilization Matter</h3>
+            <p className="text-sm text-gray-700 mb-3">A closer look at the lifelines of biodiversity and civilization.</p>
             <Link to="/blog/68342ba626aa2086ab82534e">
               <button className="text-[#D95D39] font-semibold cursor-pointer">Read More →</button>
             </Link>

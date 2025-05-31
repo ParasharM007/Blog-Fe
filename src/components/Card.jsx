@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Card.css'
 import loadinggif from '../assets/loading-gif.gif'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 // import SaveTag from "../assets/images/3D_Tag.png"
 import { FaHeart } from "react-icons/fa"
 import { toast } from 'react-toastify'
 import api from '../utils/api_Interceptor'
+import { AuthContext } from '../utils/AuthContext'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const fetchBlogData = async () => {
@@ -19,14 +20,21 @@ const fetchBlogData = async () => {
 
 function Card() {
   // const [liked, setLiked] = useState({})
+  const { searchBlogs }=useContext(AuthContext)
   const [justLiked , setJustLiked] = useState({})
-  const { data: blogs, isLoading, isError } = useQuery(
+  
+
+  const { data: blogsFromApi, isLoading, isError,refetch } = useQuery(
     { 
-      queryKey: ["blogs"], 
+      queryKey: ["blogs",searchBlogs], 
       queryFn: fetchBlogData, 
-      staleTime: 20000 
+      staleTime: 20000,
+      enabled: !(Array.isArray(searchBlogs) && searchBlogs.length > 0),
+    
     }
   )
+   const blogs = Array.isArray(searchBlogs) && searchBlogs.length > 0 ? searchBlogs : blogsFromApi;
+  const usingSearch = Array.isArray(searchBlogs) && searchBlogs.length > 0;
    const likeMutation = useMutation({
       mutationFn:async(blogId)=>{
        
@@ -59,6 +67,9 @@ function Card() {
       },
       
     })
+ 
+
+
    
   const handleLikedBlogs=(e, blogId)=>{
     e.stopPropagation()
@@ -104,18 +115,21 @@ function Card() {
 
   return (
     <>
-      {isError && <h1 className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-10 text-4xl md:text-5xl'>Error while Loading blog data...</h1>}
+      {!usingSearch && isError && <h1 className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-10 text-4xl md:text-5xl'>Error while Loading blog data...</h1>}
       {
        
-   isLoading ? (
+   !usingSearch && isLoading ? (
     <div className="flex justify-center items-center h-[80vh]">
       <img src={loadinggif} alt="Loading..." className="w-20 h-20" />
     </div>
   ) : (
+    
     // <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 p-4">
     <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 p-4">
-    
-      {blogs?.map((item) => (
+       
+       {blogs!==null && typeof(blogs)==='object'&& !Array.isArray(blogs) &&(<div className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>No Blogs Available...</div>)} 
+      
+      {Array.isArray(blogs) && blogs?.map((item) => (
         <div
           key={item?._id}
           onClick={() => handleNavigate(item?._id)}
