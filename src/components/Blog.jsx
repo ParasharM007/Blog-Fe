@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import "./Blog.css"
 import { useNavigate, useParams } from 'react-router-dom'
 import loadinggif from '../assets/loading-gif.gif'
+import profIcon from "../assets/images/profileIcon.png"
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import Geovideo from "../assets/Geography_video.mp4"
@@ -114,7 +115,7 @@ function Blog() {
           
         >
           <img
-            src={blog.authorId?.avatar}
+            src={blog.authorId?.avatar ||profIcon}
             alt="Author"
             className="w-12 h-12 rounded-full border border-gray-300 cursor-pointer"
             onClick={() => handleNavigateToUserProfile(blog?.authorId?._id)}

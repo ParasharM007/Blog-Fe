@@ -9,6 +9,7 @@ import axios from 'axios';
 import api from '../utils/api_Interceptor';
 import { AuthContext } from '../utils/AuthContext';
 import loadinggif from '../assets/loading-gif.gif'
+import profIcon from "../assets/images/profileIcon.png"
 import { AiOutlineSearch } from 'react-icons/ai';
 
 
@@ -17,8 +18,7 @@ function Navbar() {
   const [showMenu,setShowMenu]=useState(false)
   const [showProfile,setShowProfile]=useState(false);
   // const [isLoggedIn,setIsLoggedIn]=useState(false)
-  const[ showSearch,setShowSearch]=useState(false)
-  const {isLoggedIn , setIsLoggedIn , loading , AdminLogin ,setAdminLogin } = useContext(AuthContext)
+  const {isLoggedIn , setIsLoggedIn , loading , avatar , setAvatar , AdminLogin ,setAdminLogin } = useContext(AuthContext)
   
   
   
@@ -51,15 +51,16 @@ function Navbar() {
     
     try {
       const res = await 
-      // axios.post(`${API_BASE_URL}/v1/users/logout`,
+      axios.post(`${API_BASE_URL}/v1/users/logout`,
       // axios.post(`http://localhost:5000/api/v1/users/logout`,
-      api.post(`/v1/users/logout`,
+      // api.post(`/v1/users/logout`,
         {},
         { withCredentials: true }
       );
       
       if (res.status === 200) {
         setShowProfile(false)
+        setAvatar(null)
         // setTimeout(() => {
         //   toast.success("Logged out", { toastId: "logoutSuccess" });
         //   }, 100);
@@ -94,7 +95,7 @@ function Navbar() {
   return (
     
    <div className=''>
-   <nav className='z-10'>
+   <nav className='z-50'>
       <div className='flex m-1 p-1 justify-between items-center'>
 
     <div className='bg-black p-2 text-white text-4xl' onClick={()=>{  setShowMenu(false)
@@ -110,11 +111,37 @@ function Navbar() {
       <ul className='text-lg md:hidden flex gap-5'>
        <img src={loadinggif} alt="Loading..." className="w-10 h-10" />
       </ul>):
-      (
-         <div className={`${showMenu ? "-rotate-90" : "rotate-0"} transition-transform duration-600`} onClick={()=>setShowMenu(prev=>!prev)}>
-    {showMenu ? <FaTimes /> : <FaBars />}
+      isLoggedIn?(
+
+        <div className={`${showMenu ? "-rotate-90" : "rotate-0"} transition-transform duration-600`} onClick={()=>setShowMenu(prev=>!prev)}>
+    {showMenu ? <FaTimes /> : (
+
+      // <FaBars />
+      avatar?(
+        
+        
+        <Link>
+          <img src={avatar} alt='pfp' className={`border-1 shadow-xl rounded-full border-gray-400 bg-white text-black w-11 h-11 ${showProfile ? "-rotate-40" : "rotate-0"} transition-transform duration-500} `} />
+        </Link>
+      
+    ):(
+      
+      <Link>
+          {/* <FaUser className={`border-2 p-1 rounded-full border-gray-400 bg-white text-black text-4xl ${showProfile ? "-rotate-40" : "rotate-0"} transition-transform duration-500} `} /> */}
+          <img src={profIcon} alt='pfp' className={`border-1 shadow-xl rounded-full border-gray-400 bg-white text-black w-11 h-11 ${showProfile ? "-rotate-40" : "rotate-0"} transition-transform duration-500} `} />
+        </Link>
+      
+    ) 
+  )
+  
+}
   </div>
-)}
+):(
+  <div className={`${showMenu ? "-rotate-90" : "rotate-0"} transition-transform duration-500`} onClick={()=>setShowMenu(prev=>!prev)}>
+    {showMenu ? <FaTimes /> : <FaBars />}
+      </div>
+)
+}
        </div>
       
      {/* Menu Options For Desktop */}
@@ -175,19 +202,60 @@ function Navbar() {
         <FaHeart className='w-4 h-4' />
         <span className="text-lg font-medium">Liked</span>
       </li>
-      <li onClick={handleShowProfile}>
+     {avatar?(
+
+       <li onClick={handleShowProfile}>
         <Link>
-          <FaUser className={`border-2 p-1 rounded-full border-gray-400 bg-white text-black text-4xl ${showProfile ? "-rotate-40" : "rotate-0"} transition-transform duration-600} `} />
+          <img src={avatar} alt='pfp' className={`border-1 shadow-xl rounded-full border-gray-400 bg-white text-black w-11 h-11 ${showProfile ? "-rotate-40" : "rotate-0"} transition-transform duration-500} `} />
         </Link>
       </li>
+      ):(
+        <li onClick={handleShowProfile}>
+        <Link>
+          {/* <FaUser className={`border-2 p-1 rounded-full border-gray-400 bg-white text-black text-4xl ${showProfile ? "-rotate-40" : "rotate-0"} transition-transform duration-500} `} /> */}
+          <img src={profIcon} alt='pfp' className={`border-1 shadow-xl rounded-full border-gray-400 bg-white text-black w-11 h-11 ${showProfile ? "-rotate-40" : "rotate-0"} transition-transform duration-500} `} />
+        </Link>
+      </li>
+      ) 
+      }
     </>
   )}
 </ul>
 
+{showProfile && 
+  <div className='m-1 p-5 gap-2 grid menu-options rounded-xl text-xl border border-gray-200 max-h-[90vh] overflow-y-auto bg-white shadow-lg z-50'>
+
+        
+        <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleNavigate}>{AdminLogin?"Dashboard":"Profile"}</div>
+        
+        {AdminLogin && <div className='border-b-2 border-purple-500 cursor-pointer' onClick={()=>{
+                                                                      navigate("/cover-video")
+                                                                      setShowMenu(false)
+                                                                      setShowProfile(false)
+                                                                      }}>Cover Video
+
+        </div>}
+        <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleLogout}>Logout
+
+        </div>
+       
+       
+       
+        </div>
+        }    
+
+
+
+
+
+
+
+
 
      {/* Menu Options For Mobile */}
      
-     <ul className={`md:hidden p-3 border-1 border-gray-300 rounded-xl absolute z-30 flex flex-col top-19 right-10 text-gray-900 bg-white gap-3  transition-all duration-300 transform ease-in-out ${showMenu ? " translate-x-0 opacity-100 visible" : " translate-x-full opacity-0 invisible"}`}>
+     <ul className={`md:hidden p-3 border border-gray-300 rounded-xl absolute z-30 flex flex-col top-20 right-5 text-gray-900 bg-white gap-3 max-h-[90vh] overflow-y-auto transition-all duration-300 transform ease-in-out ${showMenu ? "translate-x-0 opacity-100 visible" : "translate-x-full opacity-0 invisible"}`}>
+
       {!isLoggedIn ?
       
      ( <>
@@ -232,6 +300,13 @@ function Navbar() {
          <>
          <li className='flex flex-col gap-2 text-xl'>
       <button className='border-b-2 border-purple-500' onClick={handleNavigate} >{AdminLogin?"Dashboard":"Profile"} </button>
+      {AdminLogin && <div className='border-b-2 border-purple-500 cursor-pointer' onClick={()=>{
+                                                                      navigate("/cover-video")
+                                                                      setShowMenu(false)
+                                                                      setShowProfile(false)
+                                                                      }}>Cover Video
+
+        </div>}
       <Link className='border-b-2 border-purple-500' onClick={handleLogout} >Logout </Link>
         
        <li className='border-b-2 border-pink-700 text-pink-700' onClick={(e)=>
@@ -259,19 +334,7 @@ function Navbar() {
      </ul>
       
      
-     {showProfile && 
-        <div className='m-1 p-5 gap-2 grid menu-options rounded-xl text-xl border-1 border-gray-200 '>
-        
-        <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleNavigate}>{AdminLogin?"Dashboard":"Profile"}</div>
-        
-        <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleLogout}>Logout
-
-        </div>
-       
-       
-       
-        </div>
-        }    
+     
       </div>
     <div className=''>
       <hr className='text-gray-800'/>

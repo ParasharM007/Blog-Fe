@@ -17,6 +17,7 @@ import LikedBlogs from './components/LikedBlogs.jsx';
 import { AuthContextProvider } from './utils/AuthContext.jsx';
 import AdminDashboard from './components/AdminDashboard.jsx';
 import Search from './components/Search.jsx';
+import CoverVideo from './components/CoverVideo.jsx';
 
 
 
@@ -53,6 +54,7 @@ function App() {
           <Route path='/create-blog' element={<CreateBlog />}/>
           <Route path='/liked-blogs' element={<LikedBlogs />} />
           <Route path='/search-blogs' element={<Search />} />
+          <Route path='/cover-video' element={<CoverVideo />} />
         </Routes>
        <Plus />
         </AuthContextProvider>

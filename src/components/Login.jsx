@@ -14,7 +14,7 @@ function Login() {
   const [Email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword ,setShowPassword] = useState(false)
-  const {setIsLoggedIn , setAdminLogin} = useContext(AuthContext)
+  const {setIsLoggedIn , setAdminLogin , setAvatar} = useContext(AuthContext)
 
   const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -55,6 +55,8 @@ function Login() {
           const userRole = res.data.data.user.role
           if(userRole==='admin')
             setAdminLogin(true)
+          const avatar = res.data.data.user?.avatar || null
+          avatar?setAvatar(avatar):setAvatar(null)
           const id = res.data.data.user._id
           console.log(
             id

@@ -11,12 +11,13 @@ function Search() {
     const navigate=useNavigate()
     const { setSearchBlogs }=useContext(AuthContext)
      const [debouncedQuery, setDebouncedQuery] = useState('');
+     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   // Debounce the query input
   const debounceQuery = useCallback(
     debounce((value) => {
       setDebouncedQuery(value);
-    }, 1500), 
+    }, 1000), 
     []
   );
 
@@ -25,7 +26,7 @@ function Search() {
   };
 
     const fetchBlogs=async(query)=>{
-      const res = await axios.get('http://localhost:5000/api/v1/users/search',
+      const res = await axios.get(`${API_BASE_URL}/v1/users/search`,
         {
             params:{s:query}
         }
@@ -64,11 +65,16 @@ function Search() {
 
   </div>
 </div>
-    {isError && <h1 className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-10 text-4xl md:text-5xl'>Error while Loading blogs...</h1>}
+
+{!blogs &&!isLoading && <h1 className='font-light flex flex-col items-center text-center h-20 mt-20 sm:ml-50 md:ml-10 text-4xl md:text-5xl'>Search for blogs here...</h1> }
+    
+    
+    {
+    isError && <h1 className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-10 text-4xl md:text-5xl'>Error while Loading blogs...</h1>}
         {
          
      isLoading ? (
-      <div className="flex justify-center items-center h-[80vh]">
+      <div className="flex justify-center items-start h-[80vh]">
         <img src={loadinggif} alt="Loading..." className="w-20 h-20" />
       </div>
     ) : (

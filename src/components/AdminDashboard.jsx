@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../utils/AuthContext'
 import loadinggif from '../assets/loading-gif.gif'
@@ -12,6 +12,7 @@ function AdminDashboard() {
     const [selectedStatus, setSelectedStatus] = useState('pending')
     const [reason, setReason] = useState("")
     const [showModal, setShowModal] = useState(false);
+    const queryClient = useQueryClient();
     const [modalData, setModalData] = useState({
         action: '', // 'approve' or 'reject'
         blogId: '',
@@ -30,9 +31,8 @@ function AdminDashboard() {
                 url = `/v1/users/rejected-blogs`
             if (selectedStatus === 'approved')
                 url = `/v1/users/approved-blogs`
-            // const res = await axios.get(`http://localhost:5000/api/v1/users/all-liked-blogs`,
-            // const res = await axios.get(`${API_BASE_URL}/v1/users/all-liked-blogs`,
             const res = await api.get(url,
+            // const res = await api.get(`http://localhost:5000/api/v1/users/approved-blogs`,
                 {
                     withCredentials: true,
                     validateStatus: function (status) {
@@ -172,6 +172,40 @@ function AdminDashboard() {
         
        }
 
+       const featuredBlog=useMutation({
+        mutationFn:async({blogId,status})=>{
+            const res=api.post('/v1/users/featured-blog-status',
+                {},
+                {
+                params:{
+                    blogId:blogId,
+                    status:!status
+                }
+            })
+            return res.data
+        }
+       })
+
+       const handleFeaturedBlog=async(e,blogId,status)=>{
+        e.stopPropagation()
+        featuredBlog.mutate({blogId,status},
+            {
+                onSuccess:()=>{
+                    toast.success("Blog featured status changed!")
+                        queryClient.invalidateQueries(["admin-blogs", selectedStatus])
+                        refetch()
+                    // window.location.reload()
+                },
+                onError:(error)=>{
+                    toast.error("Error in marking/removing blog as featured")
+                    console.log(error)
+                }
+            }
+        )
+
+
+       }
+
     return (
         <>
             {showModal && (
@@ -296,12 +330,26 @@ function AdminDashboard() {
                                             onClick={() => handleNavigate(item?._id)}
                                             className="relative group mb-6 break-inside-avoid overflow-hidden rounded-3xl shadow-md bg-white transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
                                         >
+                                            
                                             <img
                                                 src={item.blogImg}
                                                 alt="Blog Thumbnail"
-                                                className="w-full object-cover h-auto rounded-t-3xl"
-                                            />
+                                                className="w-full z-10 object-cover h-auto rounded-t-3xl"
+                                                />
                                            
+                                                
+                                            {selectedStatus === 'approved' && <><button
+                                                className={`absolute top-3 left-3 z-10 cursor-pointer flex items-center gap-1 px-3 py-1 rounded-full ${!item.featuredBlog?"bg-green-700":"bg-red-700"} text-white text-sm shadow-md 
+                transition-all duration-300 transform hover:scale-105
+                lg:opacity-0 lg:group-hover:opacity-100`}
+                                                onClick={(e) => {
+                                                    handleFeaturedBlog(e,item._id,item.featuredBlog)
+                                                   
+                                                }}
+                                                title="Featured Blog"
+                                            >
+                                                {!item.featuredBlog?"✅ Mark as Featured Blog":"❌ Remove from Featured Blog"}
+                                            </button></>}
 
                                             {selectedStatus === 'pending' && <><button
                                                 className="absolute top-3 left-3 z-10 cursor-pointer flex items-center gap-1 px-3 py-1 rounded-full bg-green-700 text-white text-sm shadow-md 

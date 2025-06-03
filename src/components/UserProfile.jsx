@@ -5,6 +5,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useQuery } from '@tanstack/react-query'
 import loadinggif from '../assets/loading-gif.gif'
+import profIcon from "../assets/images/profileIcon.png"
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
@@ -58,7 +59,7 @@ function UserProfile() {
          <div className='flex items-center justify-center  m-2 p-2 gap-4 md:gap-12'>
          <div className="mt-15">
          <div >
-         <img src={data?.avatar} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50"/>
+         <img src={data?.avatar || profIcon} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50"/>
           </div>
           <div className="m-3 p-1 md:text-5xl text-4xl font-light">{data?.username || "username"}</div>
         </div>

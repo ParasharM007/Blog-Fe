@@ -288,7 +288,11 @@ function Edit() {
              videoPreview ? (
             !videoUplaod.isPending ? (
             <div className="ml-10 m-2 p-2 mt-3 flex justify-center items-center w-50 md:w-100 lg:w-150">
-              <video src={videoPreview} alt="Preview" className="border-3 border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
+               <video 
+                    src={videoPreview}
+                    alt="Preview" 
+                    controls
+                    className="object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
              <div>
 
              
@@ -297,21 +301,19 @@ function Edit() {
             </div>)
             
             :(
-              <div className="ml-5 m-2 p-2 mt-3 flex justify-center items-center w-[70%] md:w-100 lg:w-150">
-              <div className=" flex flex-col items-center border-3 bg-gray-300  border-gray-300 w-70 h-45 md:w-80 md:h-50 rounded-2xl" >
-                <b className='m-2'>
-                  It may take few minutes to compress&upload video.
+              <div className="m-2 p-2 mt-3 flex justify-center items-center gap-10 w-full">
+              <div className="flex flex-col items-center bg-gray-300 border-2 border-gray-300  w-40 max-w-md md:max-w-lg rounded-2xl p-4">
+                  <b className='m-2 text-center'>
+                    It may take a few minutes to compress & upload the video.
                   </b>
-                
-             <img src={loadinggif} alt="Loading..." className="w-10 h-10 md:w-20 md:h-20" />
-           
-                
-              </div>
+                  <img src={loadinggif} alt="Loading..." className="w-10 h-10 md:w-16 md:h-16" />
+                </div>
              
-             <div>
+             
 
+             <div >
              {/* <button className='ml-5' type='submit'>Edit Blog Img</button> */}
-             <button className='bg-[#D95D39] hover:bg-[#b34b2e] text-sm lg:text-xl text-white w-full mx-5 py-1 px-2 lg:px-0 lg:mx-2 rounded-lg font-medium cursor-pointer' type='submit'>Editing Cover Video...</button>
+             <button className='bg-[#D95D39] hover:bg-[#b34b2e]  text-sm lg:text-xl text-white w-[50%] mx-5 py-1 px-2 lg:px-0 lg:mx-2 rounded-lg font-medium cursor-pointer' type='submit'>Editing Cover Video...</button>
              </div>
             </div>
 

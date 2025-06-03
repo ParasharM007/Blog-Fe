@@ -156,24 +156,25 @@ function Edit() {
               </div>
               {videoPreview && (
                 !mutation.isPending ? (
-                  <div className="m-2 p-2 mt-3 flex justify-center items-center w-50 md:w-100 lg:w-150">
-                    <video src={videoPreview} alt="Preview" className="border-3 border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
+                
+                  <div className="m-2 p-2 mt-3 flex justify-center items-center  w-[30%] md:w-[50%] ">
+                    <video 
+                    src={videoPreview}
+                    alt="Preview" 
+                    controls
+                    className="object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
                   </div>)
 
                   : (
-                    <div className="m-2 p-2 mt-3 flex justify-center items-center w-[70%] md:w-100 lg:w-150">
-                      <div className=" flex flex-col items-center border-3 bg-gray-300  border-gray-300 w-70 h-45 md:w-80 md:h-50 rounded-2xl" >
-                                     <b className='m-2'>
-                                       It may take few minutes to compress&upload video.
-                                       </b>
-                                     
-                                  <img src={loadinggif} alt="Loading..." className="w-10 h-10 md:w-20 md:h-20" />
-                                
-                                     
-                                   </div>
+                   <div className="m-2 p-2 mt-3 flex justify-center items-center w-full">
+  <div className="flex flex-col items-center bg-gray-300 border-2 border-gray-300 mr-[70%] w-40 max-w-md md:max-w-lg rounded-2xl p-4">
+    <b className='m-2 text-center'>
+      It may take a few minutes to compress & upload the video.
+    </b>
+    <img src={loadinggif} alt="Loading..." className="w-10 h-10 md:w-16 md:h-16" />
+  </div>
+</div>
 
-
-                    </div>
 
                   )
 
@@ -193,8 +194,8 @@ function Edit() {
                 />
               </div>
               {imagePreview && (
-                <div className="m-2 p-2 mt-3 flex justify-center items-center w-50 md:w-100 lg:w-150">
-                  <img src={imagePreview} alt="Preview" className="border-3 border-gray-300 object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
+                <div className="m-2 p-2 mt-3 flex justify-center items-center w-[30%] md:w-[50%] ">
+                  <img src={imagePreview} alt="Preview" className=" object-cover w-50 h-30 md:w-80 md:h-50 rounded-2xl" />
                 </div>
               )}
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./Profile.css"
 import loadinggif from "../assets/loading-gif.gif"
+import profIcon from "../assets/images/profileIcon.png"
 import Myposts from './Myposts'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
@@ -149,7 +150,7 @@ useEffect(() => {
         ( <div className='flex items-center justify-center  m-2 p-2 gap-4 md:gap-12'>
         <div className="mt-15">
           <div >
-            <img src={profileData?.avatar} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50"/>
+            <img src={profileData?.avatar || profIcon} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50"/>
           </div>
           <div className="m-3 p-1 md:text-5xl text-4xl font-light">{profileData?.username || "username"}</div>
         </div>
@@ -174,7 +175,7 @@ useEffect(() => {
           {/* <div >
             <img src={profileData?.avatar} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50"/>
             </div> */}
-            {!mutation.isPending?<img src={imagePreview} alt="pfp" className="rounded-[100%] w-32 h-32 md:w-50 md:h-50"/>:<img src={imagePreview} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50 opacity-50 "/>}
+            {!mutation.isPending?<img src={imagePreview || profIcon} alt="pfp" className="rounded-[100%] w-32 h-32 md:w-50 md:h-50"/>:<img src={imagePreview} alt="pfp" className="rounded-[100%] w-40 h-40 md:w-50 md:h-50 opacity-50 "/>}
           <input type="file"
             name="avatar" 
             id="avatar"

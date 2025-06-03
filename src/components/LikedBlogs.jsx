@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import api from '../utils/api_Interceptor';
 import { AuthContext } from '../utils/AuthContext';
 import { AiFillDislike } from 'react-icons/ai';
+import { useLikeBlog } from '../utils/LikeHook';
 function LikedBlogs() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const userId = localStorage.getItem("userId")
@@ -106,56 +107,50 @@ function LikedBlogs() {
       enabled:isLoggedIn
 
   })
+  const { mutate: likeBlogMutate, isPending, isSuccess } = useLikeBlog();
 
 
 
-  const dislikeMutation = useMutation({
-    mutationFn: async (id) => {
-      try {
-        // const res = await axios.post(`${API_BASE_URL}/v1/users/dislike-blog`,{},
-        const res = await api.post(`/v1/users/dislike-blog`,
-          {
-            id
-          },
-          {
-            withCredentials: true
-          })
-        if (!res.data?.success) {
-          throw new Error('Dislike failed');
-        }
-        return res.data
-      } catch (error) {
-        throw error;
+  // const dislikeMutation = useMutation({
+  //   mutationFn: async (id) => {
+  //     try {
+  //       // const res = await axios.post(`${API_BASE_URL}/v1/users/dislike-blog`,{},
+  //       const res = await api.post(`/v1/users/dislike-blog`,
+  //         {
+  //           id
+  //         },
+  //         {
+  //           withCredentials: true
+  //         })
+  //       if (!res.data?.success) {
+  //         throw new Error('Dislike failed');
+  //       }
+  //       return res.data
+  //     } catch (error) {
+  //       throw error;
 
-      }
+  //     }
 
-    }
+  //   }
 
-  })
+  // })
   const handleDislikeBlog = (e, blogId) => {
 
      e.stopPropagation()
 
-    dislikeMutation.mutate(blogId,
-      {
-        onSuccess: (data) => {
-          console.log("onSuccess triggeredddd" + data)
-          toast.success("Blog removed from liked list")
-         
-
+   likeBlogMutate({ id: blogId, status: false },{
+         onSuccess:()=>{
+           toast.success("Blog removed from liked list")
            refetch();
-          //invalidate query 
-
-          //  queryClient.invalidateQueries({ queryKey: ["likedBlogs"] });
-
-
-        },
-        onError: () => {
-          console.log("Error occured in onError")
-          toast.error("Couldn't removed like")
-        }
-      }
-    )
+         },
+         onError:(error)=>{
+           toast.error(
+         error?.response?.status === 401
+           ? "Please login first to unlike"
+           : "Something went wrong"
+           )
+         }}
+     )
 
   }
 

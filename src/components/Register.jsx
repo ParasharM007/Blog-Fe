@@ -18,6 +18,7 @@ function Register() {
   const mutation = useMutation({
 
     mutationFn: async ({formData})=>{
+      // return await axios.post(`http://localhost:5000/api/v1/users/register`,formData,
       return await axios.post(`${API_BASE_URL}/v1/users/register`,formData,
         { 
           headers:{
@@ -35,7 +36,7 @@ function Register() {
     formData.append("fullName",fullName)
     formData.append("password",password)
     formData.append("email",email)
-    formData.append("avatar",imageFile)
+    if(imageFile) formData.append("avatar",imageFile)
     console.log(formData)
     mutation.mutate({formData},
       {onSuccess:(res)=>{
@@ -158,7 +159,7 @@ function Register() {
             name="avatar"
             id="avatar"
             accept="image/*"
-            required
+            // required
             className="w-full p-2 bg-white rounded-xl border border-gray-300 text-sm cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-purple-100 file:text-purple-700 hover:file:bg-purple-200"
             onChange={handleImageChange}
           />
