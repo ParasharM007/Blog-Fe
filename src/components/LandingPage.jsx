@@ -107,7 +107,7 @@ export default function LandingPage() {
     .
   </video>
 )}
-      <div className="absolute inset-0  z-10" />
+      <div className={`absolute inset-0 z-10 ${!coverVideo?'bg-black':''}`} />
 
       
       <div className="relative flex flex-col items-center z-20">
