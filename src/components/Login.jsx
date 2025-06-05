@@ -124,10 +124,13 @@ return (
               {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
             </div>
           </div>
+             <span className='text-md font-medium text-gray-800 my-2 p-1 rounded-xl cursor-pointer ' 
+             onClick={()=>navigate("/forget-password")}
+             >Forget password?</span>
 
           <button  
             type="submit"
-            className="w-full bg-black hover:bg-purple-800 text-white text-sm font-medium py-3 rounded-xl transition-all duration-300"
+            className="w-full bg-black hover:bg-purple-800 text-white text-sm font-medium py-3 my-3 rounded-xl transition-all duration-300"
           >
             {!mutation.isPending ? "Login" : "Logging in..."}
           </button>

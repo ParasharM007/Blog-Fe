@@ -32,7 +32,7 @@ function AdminDashboard() {
             if (selectedStatus === 'approved')
                 url = `/v1/users/approved-blogs`
             const res = await api.get(url,
-            // const res = await api.get(`http://localhost:5000/api/v1/users/approved-blogs`,
+            // const res = await api.get(`http://localhost:5000/api/v1/users/pending-blogs`,
                 {
                     withCredentials: true,
                     validateStatus: function (status) {

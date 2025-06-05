@@ -228,13 +228,21 @@ function Navbar() {
         
         <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleNavigate}>{AdminLogin?"Dashboard":"Profile"}</div>
         
-        {AdminLogin && <div className='border-b-2 border-purple-500 cursor-pointer' onClick={()=>{
+        {AdminLogin && <>
+        <div className='border-b-2 border-purple-500 cursor-pointer' onClick={()=>{
                                                                       navigate("/cover-video")
                                                                       setShowMenu(false)
                                                                       setShowProfile(false)
                                                                       }}>Cover Video
 
-        </div>}
+        </div>
+         <div className='border-b-2 border-purple-500 cursor-pointer' onClick={()=>{
+                                                                      navigate("/change-password")
+                                                                      setShowMenu(false)
+                                                                      setShowProfile(false)
+                                                                      }}>Change Password
+
+        </div></>}
         <div className='border-b-2 border-purple-500 cursor-pointer' onClick={handleLogout}>Logout
 
         </div>
@@ -300,13 +308,21 @@ function Navbar() {
          <>
          <li className='flex flex-col gap-2 text-xl'>
       <button className='border-b-2 border-purple-500' onClick={handleNavigate} >{AdminLogin?"Dashboard":"Profile"} </button>
-      {AdminLogin && <div className='border-b-2 border-purple-500 cursor-pointer' onClick={()=>{
+      {AdminLogin && <><div className='border-b-2 border-purple-500 cursor-pointer' onClick={()=>{
                                                                       navigate("/cover-video")
                                                                       setShowMenu(false)
                                                                       setShowProfile(false)
                                                                       }}>Cover Video
 
-        </div>}
+      </div>
+      <div className='border-b-2 border-purple-500 cursor-pointer' onClick={()=>{
+                                                                      navigate("/change-password")
+                                                                      setShowMenu(false)
+                                                                      setShowProfile(false)
+                                                                      }}>Change Password
+
+        </div>
+        </>}
       <Link className='border-b-2 border-purple-500' onClick={handleLogout} >Logout </Link>
         
        <li className='border-b-2 border-pink-700 text-pink-700' onClick={(e)=>

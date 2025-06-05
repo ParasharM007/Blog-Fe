@@ -3,18 +3,16 @@ import "./Profile.css"
 import loadinggif from "../assets/loading-gif.gif"
 import profIcon from "../assets/images/profileIcon.png"
 import Myposts from './Myposts'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { FaEdit } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import api from '../utils/api_Interceptor'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 const fetchProfile=async(id) => {
  
-    // const res= await axios.post(`${API_BASE_URL}/v1/users/profile`,
+    // const res= await axios.post(`http://localhost:5000/api/v1/users/profile`,
     const res= await api.post(`/v1/users/profile`,
       {
         "id":id
@@ -32,6 +30,7 @@ function Profile() {
   const [imagePreview, setImagePreview] = useState("");
     const [image, setImage] = useState(null);
     const [fullName, setFullName] = useState('')
+    const navigate=useNavigate();
     const fileInputRef = useRef(null)
     
     const handleIconClick = () => {
@@ -161,7 +160,7 @@ useEffect(() => {
             <div>Joined at:-{date|| "data of joining"}</div>
               
           </div>
-          <button className='w-1/2 mt-4 bg-black hover:bg-purple-800 text-white text-sm font-medium py-3 rounded-xl transition-all duration-300 cursor-pointer ' onClick={()=>(setEditProfile(true))}>Edit Profile</button>
+          <button className='w-20 md:w-1/2 mt-4 bg-black hover:bg-purple-800 text-white text-sm font-medium py-3 rounded-xl transition-all duration-300 cursor-pointer ' onClick={()=>(setEditProfile(true))}>Edit Profile</button>
         </div>
     </div>)
     
@@ -221,8 +220,13 @@ useEffect(() => {
         }
         <div className='flex gap-1'>
 
+          {/* <button className='bg-green-700 text-white font-medium text-sm w-20  md:w-25 py-2 md:text-md mt-5 rounded-2xl cursor-pointer' type='submit'>{mutation.isPending?"Updating..":"Save"}</button> */}
           <button className='bg-green-700 text-white font-medium text-sm w-20 h-8 md:w-25 md:h-10 md:text-md mt-5 rounded-2xl cursor-pointer' type='submit'>{mutation.isPending?"Updating..":"Save"}</button>
           {! mutation.isPending && <button type='button' className='bg-red-700 text-white font-medium text-sm w-20 h-8 md:w-25 md:h-10 md:text-md mt-5 rounded-2xl cursor-pointer' onClick={()=>setEditProfile(false)} >Cancel</button>}
+        </div>
+        <div className='flex justify-center'>
+
+          <button className='w-32 mt-4  bg-black hover:bg-purple-800 text-white text-sm font-medium py-2 rounded-xl transition-all duration-300 cursor-pointer ' onClick={()=>navigate('/change-password')}>change password</button>
         </div>
         </div>
        

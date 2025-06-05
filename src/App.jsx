@@ -18,6 +18,9 @@ import { AuthContextProvider } from './utils/AuthContext.jsx';
 import AdminDashboard from './components/AdminDashboard.jsx';
 import Search from './components/Search.jsx';
 import CoverVideo from './components/CoverVideo.jsx';
+import ChangePassword from './components/ChangePassword.jsx';
+import ResetPassword from './components/ResetPassword.jsx';
+import ForgetPassword from './components/ForgetPassword.jsx';
 
 
 
@@ -55,6 +58,9 @@ function App() {
           <Route path='/liked-blogs' element={<LikedBlogs />} />
           <Route path='/search-blogs' element={<Search />} />
           <Route path='/cover-video' element={<CoverVideo />} />
+          <Route path='/change-password' element={<ChangePassword />} />
+          <Route path='/forget-password' element={<ForgetPassword />} />
+          <Route path='/reset-password/:token' element={<ResetPassword />} />
         </Routes>
        <Plus />
         </AuthContextProvider>
