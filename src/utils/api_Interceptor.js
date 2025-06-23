@@ -5,6 +5,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
+  // baseURL: `http://localhost:5000/api`,
   withCredentials: true,
 });
 
@@ -39,6 +40,7 @@ api.interceptors.response.use(
       try {
         console.log("🔁 Trying to refresh token");
         await axios.post(`${API_BASE_URL}/v1/users/refresh-token`, {}, {
+        // await axios.post(`http://localhost:5000/api/v1/users/refresh-token`, {}, {
         withCredentials: true,
         }); 
         notifySubscribers();

@@ -4,12 +4,14 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 function Register() {
   const [username,setUsername]=useState(null)
   const [fullName,setFullName]=useState(null)
   const [password,setPassword]=useState(null)
   const [email,setEmail]=useState(null)
   const [imageFile,setImageFile]=useState(null)
+  const [showPassword ,setShowPassword] = useState(false)
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const navigate=useNavigate();
   const handleImageChange=(e)=>{
@@ -54,61 +56,6 @@ function Register() {
     }
     )
   }
-  // return (
-  //   <div className='register-cont'>
-      
-  //     <div className='m-3 mt-7 p-5 w-70 md:h-120 md:w-120 bg-gray-300 flex flex-col items-center justify-center'>
-
-  //       <h1 className='text-black  p-2 m-2 text-[23px] md:text-4xl '>Welcome To WildEarth</h1>
-  //       <form action="submit"
-  //         onSubmit={handleRegisterUser}
-  //         className='flex flex-col items-center'
-  //       >
-
-  //         <input type="text"
-  //           required={true}
-  //           placeholder='Enter full name'
-  //           className='m-2 p-2 text-lg bg-white rounded-md outline-none'
-  //           onChange={(e) =>{setFullName(e.target.value)}}
-  //           />
-  //         <input type="email"
-  //           required={true}
-  //           placeholder='Enter email'
-  //           className='m-2 p-2 text-lg bg-white rounded-md outline-none'
-  //           onChange={(e) => {setEmail(e.target.value)}}
-  //           />
-  //         <input type="username"
-  //           required={true}
-  //           placeholder='Enter username'
-  //           className='m-2 p-2 text-lg bg-white rounded-md outline-none'
-  //           onChange={(e)=>setUsername(e.target.value)}
-  //           />
-
-  //         <input type="text"
-  //           required={true}
-  //           placeholder='Enter password '
-  //           className='m-2 p-2 text-lg bg-white rounded-md outline-none'
-  //           onChange={(e) => {setPassword(e.target.value)}}
-  //           />
-  //           <div className=" m-2 w-auto">
-
-  //           <span className=''>Profile/Avatar:-</span>
-  //         <input type="file"
-  //           name="avatar" 
-  //           id="avatar"
-  //           className='mt-2 border-1 border-gray-400 w-50 cursor-pointer'
-  //           accept="image/*"
-            
-  //           onChange={handleImageChange}
-  //           required
-  //           />
-  //           </div>
-            
-  //         <button type='submit' className='m-2 p-2 w-40 cursor-pointer bg-black text-white text-lg hover:bg-purple-800 rounded-md outline-none'>{!mutation.isPending?"Sign Up":"Signing Up..."}</button>
-  //       </form>
-  //     </div>
-  //   </div>
-  // )
 
   return (
   <div className="min-h-[90vh] bg-gray-100 flex items-center justify-center p-4">
@@ -141,14 +88,22 @@ function Register() {
           className="w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
           onChange={(e) => setUsername(e.target.value)}
         />
+        <div className="relative">
 
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           required
           placeholder="Enter password"
           className="w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
           onChange={(e) => setPassword(e.target.value)}
         />
+         <div
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 cursor-pointer"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      >
+                      {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+        </div>
+      </div>
 
         <div>
           <label htmlFor="avatar" className="block text-sm text-gray-700 mb-1">
