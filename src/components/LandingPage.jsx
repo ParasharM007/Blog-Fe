@@ -63,9 +63,12 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../utils/AuthContext';
+import { useContext } from 'react';
 
 export default function LandingPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const { setSearchBlogs }=useContext(AuthContext)
   const fetchCoverVideo =async()=>{
     // const res=await axios.get(`http://localhost:5000/api/v1/users/get-cover-video`,
     const res=await axios.get(`${API_BASE_URL}/v1/users/get-cover-video`,
@@ -120,7 +123,9 @@ export default function LandingPage() {
           Dive into stories about wildlife, climate, nature, and Earth's adventures.
         </p>
         <Link to="/blogs">
-          <button className="bg-green-700 hover:bg-green-800 transition px-6 py-3 cursor-pointer rounded-full font-medium text-white shadow-md">
+          <button className="bg-green-700 hover:bg-green-800 transition px-6 py-3 cursor-pointer rounded-full font-medium text-white shadow-md"
+          onClick={()=>setSearchBlogs([])}
+          >
             🌿 Explore Blogs
           </button>
         </Link>
