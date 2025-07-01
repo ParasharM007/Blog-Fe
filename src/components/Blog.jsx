@@ -37,11 +37,9 @@ function Blog() {
       queryKey:["blog",id], 
       queryFn:({queryKey})=>blogData(queryKey[1]),
       staleTime:20000
-    }       //queryFn take queryKey as parameter 
+    }       //queryFn takes queryKey as parameter 
   )
 
-  // const [isLoading, setLoading] = useState(false)
-  // const [blog,setBlog]=useState(null)
     useEffect(()=>{
         window.scrollTo(0, 0)
       
@@ -89,7 +87,9 @@ function Blog() {
               {blog.title.split(' ').slice(0, 13).join(' ')}...
             </h1>
             <p className="mt-4 text-gray-200 text-lg md:text-xl">
-              by <span className="font-semibold">{blog.authorId?.username || "Author"}</span>
+              by <span className="font-semibold cursor-pointer"
+                       onClick={() => handleNavigateToUserProfile(blog?.authorId?._id)}
+              >{blog.authorId?.username || "Author"}</span>
             </p>
           </div>
 

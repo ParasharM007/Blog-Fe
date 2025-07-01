@@ -161,7 +161,7 @@ function Edit() {
 
   videoUplaod.mutate(formData,{
     onSuccess:()=>{
-      console.log("Updating cover video")
+      console.log("Updated cover video")
       toast.success("Cover Video updated and sent for approval")
     },
     onError:(formData)=>{

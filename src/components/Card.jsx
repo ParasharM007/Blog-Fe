@@ -39,38 +39,7 @@ function Card() {
   )
    const blogs = Array.isArray(searchBlogs) && searchBlogs.length > 0 ? searchBlogs : blogsFromApi;
   const usingSearch = Array.isArray(searchBlogs) && searchBlogs.length > 0;
-  //  const likeMutation = useMutation({
-  //     mutationFn:async(blogId)=>{
-       
-  //       try {
-          
-  //          const res = await api.post(`/v1/users/like-blog`,
-  //         //  const res = await axios.post(`${API_BASE_URL}/v1/users/like-blog`,
-  //         //  const res = await axios.post(`http://localhost:5000/api/v1/users/like-blog`,
-  //          {
-  //            id:blogId
-  //          },
-  //          { 
-  //            withCredentials:true,
-  //             validateStatus: function (status) {
-  //           return status >= 200 && status < 300; 
-  //         },
-  //          })
-           
-           
-  //          if (!res.data?.success) {
-  //        throw new Error('Like failed');
-  //      }
-  //          return res.data
-           
-       
-  //       } catch (error) {
-  //         throw error
-          
-  //       }
-  //     },
-      
-  //   })
+  
  
 
 
@@ -85,20 +54,7 @@ function Card() {
         setJustLiked((prev) => ({ ...prev, [blogId]: false }));
       }, 1000);
       
-    //   likeBlogMutate(blogId,true,{
-    //     onSuccess:()=>{
-    //     toast.success("Blog added to liked list")
-       
-    //   },
-    //   onError:(error)=>{
-    //     toast.error(
-    //   error?.response?.status === 401
-    //     ? "Please login first to like"
-    //     : "Something went wrong"
-    // );
-    //   }
-    //   })
-
+    
     likeBlogMutate({ id: blogId, status: true },{
       onSuccess:()=>{
         toast.success("Blog added to liked list")
@@ -194,17 +150,26 @@ function Card() {
             
             <div
               className="flex items-center gap-3 mt-4"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleNavigateToUserProfile(item?.authorId?._id);
-              }}
+              // onClick={(e) => {
+              //   e.stopPropagation();
+              //   handleNavigateToUserProfile(item?.authorId?._id);
+              // }}
             >
               <img
                 src={item?.authorId?.avatar || profIcon}
                 alt="Author"
                 className="w-9 h-9 rounded-full object-cover border border-gray-300"
+                  onClick={(e) => {
+                e.stopPropagation();
+                handleNavigateToUserProfile(item?.authorId?._id);
+              }}
               />
-              <div className="text-xs bg-gray-900 text-white px-3 py-1 rounded-full">
+              <div className="text-xs bg-gray-900 text-white px-3 py-1 rounded-full"
+                onClick={(e) => {
+                e.stopPropagation();
+                handleNavigateToUserProfile(item?.authorId?._id);
+              }}
+              >
                 Created by: <span className="font-medium">{item.authorId?.username}</span>
               </div>
             </div>

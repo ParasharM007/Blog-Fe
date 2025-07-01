@@ -57,7 +57,7 @@ function ChangePassword() {
 
           toast.error("Something went wrong!")
           
-          console.log('Error while logging in: ', error);
+          console.log('Error while changing passw. : ', error);
 
         },
         
