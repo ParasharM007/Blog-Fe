@@ -21,6 +21,7 @@ import CoverVideo from './components/CoverVideo.jsx';
 import ChangePassword from './components/ChangePassword.jsx';
 import ResetPassword from './components/ResetPassword.jsx';
 import ForgetPassword from './components/ForgetPassword.jsx';
+import { Analytics } from "@vercel/analytics/react"
 
 
 
@@ -38,6 +39,7 @@ function App() {
         
       <Router>
         <AuthContextProvider>
+          <Analytics />
 
       <Navbar />
 
