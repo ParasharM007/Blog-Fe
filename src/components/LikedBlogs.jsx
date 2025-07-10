@@ -19,55 +19,7 @@ function LikedBlogs() {
   const navigate = useNavigate()
   const queryClient = useQueryClient();
 
-  // useEffect(() => {
-  //   (
-  //     async () => {
-  //           console.log("just before api call")
-  //       try {
-  //         setLoading(true)
-
-  //         const res = await api.get(`/v1/users/auth-route`,
-  //           //  const res = await axios.get(`http://localhost:5000/api/v1/users/auth-route`, 
-  //           {
-  //             withCredentials: true,
-  //              validateStatus: function (status) {
-  //           return status >= 200 && status < 300; 
-  //         },
-             
-  //           }
-  //         )
-        
-  //         console.log("just after api call "+res)
-  //         console.log(res.data.data.data)
-  //         const isUserLoggedIn = res.data?.data?.data
-  //         setIsLoggedIn(!!isUserLoggedIn)
-  //         // setLoading(false)
-
-
-
-  //       } catch (error) {
-  //         console.log("We are in catch block")
-  //       if(error.response?.status===401){
-  //         toast.error("Please Login to proceed")
-  //          console.log("Auth route failed with 401")
-  //       }else{
-  //          toast.error("Something went wrong")
-  //         console.log("Error occurred in auth-route"+error)
-  //       }
-  //         setIsLoggedIn(false)
-  //         // setLoading(false)
-
-
-  //       }
-  //       finally{
-  //         console.log("Loading set to false")
-  //         setLoading(false)
-  //       }
-
-  //     }
-  //   )()
-  // }, [userId])
-  
+    
 
  const handleNavigate=(id)=>{
   navigate(`/blog/${id}`)

@@ -38,7 +38,7 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        console.log("🔁 Trying to refresh token");
+        console.log("Trying to refresh token");
         await axios.post(`${API_BASE_URL}/v1/users/refresh-token`, {}, {
         // await axios.post(`http://localhost:5000/api/v1/users/refresh-token`, {}, {
         withCredentials: true,
@@ -46,7 +46,7 @@ api.interceptors.response.use(
         notifySubscribers();
         return api(originalRequest);
       } catch (refreshError) {
-        console.log("❌ Refresh token failed");
+        console.log("Refresh token failed");
         // toast.error("Please Login"); 
         return Promise.reject(error); // Reject original error so catch() works
       } finally {

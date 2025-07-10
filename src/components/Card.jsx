@@ -100,7 +100,7 @@ function Card() {
     </div>
   ) : (
     
-    // <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 p-4">
+    
     <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 p-4">
        
        {blogs!==null && typeof(blogs)==='object'&& !Array.isArray(blogs) &&(<div className='font-light flex flex-col items-center text-center sm:ml-50 md:ml-0 text-4xl md:text-5xl'>No Blogs Available...</div>)} 
@@ -113,13 +113,13 @@ function Card() {
         >
          
 
-          {/* Image */}
+          
           <img
             src={item.blogImg}
             alt="Blog Thumbnail"
             className="w-full object-cover h-auto rounded-t-3xl"
             />
-            {/* Like Button */}
+            
           <div
            onClick={(e)=>handleLikedBlogs(e,item?._id)}
            className='absolute top-1 right-0 z-10 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity bg-opacity-60  px-3 py-1 w-15 h-15'>

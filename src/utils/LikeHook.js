@@ -1,4 +1,4 @@
-// hooks/useLikeBlog.js
+
 import { useMutation } from "@tanstack/react-query";
 import api from "./api_Interceptor";
 

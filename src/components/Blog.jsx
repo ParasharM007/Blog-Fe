@@ -67,7 +67,7 @@ function Blog() {
     </div>
   ) : blog && (
     <>
-      {/* 🔥 Hero Section with Video Background */}
+      
       <div className="relative w-full h-full md:h-[91vh]  overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
@@ -75,12 +75,13 @@ function Blog() {
           autoPlay
           muted
           loop
+          playsInline
         />
 
-        {/* Overlay (dark gradient or glass) */}
+        
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/1 z-10" />
 
-        {/* Text & Image Overlaid on Video */}
+        
         <div className="relative z-20 flex flex-col md:flex-row items-center justify-between h-full md:h-full px-10 py-8 text-white">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-6xl font-bold">
@@ -93,7 +94,7 @@ function Blog() {
             </p>
           </div>
 
-         <div className="relative md:h-80 md:w-[100%] lg:w-[40%] opacity-95 hover:opacity-80  group mt-15 lg:mt-0">
+         <div className="relative md:h-80 md:w-[100%] lg:w-[40%] opacity-95 hover:opacity-80 mt-15 lg:mt-0">
   <img
     src={blog.blogImg}
     alt="Blog"
@@ -104,7 +105,7 @@ function Blog() {
         </div>
       </div>
 
-      {/* 📝 Blog Content */}
+      
       <div className="px-8 py-10 max-w-5xl mx-auto text-gray-800">
         <div
           className="text-xl md:text-2xl leading-relaxed"
