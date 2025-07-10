@@ -97,6 +97,7 @@ function Navbar() {
    <div className=''>
    <nav className='z-50'>
       <div className='flex m-1 p-1 justify-between items-center'>
+      
 
     <div className='bg-black p-2 text-white text-4xl' onClick={()=>{  setShowMenu(false)
        setShowProfile(false)

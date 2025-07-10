@@ -107,7 +107,7 @@ function Register() {
 
         <div>
           <label htmlFor="avatar" className="block text-sm text-gray-700 mb-1">
-            Profile / Avatar
+            Profile / Avatar <span className='text-gray-500'>(Optional)</span>
           </label>
           <input
             type="file"
