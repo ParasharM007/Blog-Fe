@@ -42,6 +42,7 @@ function App() {
           <Analytics />
 
       <Navbar />
+      
 
       <ToastContainer position='top-center' theme="dark" />
         <Routes>

@@ -19,6 +19,25 @@ function Navbar() {
   const [showProfile,setShowProfile]=useState(false);
   // const [isLoggedIn,setIsLoggedIn]=useState(false)
   const {isLoggedIn , setIsLoggedIn , loading , avatar , setAvatar , AdminLogin ,setAdminLogin } = useContext(AuthContext)
+
+   const [visible, setVisible] = useState(true);
+    let lastScrollY = window.scrollY;
+  
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        // scrolling down
+        setVisible(false);
+      } else {
+        // scrolling up
+        setVisible(true);
+      }
+      lastScrollY = window.scrollY;
+    };
+  
+    useEffect(() => {
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
   
   
   
@@ -95,7 +114,10 @@ function Navbar() {
   return (
     
    <div className=''>
-   <nav className='z-50'>
+   {/* <nav className='z-50'> */}
+   <nav className={`fixed left-0 right-0 bg-white transition-all duration-600 z-[999] ${
+        visible ? "top-0" : "-top-100"
+      }`}>
       <div className='flex m-1 p-1 justify-between items-center'>
       
 
