@@ -115,7 +115,7 @@ function Navbar() {
     
    <div className=''>
    {/* <nav className='z-50'> */}
-   <nav className={`fixed left-0 right-0 bg-white transition-all duration-600 z-[999] ${
+   <nav className={`fixed left-0 right-0 h-18 bg-white transition-all duration-600 z-[999] ${
         visible ? "top-0" : "-top-100"
       }`}>
       <div className='flex m-1 p-1 justify-between items-center'>

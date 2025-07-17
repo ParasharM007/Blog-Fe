@@ -35,7 +35,7 @@ function App() {
   return (
     
     
-     <div className=' relative bg-white overflow-x-hidden'>
+     <div className=' relative py-18 bg-white overflow-x-hidden'>
         
       <Router>
         <AuthContextProvider>
